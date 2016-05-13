@@ -7,6 +7,7 @@ angular.module('angular-login.home', ['angular-login.grandfather'])
       controller: 'HomeController'
     });
 })
-.controller('HomeController', function ($scope) {
-  $scope.users = angular.fromJson(localStorage.getItem('userStorage'));
+.controller('HomeController', function ($scope, loginService) {
+  $scope.ls = loginService;
+  $scope.users = angular.fromJson(loginService.user);
 });

@@ -5,6 +5,7 @@ angular.module('angular-login', [
   'angular-login.directives',
   // different app sections
   'angular-login.home',
+  'angular-login.recyclage',
   'angular-login.pages',
   'angular-login.register',
   'angular-login.error',

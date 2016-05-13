@@ -1,12 +1,17 @@
-angular.module('angular-login.home', ['angular-login.grandfather'])
+angular.module('angular-login.recyclage', ['angular-login.grandfather'])
 .config(function ($stateProvider) {
   $stateProvider
-    .state('app.home', {
-      url: '/',
-      templateUrl: 'home/home.tpl.html',
-      controller: 'HomeController'
+    .state('app.recyclage', {
+      url: '/recyclage',
+      templateUrl: 'recyclage/recyclage.tpl.html',
+      controller: 'RecyclageController',
+      accessLevel: accessLevels.admin
     });
 })
-.controller('HomeController', function ($scope) {
-  $scope.users = angular.fromJson(localStorage.getItem('userStorage'));
+.controller('RecyclageController', function ($scope, loginService, $http) {
+  var url_connect = 'http://localhost:4567/connect?username='+loginService.utilisateur.username+'&password='+loginService.utilisateur.password;
+  $log.info('test seb',url_connect);
+  var loginPromise = $http.get(url_connect, $scope.login);
+    
+  $scope.data = angular.fromJson(loginService.user);
 });
