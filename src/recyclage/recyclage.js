@@ -8,10 +8,24 @@ angular.module('angular-login.recyclage', ['angular-login.grandfather'])
       accessLevel: accessLevels.admin
     });
 })
-.controller('RecyclageController', function ($scope, loginService, $http) {
-  var url_connect = 'http://localhost:4567/connect?username='+loginService.utilisateur.username+'&password='+loginService.utilisateur.password;
-  $log.info('test seb',url_connect);
-  var loginPromise = $http.get(url_connect, $scope.login);
+.controller('RecyclageController', function ($scope, loginService, $http, $log) {
+  
+   
+  $scope.search = function () {
     
-  $scope.data = angular.fromJson(loginService.user);
+    $log.info('competence search',$scope.competence);
+    
+    var url_search = 'http://localhost:4567/benevoles/recyclages/'+$scope.competence+'?F5_ST='+loginService.user.F5_ST+'&LastMRH_Session='+loginService.user.LastMRH_Session+'&MRHSession='+loginService.user.MRHSession;
+    
+    $scope.search.working = true;
+    
+    $http.get(url_search).
+        success(function(response){
+        $log.info('data', response);
+        $scope.data = angular.fromJson(response);
+        $scope.search.working = false;
+        }
+    );     
+  };
+  
 });

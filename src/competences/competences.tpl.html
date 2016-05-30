@@ -1,0 +1,55 @@
+<div class="jumbotron">
+    <h3>Chercher une compétence</h3>
+    <form name="searchCompetenceForm" role="competenceSearch" ng-submit="search()">
+        <div class="form-group">
+            <input type="text" class="form-control" ng-model="competence" name="competence" placeholder="Competence">
+        </div>
+        <button type="submit" class="btn btn-default hidden-devices" ng-disabled="search.working">
+            search 
+        </button>
+    </form>
+    <h3>Qui n'est pas... ?</h3>
+    <form name="searchWithoutCompetenceForm" role="withoutXompetenceSearch" ng-submit="searchWithout()">
+        <div class="form-group">
+            <input type="text" class="form-control" ng-model="competence" name="competence" placeholder="Competence">
+        </div>
+        <button type="submit" class="btn btn-default hidden-devices" ng-disabled="search.working">
+            search 
+        </button>
+    </form>
+    <h3>Qui n'est pas... ? Mais possède la compétence...</h3>
+    <form name="searchWithoutCompetenceForm" role="withoutXompetenceSearch" ng-submit="searchComplexe()">
+        <div class="form-group">
+            <input type="text" class="form-control" ng-model="competence" name="competence" placeholder="Competence">
+            <input type="text" class="form-control" ng-model="competence2" name="competence2" placeholder="Competence 2">
+        </div>
+        <button type="submit" class="btn btn-default hidden-devices" ng-disabled="search.working">
+            search 
+        </button>
+    </form>
+</div>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>            
+            <th>Nivol</th>
+            <th>Name</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="person in data.list">
+            <td>{{person.nivol}}</td>
+            <td>{{person.name}}</td>
+            <td>{{person.email}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>native json</h3>
+<pre>
+  <code>
+{{ data | json }}
+  </code>
+</pre>
+

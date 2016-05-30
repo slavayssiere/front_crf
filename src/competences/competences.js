@@ -1,0 +1,67 @@
+angular.module('angular-login.competences', ['angular-login.grandfather'])
+.config(function ($stateProvider) {
+  $stateProvider
+    .state('app.competences', {
+      url: '/competences',
+      templateUrl: 'competences/competences.tpl.html',
+      controller: 'CompetencesController',
+      accessLevel: accessLevels.admin
+    });
+})
+.controller('CompetencesController', function ($scope, loginService, $http, $log) {
+  
+  $scope.data = []
+  
+  $scope.search = function () {
+    
+    $log.info('competence search',$scope.competence);
+    
+    var url_search = 'http://localhost:4567/benevoles/com/'+$scope.competence+'?F5_ST='+loginService.user.F5_ST+'&LastMRH_Session='+loginService.user.LastMRH_Session+'&MRHSession='+loginService.user.MRHSession;
+    
+    $scope.search.working = true;
+    
+    $http.get(url_search).
+        success(function(response){
+        $log.info('data', response);
+        $scope.data = angular.fromJson(response);
+        $scope.search.working = false;
+        }
+    );     
+  };
+  
+  $scope.searchWithout = function () {
+    
+    $log.info('competence not search',$scope.competence);
+    
+    var url_search = 'http://localhost:4567/benevoles/com/without/'+$scope.competence+'?F5_ST='+loginService.user.F5_ST+'&LastMRH_Session='+loginService.user.LastMRH_Session+'&MRHSession='+loginService.user.MRHSession;
+    
+    $scope.search.working = true;
+    
+    $http.get(url_search).
+        success(function(response){
+        $log.info('data', response);
+        $scope.data = angular.fromJson(response);
+        $scope.search.working = false;
+        }
+    )};   
+    
+    
+    $scope.searchComplexe = function () {
+    
+        $log.info('competence not search',$scope.competence);
+        
+        var url_search = 'http://localhost:4567/benevoles/com/without/'+$scope.competence+'/with/'+$scope.competence2+'?F5_ST='+loginService.user.F5_ST+'&LastMRH_Session='+loginService.user.LastMRH_Session+'&MRHSession='+loginService.user.MRHSession;
+        
+        $scope.search.working = true;
+        
+        $http.get(url_search).
+            success(function(response){
+            $log.info('data', response);
+            $scope.data = angular.fromJson(response);
+            $scope.search.working = false;
+            }
+    )};     
+    
+    
+  
+});

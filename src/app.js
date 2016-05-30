@@ -6,6 +6,7 @@ angular.module('angular-login', [
   // different app sections
   'angular-login.home',
   'angular-login.recyclage',
+  'angular-login.competences',
   'angular-login.pages',
   'angular-login.register',
   'angular-login.error',
