@@ -8,6 +8,7 @@ angular.module('angular-login', [
   'angular-login.recyclage',
   'angular-login.competences',
   'angular-login.pages',
+  'angular-login.benevoles',
   'angular-login.register',
   'angular-login.error',
   // components

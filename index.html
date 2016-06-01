@@ -1,7 +1,10 @@
 <!DOCTYPE html>
+
+<!-- Thanks to https://github.com/mrgamer/angular-login-example/tree/ -->
+
 <html ng-app="angular-login">
   <head>
-    <title>Test-front-pegass</title>
+    <title>Front UL Manager</title>
 
     <!-- BootstrapCDN -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
@@ -26,11 +29,8 @@
             <li ng-class="{ active: $state.is('app.home') }">
               <a ui-sref="app.home">Home</a>
             </li>
-            <li ng-class="{ active: $state.is('app.admin') }">
-              <a ui-sref="app.admin">Admin-Only page</a>
-            </li>
-            <li ng-class="{ active: $state.is('app.user') }">
-              <a ui-sref="app.user">Registered-Only page</a>
+            <li ng-class="{ active: $state.is('app.benevoles') }">
+              <a ui-sref="app.benevoles">Liste des bénévoles</a>
             </li>
             <li ng-class="{ active: $state.is('app.recyclage') }">
               <a ui-sref="app.recyclage">Recyclage</a>
@@ -75,7 +75,10 @@
       <!-- version footer -->
       <div class="panel panel-default">
         <div class="panel-body">
-          <a href="https://github.com/mrgamer/angular-login-example/tree/<%=version %>" target="_blank"><b>angular-login-version:</b> <%=version %></a>
+          <a href="https://github.com/slavayssiere/front_crf/<%=version %>" target="_blank"><b>Front version:</b> <%=version %></a>
+        </div>        
+        <div class="panel-body">
+          <a href="https://github.com/slavayssiere/ws_pegass/" target="_blank">Link to backend project</a>
         </div>
       </div>
     </div>

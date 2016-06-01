@@ -1,6 +1,6 @@
 {
-  "name": "angular-login-example",
-  "version": "0.3.1",
+  "name": "front_crf",
+  "version": "0.0.1",
   "keywords": [
     "angularjs",
     "angular",
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mrgamer/angular-login-example.git"
+    "url": "https://github.com/slavayssiere/front_crf.git"
   },
   "devDependencies": {
     "bower": "^1.7.9",

@@ -12,6 +12,17 @@ angular.module('angular-login.competences', ['angular-login.grandfather'])
   
   $scope.data = []
   
+  
+    var getEmailList = function(data) {
+        var emailList = "";
+        $log.info(data.list);
+        for (i = 0; i < data.list.length; i++) {
+            $log.info(data.list[i]);
+            emailList += data.list[i].email + "; ";
+        }
+        return emailList;
+    }
+  
   $scope.search = function () {
     
     $log.info('competence search',$scope.competence);
@@ -22,8 +33,8 @@ angular.module('angular-login.competences', ['angular-login.grandfather'])
     
     $http.get(url_search).
         success(function(response){
-        $log.info('data', response);
         $scope.data = angular.fromJson(response);
+        $scope.emails = getEmailList(response);       
         $scope.search.working = false;
         }
     );     
@@ -39,8 +50,8 @@ angular.module('angular-login.competences', ['angular-login.grandfather'])
     
     $http.get(url_search).
         success(function(response){
-        $log.info('data', response);
         $scope.data = angular.fromJson(response);
+        $scope.emails = getEmailList(response);        
         $scope.search.working = false;
         }
     )};   
@@ -48,16 +59,14 @@ angular.module('angular-login.competences', ['angular-login.grandfather'])
     
     $scope.searchComplexe = function () {
     
-        $log.info('competence not search',$scope.competence);
-        
         var url_search = 'http://localhost:4567/benevoles/com/without/'+$scope.competence+'/with/'+$scope.competence2+'?F5_ST='+loginService.user.F5_ST+'&LastMRH_Session='+loginService.user.LastMRH_Session+'&MRHSession='+loginService.user.MRHSession;
         
         $scope.search.working = true;
         
         $http.get(url_search).
             success(function(response){
-            $log.info('data', response);
             $scope.data = angular.fromJson(response);
+            $scope.emails = getEmailList(response);       
             $scope.search.working = false;
             }
     )};     
