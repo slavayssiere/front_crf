@@ -5,6 +5,10 @@
       Nivol: {{ ls.user.utilisateur.id }} <br />
       ul: {{ ls.user.structuresAdministrees[0].libelle }}
     </p>
+    <h3>Nominations</h3>
+      <ul ng-repeat="nomination in nominations">
+          <li>{{nomination.libelleLong}}</li>
+      </ul>
   </div>
 </div>
 
