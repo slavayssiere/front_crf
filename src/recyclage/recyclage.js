@@ -15,7 +15,8 @@ angular.module('angular-login.recyclage', ['angular-login.grandfather'])
     
     $log.info('competence search',$scope.competence);
     
-    var url_search = 'http://localhost:4567/benevoles/recyclages/'+$scope.competence+'?F5_ST='+loginService.user.F5_ST+'&LastMRH_Session='+loginService.user.LastMRH_Session+'&MRHSession='+loginService.user.MRHSession;
+    var url_search = 'http://'+$scope.url+'/benevoles/recyclages/'+$scope.competence+'?F5_ST='+loginService.user.F5_ST+'&LastMRH_Session='+loginService.user.LastMRH_Session+'&MRHSession='+loginService.user.MRHSession+'&ul='+loginService.user.utilisateur.structure.id;
+    $log.info('URI: ' + url_search);
     
     $scope.search.working = true;
     

@@ -27,8 +27,8 @@ angular.module('angular-login.competences', ['angular-login.grandfather'])
     
     $log.info('competence search',$scope.competence);
     
-    var url_search = 'http://localhost:4567/benevoles/com/'+$scope.competence+'?F5_ST='+loginService.user.F5_ST+'&LastMRH_Session='+loginService.user.LastMRH_Session+'&MRHSession='+loginService.user.MRHSession;
-    
+    var url_search = 'http://'+$scope.url+'/benevoles/com/'+$scope.competence+'?F5_ST='+loginService.user.F5_ST+'&LastMRH_Session='+loginService.user.LastMRH_Session+'&MRHSession='+loginService.user.MRHSession+'&ul='+loginService.user.utilisateur.structure.id;
+    $log.info('URI: ' + url_search);
     $scope.search.working = true;
     
     $http.get(url_search).
@@ -44,8 +44,8 @@ angular.module('angular-login.competences', ['angular-login.grandfather'])
     
     $log.info('competence not search',$scope.competence);
     
-    var url_search = 'http://localhost:4567/benevoles/com/without/'+$scope.competence+'?F5_ST='+loginService.user.F5_ST+'&LastMRH_Session='+loginService.user.LastMRH_Session+'&MRHSession='+loginService.user.MRHSession;
-    
+    var url_search = 'http://'+$scope.url+'/benevoles/com/without/'+$scope.competence+'?F5_ST='+loginService.user.F5_ST+'&LastMRH_Session='+loginService.user.LastMRH_Session+'&MRHSession='+loginService.user.MRHSession+'&ul='+loginService.user.utilisateur.structure.id;
+    $log.info('URI: ' + url_search);
     $scope.search.working = true;
     
     $http.get(url_search).
@@ -59,8 +59,8 @@ angular.module('angular-login.competences', ['angular-login.grandfather'])
     
     $scope.searchComplexe = function () {
     
-        var url_search = 'http://localhost:4567/benevoles/com/without/'+$scope.competence+'/with/'+$scope.competence2+'?F5_ST='+loginService.user.F5_ST+'&LastMRH_Session='+loginService.user.LastMRH_Session+'&MRHSession='+loginService.user.MRHSession;
-        
+        var url_search = 'http://'+$scope.url+'/benevoles/com/without/'+$scope.competence+'/with/'+$scope.competence2+'?F5_ST='+loginService.user.F5_ST+'&LastMRH_Session='+loginService.user.LastMRH_Session+'&MRHSession='+loginService.user.MRHSession+'&ul='+loginService.user.utilisateur.structure.id;
+        $log.info('URI: ' + url_search);
         $scope.search.working = true;
         
         $http.get(url_search).

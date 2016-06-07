@@ -10,7 +10,8 @@ angular.module('angular-login.benevoles', ['angular-login.grandfather'])
 })
 .controller('BenevolesController', function ($scope, loginService, $http, $log) {
       
-    var url_search = 'http://localhost:4567/benevoles?F5_ST='+loginService.user.F5_ST+'&LastMRH_Session='+loginService.user.LastMRH_Session+'&MRHSession='+loginService.user.MRHSession;
+    var url_search = 'http://'+$scope.url+'/benevoles?F5_ST='+loginService.user.F5_ST+'&LastMRH_Session='+loginService.user.LastMRH_Session+'&MRHSession='+loginService.user.MRHSession+'&ul='+loginService.user.utilisateur.structure.id;
+    $log.info('URI: ' + url_search);
     
     var getEmail = function(data) {
         var emailList = [];
