@@ -20,7 +20,7 @@
     </form>
 </div>
 
-
+<h2>A recycle cette annee</h2>
 <table class="table table-bordered">
     <thead>
         <tr>            
@@ -39,6 +39,27 @@
         </tr>
     </tbody>
 </table>
+
+<h2>Perdu la competence</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>            
+            <th>Nivol</th>
+            <th>Prenom</th>
+            <th>Nom</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="person in data.out">
+            <td>{{person.nivol}}</td>
+            <td>{{person.prenom}}</td>
+            <td>{{person.nom}}</td>
+            <td>{{person.date}}</td>
+        </tr>
+    </tbody>
+</table>
+
 
 <h2>native json</h2>
 <p>the real json object</p>
