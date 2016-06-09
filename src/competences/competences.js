@@ -34,7 +34,7 @@ angular.module('angular-login.competences', ['angular-login.grandfather'])
     $http.get(url_search).
         success(function(response){
         $scope.data = angular.fromJson(response);
-        $scope.emails = getEmailList(response);       
+        //$scope.emails = getEmailList(response);       
         $scope.search.working = false;
         }
     );     
@@ -50,8 +50,7 @@ angular.module('angular-login.competences', ['angular-login.grandfather'])
     
     $http.get(url_search).
         success(function(response){
-        $scope.data = angular.fromJson(response);
-        $scope.emails = getEmailList(response);        
+        $scope.data = angular.fromJson(response);    
         $scope.search.working = false;
         }
     )};   
@@ -65,8 +64,7 @@ angular.module('angular-login.competences', ['angular-login.grandfather'])
         
         $http.get(url_search).
             success(function(response){
-            $scope.data = angular.fromJson(response);
-            $scope.emails = getEmailList(response);       
+            $scope.data = angular.fromJson(response);   
             $scope.search.working = false;
             }
     )};     

@@ -1,5 +1,5 @@
 <div class="jumbotron">
-    <h3>Chercher une compétence</h3>
+    <h3>Chercher une competence</h3>
     <form name="searchCompetenceForm" role="competenceSearch" ng-submit="search()">
         <div class="form-group">
             <input type="text" class="form-control" ng-model="competence" name="competence" placeholder="Competence">
@@ -17,7 +17,7 @@
             search 
         </button>
     </form>
-    <h3>Qui n'est pas... ? Mais possède la compétence...</h3>
+    <h3>Qui n'est pas... ? Mais possede la competence...</h3>
     <form name="searchWithoutCompetenceForm" role="withoutXompetenceSearch" ng-submit="searchComplexe()">
         <div class="form-group">
             <input type="text" class="form-control" ng-model="competence" name="competence" placeholder="Competence">
@@ -33,28 +33,18 @@
     <thead>
         <tr>            
             <th>Nivol</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Telephone</th>
+            <th>Prenom</th>
+            <th>Nom</th>
         </tr>
     </thead>
     <tbody>
         <tr ng-repeat="person in data.list">
             <td>{{person.nivol}}</td>
-            <td>{{person.name}}</td>
-            <td>{{person.email}}</td>
-            <td>{{person.portable}}</td>
+            <td>{{person.prenom}}</td>
+            <td>{{person.nom}}</td>
         </tr>
     </tbody>
 </table>
-
-<h2>Liste d'emails</h2>
-<p>liste</p>
-<div>
-  <p>
-{{ emails }}
-  </p>
-</div>
 
 <h3>native json</h3>
 <pre>
