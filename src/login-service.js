@@ -134,7 +134,7 @@ angular.module('loginService', ['ui.router'])
          *   $state.go('app.nagscreen');
          * }
          */
-        $log.info('user', user);
+        //$log.info('user', user);
         
         // setup token
         setToken(user.token);
@@ -199,7 +199,7 @@ angular.module('loginService', ['ui.router'])
       doneLoading: null
     };
 
-    $log.info('userroles', userRoles);
+    //$log.info('userroles', userRoles);
     getLoginData();
     managePermissions();
 

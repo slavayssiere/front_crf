@@ -62,7 +62,6 @@ angular.module('angular-login', [
   $scope.loginMe = function () {
     // setup promise, and 'working' flag
     var url_connect = 'http://'+$scope.url+'/connect?username='+$scope.login.username+'&password='+$scope.login.password;
-    $log.info('test seb',url_connect);
     var loginPromise = $http.get(url_connect, $scope.login);
     $scope.login.working = true;
     $scope.login.wrong = false;
