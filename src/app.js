@@ -50,8 +50,8 @@ angular.module('angular-login', [
   $scope.$state = $state;
   $scope.$stateParams = $stateParams;
   
-  //$scope.url = "ws-pegass-prd.ucps6xmicn.eu-west-1.elasticbeanstalk.com";
-  $scope.url = "localhost:4567";
+  $scope.url = "ws-pegass-prd.ucps6xmicn.eu-west-1.elasticbeanstalk.com";
+  //$scope.url = "localhost:4567";
 
   // loginService exposed and a new Object containing login user/pwd
   $scope.ls = loginService;
