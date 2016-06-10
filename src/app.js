@@ -20,7 +20,6 @@ angular.module('angular-login', [
   delete $httpProvider.defaults.headers.common['X-Requested-With'];
 })
 .run(function ($rootScope, $window) {
-  // google analytics
   $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams) {
     var realURL = toState.url;
     if (!!$window.ga) {
@@ -59,6 +58,7 @@ angular.module('angular-login', [
     working: false,
     wrong: false
   };
+  
   $scope.loginMe = function () {
     // setup promise, and 'working' flag
     var url_connect = 'http://'+$scope.url+'/connect?username='+$scope.login.username+'&password='+$scope.login.password;
@@ -86,4 +86,6 @@ angular.module('angular-login', [
   $scope.logoutMe = function () {
     loginService.logoutUser($http.get('/logout'));
   };
+  
+  
 });

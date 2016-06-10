@@ -17,13 +17,17 @@ angular.module('loginService', ['ui.router'])
       $http.defaults.headers.common['X-Token'] = token.toString();
     };
 
-    var setToken = function (token) {
-      if (!token) {
-        localStorage.removeItem('userToken');
+    var setTokens = function (F5_ST, LastMRH_Session, MRHSession) {
+      if (!F5_ST && !LastMRH_Session && !MRHSession) {
+        localStorage.removeItem('F5_ST');
+        localStorage.removeItem('LastMRH_Session');
+        localStorage.removeItem('MRHSession');
       } else {
-        localStorage.setItem('userToken', token);
+        localStorage.setItem('F5_ST', F5_ST);
+        localStorage.setItem('LastMRH_Session', LastMRH_Session);
+        localStorage.setItem('MRHSession', MRHSession);
       }
-      setHeaders(token);
+      
     };
 
     var getLoginData = function () {
@@ -134,10 +138,10 @@ angular.module('loginService', ['ui.router'])
          *   $state.go('app.nagscreen');
          * }
          */
-        //$log.info('user', user);
+        $log.info('user', user);
         
         // setup token
-        setToken(user.token);
+        setTokens(user.F5_ST, user.LastMRH_Session, user.MRHSession);
         // update user
         angular.extend(wrappedService.user, user);
         // flag true on isLogged
@@ -154,7 +158,7 @@ angular.module('loginService', ['ui.router'])
          * De-registers the userToken remotely
          * then clears the loginService as it was on startup
          */
-        setToken(null);
+        setTokens(null, null, null);
         this.userRole = userRoles.public;
         this.user = {};
         this.isLogged = false;

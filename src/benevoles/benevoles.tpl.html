@@ -1,32 +1,29 @@
 <div class="jumbotron">
-  <h3>Liste des benevoles</h3>    
+    <h3>Liste des benevoles</h3>    
+    <table class="table table-bordered">
+        <thead>
+            <tr>            
+                <th>Nivol</th>
+                <th>Prenom</th>
+                <th>Nom</th>
+                <th>Actif</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="person in data.list">
+                <td>{{person.id}}</td>
+                <td>{{person.prenom}}</td>
+                <td>{{person.nom}}</td>
+                <td>{{person.actif}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>native json</h2>
+    <p>the real json object</p>
+    <pre>
+        <code>
+        {{ data | json }}
+        </code>
+    </pre>
 </div>
-
-
-<table class="table table-bordered">
-    <thead>
-        <tr>            
-            <th>Nivol</th>
-            <th>Prenom</th>
-            <th>Nom</th>
-            <th>Actif</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="person in data.list">
-            <td>{{person.id}}</td>
-            <td>{{person.prenom}}</td>
-            <td>{{person.nom}}</td>
-            <td>{{person.actif}}</td>
-        </tr>
-    </tbody>
-</table>
-
-<h2>native json</h2>
-<p>the real json object</p>
-<pre>
-  <code>
-{{ data | json }}
-  </code>
-</pre>
-

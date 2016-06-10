@@ -27,29 +27,29 @@
             search 
         </button>
     </form>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>            
+                <th>Nivol</th>
+                <th>Prenom</th>
+                <th>Nom</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="person in data.list">
+                <td>{{person.nivol}}</td>
+                <td>{{person.prenom}}</td>
+                <td>{{person.nom}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>native json</h3>
+    <pre>
+        <code>
+        {{ data | json }}
+        </code>
+    </pre>
+
 </div>
-
-<table class="table table-bordered">
-    <thead>
-        <tr>            
-            <th>Nivol</th>
-            <th>Prenom</th>
-            <th>Nom</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="person in data.list">
-            <td>{{person.nivol}}</td>
-            <td>{{person.prenom}}</td>
-            <td>{{person.nom}}</td>
-        </tr>
-    </tbody>
-</table>
-
-<h3>native json</h3>
-<pre>
-  <code>
-{{ data | json }}
-  </code>
-</pre>
-
