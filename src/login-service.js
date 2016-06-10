@@ -58,7 +58,7 @@ angular.module('loginService', ['ui.router'])
       }
       else {
         $log.info('we have localstorage data');
-        var url_connect = 'http://localhost:4567/connecttest?F5_ST='+F5_ST+'&LastMRH_Session='+LastMRH_Session+'&MRHSession='+MRHSession;        
+        var url_connect = 'http://'+url_ws_pegass+'/connecttest?F5_ST='+F5_ST+'&LastMRH_Session='+LastMRH_Session+'&MRHSession='+MRHSession;        
         $log.info(url_connect);
         var loginPromise = $http.get(url_connect);
         

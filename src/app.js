@@ -48,10 +48,8 @@ angular.module('angular-login', [
   // Expose $state and $stateParams to the <body> tag
   $scope.$state = $state;
   $scope.$stateParams = $stateParams;
+  $scope.url=url_ws_pegass;
   
-  //$scope.url = "ws-pegass-prd.ucps6xmicn.eu-west-1.elasticbeanstalk.com";
-  $scope.url = "localhost:4567";
-
   // loginService exposed and a new Object containing login user/pwd
   $scope.ls = loginService;
   $scope.login = {
@@ -61,7 +59,8 @@ angular.module('angular-login', [
   
   $scope.loginMe = function () {
     // setup promise, and 'working' flag
-    var url_connect = '';
+    var url_connect = '';        
+    
     url_connect = 'http://'+$scope.url+'/connect?username='+$scope.login.username+'&password='+$scope.login.password;   
     $log.info(url_connect);
     var loginPromise = $http.get(url_connect, $scope.login);
