@@ -26,8 +26,7 @@ angular.module('loginService', ['ui.router'])
         localStorage.setItem('F5_ST', F5_ST);
         localStorage.setItem('LastMRH_Session', LastMRH_Session);
         localStorage.setItem('MRHSession', MRHSession);
-      }
-      
+      }      
     };
 
     var getLoginData = function () {
