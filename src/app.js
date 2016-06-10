@@ -49,8 +49,8 @@ angular.module('angular-login', [
   $scope.$state = $state;
   $scope.$stateParams = $stateParams;
   
-  $scope.url = "ws-pegass-prd.ucps6xmicn.eu-west-1.elasticbeanstalk.com";
-  //$scope.url = "localhost:4567";
+  //$scope.url = "ws-pegass-prd.ucps6xmicn.eu-west-1.elasticbeanstalk.com";
+  $scope.url = "localhost:4567";
 
   // loginService exposed and a new Object containing login user/pwd
   $scope.ls = loginService;
@@ -61,8 +61,11 @@ angular.module('angular-login', [
   
   $scope.loginMe = function () {
     // setup promise, and 'working' flag
-    var url_connect = 'http://'+$scope.url+'/connect?username='+$scope.login.username+'&password='+$scope.login.password;
+    var url_connect = '';
+    url_connect = 'http://'+$scope.url+'/connect?username='+$scope.login.username+'&password='+$scope.login.password;   
+    $log.info(url_connect);
     var loginPromise = $http.get(url_connect, $scope.login);
+    
     $scope.login.working = true;
     $scope.login.wrong = false;
 

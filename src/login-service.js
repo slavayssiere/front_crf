@@ -4,6 +4,10 @@ angular.module('loginService', ['ui.router'])
       errorState = 'app.error',
       logoutState = 'app.home';
 
+  var F5_ST = localStorage.getItem('F5_ST');
+  var LastMRH_Session = localStorage.getItem('LastMRH_Session');
+  var MRHSession = localStorage.getItem('MRHSession');
+  
   this.$get = function ($rootScope, $http, $q, $state, $log) {
 
     /**
@@ -28,13 +32,46 @@ angular.module('loginService', ['ui.router'])
         localStorage.setItem('MRHSession', MRHSession);
       }      
     };
+    
+    var getTokens = function () {
+        
+        F5_ST = localStorage.getItem('F5_ST');
+        LastMRH_Session = localStorage.getItem('LastMRH_Session');
+        MRHSession = localStorage.getItem('MRHSession');
+        
+        if(!F5_ST && !LastMRH_Session && !MRHSession){
+          $log.info("no data");
+          return false;
+        }
+        else{
+          $log.info("data");
+          return true;
+        }
+    };
 
     var getLoginData = function () {
-      if (userToken) {
-        setHeaders(userToken);
-      } else {
+      if (!getTokens()) {
+        $log.info('we have not localstorage data');
         wrappedService.userRole = userRoles.public;
         wrappedService.isLogged = false;
+        wrappedService.doneLoading = true;
+      }
+      else {
+        $log.info('we have localstorage data');
+        var url_connect = 'http://localhost:4567/connecttest?F5_ST='+F5_ST+'&LastMRH_Session='+LastMRH_Session+'&MRHSession='+MRHSession;        
+        $log.info(url_connect);
+        var loginPromise = $http.get(url_connect);
+        
+        wrappedService.loginUser(loginPromise);
+        
+        loginPromise.error(function () {
+            $log.info("401");
+            wrappedService.userRole = userRoles.public;
+            wrappedService.isLogged = false;
+            wrappedService.doneLoading = true;
+        });
+        
+        wrappedService.isLogged = true;
         wrappedService.doneLoading = true;
       }
     };
@@ -42,7 +79,7 @@ angular.module('loginService', ['ui.router'])
     var managePermissions = function () {
       // Register routing function.
       $rootScope.$on('$stateChangeStart', function (event, to, toParams, from, fromParams) {
-
+        $log.info("change start");
         /**
          * $stateChangeStart is a synchronous check to the accessLevels property
          * if it's not set, it will setup a pendingStateChange and will let
@@ -53,6 +90,7 @@ angular.module('loginService', ['ui.router'])
          * Grandfather.resolve will either let the user in or reject the promise later!
          */
         if (wrappedService.userRole === null) {
+           $log.info("user role null");
           wrappedService.doneLoading = false;
           wrappedService.pendingStateChange = {
             to: to,
@@ -65,8 +103,10 @@ angular.module('loginService', ['ui.router'])
         // NOTE: if `wrappedService.userRole === undefined` means the service still doesn't know the user role,
         // we need to rely on grandfather resolve, so we let the stateChange success, for now.
         if (to.accessLevel === undefined || to.accessLevel.bitMask & wrappedService.userRole.bitMask) {
+          $log.info("case 1");
           angular.noop(); // requested state can be transitioned to.
         } else {
+          $log.info("case 2");
           event.preventDefault();
           $rootScope.$emit('$statePermissionError');
           $state.go(errorState, { error: 'unauthorized' }, { location: false, inherit: false });
@@ -202,7 +242,7 @@ angular.module('loginService', ['ui.router'])
       doneLoading: null
     };
 
-    //$log.info('userroles', userRoles);
+    $log.info('userroles', userRoles);
     getLoginData();
     managePermissions();
 
