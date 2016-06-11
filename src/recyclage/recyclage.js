@@ -29,4 +29,26 @@ angular.module('angular-login.recyclage', ['angular-login.grandfather'])
     );     
   };
   
+  
+    $scope.searchemail = function () {
+        
+        $scope.searchemail.working = true;
+        var url_search = 'http://'+$scope.url+'/benevoles/emails?F5_ST='+loginService.user.F5_ST+'&LastMRH_Session='+loginService.user.LastMRH_Session+'&MRHSession='+loginService.user.MRHSession;
+        $log.info('URI: ' + url_search);
+        var req = {
+            method: 'POST',
+            url: url_search,
+            data: angular.toJson($scope.data)
+        }
+
+        $http(req).
+            success(function(response){
+            var dataemail = angular.fromJson(response);
+            $log.info(dataemail);
+            $scope.emails = $scope.getEmailList(dataemail); 
+            $scope.searchemail.working = false;
+            }
+        );     
+    };
+  
 });

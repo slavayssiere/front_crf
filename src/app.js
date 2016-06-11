@@ -89,5 +89,14 @@ angular.module('angular-login', [
     loginService.logoutUser($http.get('/logout'));
   };
   
+    
+  $scope.getEmailList = function(data) {
+        var emailList = "";
+        for (i = 0; i < data.list.length; i++) {
+            $log.info(data.list[i]);
+            emailList += data.list[i].email + "; ";
+        }
+        return emailList;
+    };
   
 });

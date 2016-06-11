@@ -54,7 +54,7 @@
             <div class="form-group">
               <input type="password" class="form-control" ng-model="login.password" name="password" placeholder="Password">
             </div>
-            <button type="submit" class="btn btn-default" ng-disabled="login.working">Login <i class="fa" ng-class="login.working ? 'fa-cog fa-spin' : 'fa-sign-in'"></i></button>
+            <button type="submit" class="btn btn-default hidden-devices" ng-disabled="login.working">Login <i class="fa" ng-class="login.working ? 'fa-cog fa-spin' : 'fa-sign-in'"></i></button>
           </form>
           <!-- Spinner -->
           <button class="btn btn-default navbar-btn navbar-right" ng-hide="ls.doneLoading">

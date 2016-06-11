@@ -28,7 +28,15 @@
         </button>
     </form>
 
-    <table class="table table-bordered">
+
+    <form name="searchEmailForm" role="searchEmail" ng-submit="searchemail()" ng-if="data.list">       
+        <button type="submit" class="btn btn-default"  ng-disabled="searchemail.working">
+            Get emails list 
+        </button>
+    </form>
+    <h4 ng-if="emails">{{ emails }}</h4> 
+    
+    <table class="table table-bordered table-striped" ng-if="data.list">
         <thead>
             <tr>            
                 <th>Nivol</th>
@@ -45,11 +53,9 @@
         </tbody>
     </table>
 
-    <h3>native json</h3>
-    <pre>
-        <code>
-        {{ data | json }}
-        </code>
+    <h3 ng-if="data.list">native json</h3>
+    <pre ng-if="data.list">
+        <code>{{ data | json }}</code>
     </pre>
 
 </div>
