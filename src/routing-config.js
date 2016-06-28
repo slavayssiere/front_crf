@@ -14,6 +14,9 @@
     roles: [
       'public',
       'user',
+      'dlaf',
+      'dlus',
+      'ddaf',
       'admin'
     ],
 
@@ -24,7 +27,9 @@
     accessLevels: {
       'public' : '*',
       'anon': ['public'],
-      'user' : ['user', 'admin'],
+      'dlaf' : ['admin', 'ddaf', 'dlaf', 'dlus'],
+      'dlus': ['admin','dlus', 'dlaf'],
+      'ddaf': ['admin','ddaf',],
       'admin': ['admin']
     }
 

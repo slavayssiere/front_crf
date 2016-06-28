@@ -186,7 +186,33 @@ angular.module('loginService', ['ui.router'])
         // flag true on isLogged
         wrappedService.isLogged = true;
         // update userRole
-        wrappedService.userRole = user.userRole;
+        var url_search = 'http://'+url_ws_pegass+'/benevoles/nominations/'+user.utilisateur.id+'?F5_ST='+user.F5_ST+'&LastMRH_Session='+user.LastMRH_Session+'&MRHSession='+user.MRHSession;
+        $log.info('URI: ' + url_search);
+        
+        $http.get(url_search).
+            success(function(response){
+              nominations = angular.fromJson(response);
+              for (i = 0; i < nominations.length; i++) {
+                $log.info(nominations[i].libelleCourt);
+                if(nominations[i].libelleCourt == "DLUS.A.FOR"){
+                  $log.info("Tu es DLAF!");
+                  wrappedService.userRole=userRoles.dlaf;
+                }
+                
+                if(nominations[i].libelleCourt == "CS FORM"){
+                  wrappedService.userRole=userRoles.ddaf;
+                }
+                
+                if(nominations[i].libelleCourt == "DLUS"){
+                  wrappedService.userRole=userRoles.dlus;
+                }
+                
+                if(user.utilisateur.id == "00001376977M") {
+                  wrappedService.userRole=userRoles.admin;
+                }
+              }
+            }
+        );
         return user;
       },
       loginUser: function (httpPromise) {

@@ -4,12 +4,13 @@
     <div>
       <p>      
         Nivol: {{ ls.user.utilisateur.id }} <br />
-        ul: {{ ls.user.structuresAdministrees[0].libelle }}
+        ul: {{ ls.user.structuresAdministrees[0].libelle }} <br />
+        Role: {{ ls.userRole.title }}
       </p>
-      <h3>Nominations</h3>
+      <!--<h3>Nominations</h3>
         <ul ng-repeat="nomination in nominations" class="list-unstyled">
             <li>{{nomination.libelleLong}}</li>
-        </ul>
+        </ul>-->
     </div>
     
     <h2>User data</h2>

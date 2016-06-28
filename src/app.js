@@ -73,15 +73,7 @@ angular.module('angular-login', [
       $scope.login.wrong = true;
       $timeout(function () { $scope.login.wrong = false; }, 8000);
     });
-    loginPromise.finally(function () {
-      var url_search = 'http://'+$scope.url+'/benevoles/nominations/'+loginService.user.utilisateur.id+'?F5_ST='+loginService.user.F5_ST+'&LastMRH_Session='+loginService.user.LastMRH_Session+'&MRHSession='+loginService.user.MRHSession;
-      $log.info('URI: ' + url_search);
-      
-      $http.get(url_search).
-          success(function(response){
-            $scope.nominations = angular.fromJson(response);
-          }
-      );
+    loginPromise.finally(function () {      
       $scope.login.working = false;
     });
   };
