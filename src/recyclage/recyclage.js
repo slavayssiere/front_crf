@@ -15,24 +15,43 @@ angular.module('angular-login.recyclage', ['angular-login.grandfather'])
     });
 })
 .controller('RecyclageController', function ($scope, loginService, $http, $log) {
-  $scope.search = function () {
     
-    $log.info('competence search',$scope.competence);
-    
-    var url_search = 'http://'+$scope.url+'/benevoles/recyclages/'+$scope.competence+'?F5_ST='+loginService.user.F5_ST+'&LastMRH_Session='+loginService.user.LastMRH_Session+'&MRHSession='+loginService.user.MRHSession+'&ul='+loginService.user.utilisateur.structure.id;
-    $log.info('URI: ' + url_search);
-    
-    $scope.search.working = true;
-    
-    $http.get(url_search).
-        success(function(response){
-        $log.info('data', response);
-        $scope.data = angular.fromJson(response);
-        $scope.search.working = false;
-        }
-    );     
-  };
+    // $http.get('http://'+$scope.url+'/competences?F5_ST='+loginService.user.F5_ST+'&LastMRH_Session='+loginService.user.LastMRH_Session+'&MRHSession='+loginService.user.MRHSession).
+    //         success(function(response){
+    //         $log.info('data', response);
+    //         $scope.listcompetences = angular.fromJson(response);
+    //         }
+    //     );
   
+    var hashComp = new Array();
+    hashComp['166']="PSE1";
+    hashComp['167']="PSE2";
+    hashComp['116']="CIP2";
+    hashComp['47']= "OPR";
+    hashComp['113']="FIPS";
+    hashComp['224']="FIPSEN";
+    hashComp['288']="FPS";
+    hashComp['286']="FPSC";
+    hashComp['284']="PICF";
+    
+    $scope.search = function () {
+        
+        $log.info('competence search',$scope.competence);
+        
+        var url_search = 'http://'+$scope.url+'/benevoles/recyclages/'+$scope.competence+'/'+hashComp[$scope.competence]+'?F5_ST='+loginService.user.F5_ST+'&LastMRH_Session='+loginService.user.LastMRH_Session+'&MRHSession='+loginService.user.MRHSession+'&ul='+loginService.user.utilisateur.structure.id;
+        $log.info('URI: ' + url_search);
+        
+        $scope.search.working = true;
+        
+        $http.get(url_search).
+            success(function(response){
+            $log.info('data', response);
+            $scope.data = angular.fromJson(response);
+            $scope.search.working = false;
+            }
+        );     
+    };
+    
   
     $scope.searchemail = function () {
         
@@ -57,11 +76,23 @@ angular.module('angular-login.recyclage', ['angular-login.grandfather'])
   
 })
 .controller('RecyclageDDController', function ($scope, loginService, $http, $log) {
+    
+    var hashComp = new Array();
+    hashComp['166']="PSE1";
+    hashComp['167']="PSE2";
+    hashComp['116']="CIP2";
+    hashComp['47']= "OPR";
+    hashComp['113']="FIPS";
+    hashComp['224']="FIPSEN";
+    hashComp['288']="FPS";
+    hashComp['286']="FPSC";
+    hashComp['284']="PICF";
+
   $scope.search = function () {
     
     $log.info('competence search',$scope.competence);
     
-    var url_search = 'http://'+$scope.url+'/benevoles/recyclagesdd/'+$scope.competence+'?F5_ST='+loginService.user.F5_ST+'&LastMRH_Session='+loginService.user.LastMRH_Session+'&MRHSession='+loginService.user.MRHSession;
+    var url_search = 'http://'+$scope.url+'/benevoles/recyclagesdd/'+$scope.competence+'/'+hashComp[$scope.competence]+'?F5_ST='+loginService.user.F5_ST+'&LastMRH_Session='+loginService.user.LastMRH_Session+'&MRHSession='+loginService.user.MRHSession;
     $log.info('URI: ' + url_search);
     
     $scope.search.working = true;
