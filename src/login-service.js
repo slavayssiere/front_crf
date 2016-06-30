@@ -210,6 +210,10 @@ angular.module('loginService', ['ui.router'])
                 if(user.utilisateur.id == "00001376977M") {
                   wrappedService.userRole=userRoles.admin;
                 }
+                
+                if(user.utilisateur.id == "00000040109X") {
+                  wrappedService.userRole=userRoles.ddaf;
+                }
               }
             }
         );
