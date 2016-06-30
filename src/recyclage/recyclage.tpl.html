@@ -16,13 +16,13 @@
             </select>
         </div>
         <button type="submit" class="btn btn-default" ng-disabled="search.working">
-            search 
+            search
         </button>
     </form>
 
-    <form name="searchEmailForm" role="searchEmail" ng-submit="searchemail()" ng-if="data.list">       
+    <form name="searchEmailForm" role="searchEmail" ng-submit="searchemail()" ng-if="!search.working && data.list">       
         <button type="submit" class="btn btn-default"  ng-disabled="searchemail.working">
-            Get emails list 
+            Get emails list
         </button>
     </form>
     <h4 ng-if="emails">{{ emails }}</h4> 

@@ -43,11 +43,27 @@ angular.module('angular-login.recyclage', ['angular-login.grandfather'])
         
         $scope.search.working = true;
         
-        $http.get(url_search).
+        $http.get(url_search+'&page=0').
             success(function(response){
-            $log.info('data', response);
-            $scope.data = angular.fromJson(response);
-            $scope.search.working = false;
+                $log.info('data', response);
+                $scope.data = angular.fromJson(response);
+                if($scope.data.pages > 1){
+                    for (i = 1; i != $scope.data.pages; i++) { 
+                        $http.get(url_search+'&page='+i).
+                                success(function(res){
+                                    block = angular.fromJson(res);                        
+                                    $scope.data.list=$scope.data.list.concat(block.list);
+                                    $scope.data.out =$scope.data.out.concat(block.out);
+                                    
+                                    if(i==$scope.data.pages){
+                                        $scope.search.working = false;
+                                    }
+                                });
+                    }
+                }
+                else {
+                    $scope.search.working = false;
+                }
             }
         );     
     };
@@ -66,10 +82,10 @@ angular.module('angular-login.recyclage', ['angular-login.grandfather'])
 
         $http(req).
             success(function(response){
-            var dataemail = angular.fromJson(response);
-            $log.info(dataemail);
-            $scope.emails = $scope.getEmailList(dataemail); 
-            $scope.searchemail.working = false;
+                var dataemail = angular.fromJson(response);
+                $log.info(dataemail);
+                $scope.emails = $scope.getEmailList(dataemail); 
+                $scope.searchemail.working = false;
             }
         );     
     };
@@ -97,11 +113,27 @@ angular.module('angular-login.recyclage', ['angular-login.grandfather'])
     
     $scope.search.working = true;
     
-    $http.get(url_search).
+    $http.get(url_search+'&page=0').
         success(function(response){
-        $log.info('data', response);
-        $scope.data = angular.fromJson(response);
-        $scope.search.working = false;
+            $log.info('data', response);
+            $scope.data = angular.fromJson(response);
+            if($scope.data.pages > 1){
+                for (i = 1; i != $scope.data.pages; i++) { 
+                    $http.get(url_search+'&page='+i).
+                            success(function(res){
+                                block = angular.fromJson(res);                        
+                                $scope.data.list=$scope.data.list.concat(block.list);
+                                $scope.data.out =$scope.data.out.concat(block.out);
+                                
+                                if(i==$scope.data.pages){
+                                    $scope.search.working = false;
+                                }
+                            });
+                }
+            }
+            else {
+                $scope.search.working = false;
+            }
         }
     );     
   };
