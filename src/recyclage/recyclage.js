@@ -33,6 +33,12 @@ angular.module('angular-login.recyclage', ['angular-login.grandfather'])
     hashComp['288']="FPS";
     hashComp['286']="FPSC";
     hashComp['284']="PICF";
+    hashComp['25']="FCI";
+    hashComp['292']="FFPS";
+    hashComp['294']="FFPSC";
+    hashComp['43']="MORAD";
+    hashComp['143']="FIAPS";
+    
     
     $scope.search = function () {
         
@@ -103,6 +109,11 @@ angular.module('angular-login.recyclage', ['angular-login.grandfather'])
     hashComp['288']="FPS";
     hashComp['286']="FPSC";
     hashComp['284']="PICF";
+    hashComp['25']="FCI";
+    hashComp['292']="FFPS";
+    hashComp['294']="FFPSC";
+    hashComp['43']="MORAD";
+    hashComp['143']="FIAPS";
 
   $scope.search = function () {
     

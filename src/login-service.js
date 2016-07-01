@@ -3,10 +3,6 @@ angular.module('loginService', ['ui.router'])
   var userToken = localStorage.getItem('userToken'),
       errorState = 'app.error',
       logoutState = 'app.home';
-
-  var F5_ST = localStorage.getItem('F5_ST');
-  var LastMRH_Session = localStorage.getItem('LastMRH_Session');
-  var MRHSession = localStorage.getItem('MRHSession');
   
   this.$get = function ($rootScope, $http, $q, $state, $log) {
 
@@ -21,25 +17,25 @@ angular.module('loginService', ['ui.router'])
       $http.defaults.headers.common['X-Token'] = token.toString();
     };
 
-    var setTokens = function (F5_ST, LastMRH_Session, MRHSession) {
-      if (!F5_ST && !LastMRH_Session && !MRHSession) {
+    var setTokens = function () {
+      if (!wrappedService.F5_ST && !wrappedService.LastMRH_Session && !wrappedService.MRHSession) {
         localStorage.removeItem('F5_ST');
         localStorage.removeItem('LastMRH_Session');
         localStorage.removeItem('MRHSession');
       } else {
-        localStorage.setItem('F5_ST', F5_ST);
-        localStorage.setItem('LastMRH_Session', LastMRH_Session);
-        localStorage.setItem('MRHSession', MRHSession);
+        localStorage.setItem('F5_ST', wrappedService.F5_ST);
+        localStorage.setItem('LastMRH_Session', wrappedService.LastMRH_Session);
+        localStorage.setItem('MRHSession', wrappedService.MRHSession);
       }      
     };
     
     var getTokens = function () {
         
-        F5_ST = localStorage.getItem('F5_ST');
-        LastMRH_Session = localStorage.getItem('LastMRH_Session');
-        MRHSession = localStorage.getItem('MRHSession');
+        wrappedService.F5_ST = localStorage.getItem('F5_ST');
+        wrappedService.LastMRH_Session = localStorage.getItem('LastMRH_Session');
+        wrappedService.MRHSession = localStorage.getItem('MRHSession');
         
-        if(!F5_ST && !LastMRH_Session && !MRHSession){
+        if(!wrappedService.F5_ST && !wrappedService.LastMRH_Session && !wrappedService.MRHSession){
           $log.info("no data");
           return false;
         }
@@ -50,29 +46,18 @@ angular.module('loginService', ['ui.router'])
     };
 
     var getLoginData = function () {
+      
+      wrappedService.userRole = userRoles.public;
+      wrappedService.isLogged = false;
+      wrappedService.doneLoading = true;
+        
       if (!getTokens()) {
         $log.info('we have not localstorage data');
-        wrappedService.userRole = userRoles.public;
-        wrappedService.isLogged = false;
-        wrappedService.doneLoading = true;
+        wrappedService.inLocalStorage = false;
       }
       else {
         $log.info('we have localstorage data');
-        var url_connect = 'http://'+url_ws_pegass+'/connecttest?F5_ST='+F5_ST+'&LastMRH_Session='+LastMRH_Session+'&MRHSession='+MRHSession;        
-        $log.info(url_connect);
-        var loginPromise = $http.get(url_connect);
-        
-        wrappedService.loginUser(loginPromise);
-        
-        loginPromise.error(function () {
-            $log.info("401");
-            wrappedService.userRole = userRoles.public;
-            wrappedService.isLogged = false;
-            wrappedService.doneLoading = true;
-        });
-        
-        wrappedService.isLogged = true;
-        wrappedService.doneLoading = true;
+        wrappedService.inLocalStorage = true;        
       }
     };
 
@@ -180,13 +165,13 @@ angular.module('loginService', ['ui.router'])
         $log.info('user', user);
         
         // setup token
-        setTokens(user.F5_ST, user.LastMRH_Session, user.MRHSession);
+        setTokens();
         // update user
         angular.extend(wrappedService.user, user);
         // flag true on isLogged
         wrappedService.isLogged = true;
         // update userRole
-        var url_search = 'http://'+url_ws_pegass+'/benevoles/nominations/'+user.utilisateur.id+'?F5_ST='+user.F5_ST+'&LastMRH_Session='+user.LastMRH_Session+'&MRHSession='+user.MRHSession;
+        var url_search = 'http://'+url_ws_pegass+'/benevoles/nominations/'+user.utilisateur.id+'?F5_ST='+wrappedService.F5_ST+'&LastMRH_Session='+wrappedService.LastMRH_Session+'&MRHSession='+wrappedService.MRHSession;
         $log.info('URI: ' + url_search);
         
         $http.get(url_search).
@@ -268,8 +253,13 @@ angular.module('loginService', ['ui.router'])
       userRole: null,
       user: {},
       isLogged: null,
+      inLocalStorage: null,
       pendingStateChange: null,
-      doneLoading: null
+      doneLoading: null,
+          
+      F5_ST: localStorage.getItem('F5_ST'),
+      LastMRH_Session: localStorage.getItem('LastMRH_Session'),
+      MRHSession: localStorage.getItem('MRHSession')
     };
 
     $log.info('userroles', userRoles);
