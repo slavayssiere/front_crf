@@ -15,7 +15,7 @@ angular.module('angular-login.grandfather', ['ui.router', 'templates-app'])
            * Calling resolvePendingState makes the loginService retrieve his userRole remotely.
            */
           if (loginService.pendingStateChange) {
-            return loginService.resolvePendingState($http.get('/'));
+            return loginService.resolvePendingState($http.get('/user'));
           } else {
             roleDefined.resolve();
           }
