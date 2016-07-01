@@ -22,10 +22,12 @@ angular.module('loginService', ['ui.router'])
         localStorage.removeItem('F5_ST');
         localStorage.removeItem('LastMRH_Session');
         localStorage.removeItem('MRHSession');
+        wrappedService.inLocalStorage = false;
       } else {
         localStorage.setItem('F5_ST', wrappedService.F5_ST);
         localStorage.setItem('LastMRH_Session', wrappedService.LastMRH_Session);
         localStorage.setItem('MRHSession', wrappedService.MRHSession);
+        wrappedService.inLocalStorage = true;
       }      
     };
     
@@ -158,7 +160,11 @@ angular.module('loginService', ['ui.router'])
          */
         $log.info('user', user);
         
+        
         // setup token
+        wrappedService.F5_ST=user.F5_ST;
+        wrappedService.MRHSession=user.MRHSession;
+        wrappedService.LastMRH_Session=user.LastMRH_Session;
         setTokens();
         // update user
         angular.extend(wrappedService.user, user);
@@ -198,7 +204,7 @@ angular.module('loginService', ['ui.router'])
         return user;
       },
       loginUser: function (httpPromise) {
-        httpPromise.success(this.loginHandler);
+        httpPromise.success(this.loginHandler); 
       },
       logoutUser: function (httpPromise) {
         /**

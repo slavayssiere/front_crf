@@ -5,7 +5,7 @@ angular.module('angular-login.benevoles', ['angular-login.grandfather'])
                 url: '/benevoles',
                 templateUrl: 'benevoles/benevoles.tpl.html',
                 controller: 'BenevolesController',
-                accessLevel: accessLevels.admin
+                accessLevel: accessLevels.public
             });
     })
     .controller('BenevolesController', function ($scope, loginService, $http, $log) {

@@ -1,0 +1,30 @@
+<div class="jumbotron">
+    <h3>Liste des benevoles</h3>
+    <form name="searchEmailForm" role="searchEmail" ng-submit="searchemail()" ng-if="data.list">       
+        <button type="submit" class="btn btn-default"  ng-disabled="searchemail.working">
+            Get emails list 
+        </button>
+    </form>
+    <h4 ng-if="emails">{{ emails }}</h4> 
+    <table class="table table-bordered table-striped" ng-if="data.list">
+        <thead>
+            <tr>            
+                <th>Nivol</th>
+                <th>Prenom</th>
+                <th>Nom</th>
+                <th>Emails</th>
+                <th>Exterieur</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="person in data.list">
+                <td>{{person.id}}</td>
+                <td>{{person.prenom}}</td>
+                <td>{{person.nom}}</td>
+                <td ng-style="person.allow_email ? {'background-color':'green'} || {'background-color': 'red'}">{{person.allow_email}}</td>
+                <td ng-style="person.allow_external ? {'background-color':'green'} || {'background-color': 'red'}">{{person.allow_external}}</td>
+            </tr>
+        </tbody>
+    </table>
+ 
+</div>

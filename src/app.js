@@ -10,6 +10,7 @@ angular.module('angular-login', [
   'angular-login.competences',
   'angular-login.pages',
   'angular-login.benevoles',
+  'angular-login.benevolesadmin',
   'angular-login.register',
   'angular-login.error',
   // components
@@ -76,6 +77,7 @@ angular.module('angular-login', [
         });
         loginPromise.finally(function () {
           $scope.login.working = false;
+          $scope.ls.setToken();
         });
       }
       else {
@@ -90,6 +92,10 @@ angular.module('angular-login', [
         loginPromise.error(function () {
           $scope.login.wrong = true;
           $timeout(function () { $scope.login.wrong = false; }, 8000);
+          $scope.ls.F5_ST=null;
+          $scope.ls.MRHSession=null;
+          $scope.ls.LastMRH_Session=null;
+          $scope.ls.setToken();
         });
         loginPromise.finally(function () {
           $scope.login.working = false;
