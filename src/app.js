@@ -104,18 +104,12 @@ angular.module('angular-login', [
     $scope.getEmailList = function (data) {
       var emailList = "";
       for (i = 0; i < data.list.length; i++) {
-        $log.info(data.list[i]);
         emailList += data.list[i].email + "; ";
       }
       return emailList;
     };
 
     if ($scope.ls.inLocalStorage == true){
-      $log.info("local storage");
       $scope.loginMe();
-    }
-    else
-    {
-      $log.info("no local storage");
     }
   });

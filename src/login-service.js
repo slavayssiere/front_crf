@@ -36,11 +36,9 @@ angular.module('loginService', ['ui.router'])
         wrappedService.MRHSession = localStorage.getItem('MRHSession');
         
         if(!wrappedService.F5_ST && !wrappedService.LastMRH_Session && !wrappedService.MRHSession){
-          $log.info("no data");
           return false;
         }
         else{
-          $log.info("data");
           return true;
         }
     };
@@ -64,7 +62,6 @@ angular.module('loginService', ['ui.router'])
     var managePermissions = function () {
       // Register routing function.
       $rootScope.$on('$stateChangeStart', function (event, to, toParams, from, fromParams) {
-        $log.info("change start");
         /**
          * $stateChangeStart is a synchronous check to the accessLevels property
          * if it's not set, it will setup a pendingStateChange and will let
@@ -75,7 +72,6 @@ angular.module('loginService', ['ui.router'])
          * Grandfather.resolve will either let the user in or reject the promise later!
          */
         if (wrappedService.userRole === null) {
-           $log.info("user role null");
           wrappedService.doneLoading = false;
           wrappedService.pendingStateChange = {
             to: to,
@@ -88,10 +84,8 @@ angular.module('loginService', ['ui.router'])
         // NOTE: if `wrappedService.userRole === undefined` means the service still doesn't know the user role,
         // we need to rely on grandfather resolve, so we let the stateChange success, for now.
         if (to.accessLevel === undefined || to.accessLevel.bitMask & wrappedService.userRole.bitMask) {
-          $log.info("case 1");
           angular.noop(); // requested state can be transitioned to.
         } else {
-          $log.info("case 2");
           event.preventDefault();
           $rootScope.$emit('$statePermissionError');
           $state.go(errorState, { error: 'unauthorized' }, { location: false, inherit: false });
@@ -180,7 +174,6 @@ angular.module('loginService', ['ui.router'])
               for (i = 0; i < nominations.length; i++) {
                 $log.info(nominations[i].libelleCourt);
                 if(nominations[i].libelleCourt == "DLUS.A.FOR"){
-                  $log.info("Tu es DLAF!");
                   wrappedService.userRole=userRoles.dlaf;
                 }
                 
@@ -262,7 +255,6 @@ angular.module('loginService', ['ui.router'])
       MRHSession: localStorage.getItem('MRHSession')
     };
 
-    $log.info('userroles', userRoles);
     getLoginData();
     managePermissions();
 

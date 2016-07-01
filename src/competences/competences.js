@@ -12,15 +12,12 @@ angular.module('angular-login.competences', ['angular-login.grandfather'])
 
         $scope.search = function () {
 
-            $log.info('competence search', $scope.competence);
-
             var url_search = 'http://' + $scope.url + '/benevoles/competences/' + $scope.competence + '/yes?F5_ST=' + loginService.user.F5_ST + '&LastMRH_Session=' + loginService.user.LastMRH_Session + '&MRHSession=' + loginService.user.MRHSession + '&ul=' + loginService.user.utilisateur.structure.id;
             $log.info('URI: ' + url_search);
             $scope.search.working = true;
 
             $http.get(url_search + '&page=0').
                 success(function (response) {
-                    $log.info('data', response);
                     $scope.data = angular.fromJson(response);
                     if ($scope.data.pages > 1) {
                         for (i = 1; i != $scope.data.pages; i++) {
@@ -44,15 +41,12 @@ angular.module('angular-login.competences', ['angular-login.grandfather'])
 
         $scope.searchWithout = function () {
 
-            $log.info('competence not search', $scope.competence);
-
             var url_search = 'http://' + $scope.url + '/benevoles/competences/' + $scope.competence + '/no?F5_ST=' + loginService.user.F5_ST + '&LastMRH_Session=' + loginService.user.LastMRH_Session + '&MRHSession=' + loginService.user.MRHSession + '&ul=' + loginService.user.utilisateur.structure.id;
             $log.info('URI: ' + url_search);
             $scope.search.working = true;
 
             $http.get(url_search + '&page=0').
                 success(function (response) {
-                    $log.info('data', response);
                     $scope.data = angular.fromJson(response);
                     if ($scope.data.pages > 1) {
                         for (i = 1; i != $scope.data.pages; i++) {
@@ -83,7 +77,6 @@ angular.module('angular-login.competences', ['angular-login.grandfather'])
 
             $http.get(url_search + '&page=0').
                 success(function (response) {
-                    $log.info('data', response);
                     $scope.data = angular.fromJson(response);
                     if ($scope.data.pages > 1) {
                         for (i = 1; i != $scope.data.pages; i++) {
@@ -120,7 +113,6 @@ angular.module('angular-login.competences', ['angular-login.grandfather'])
             $http(req).
                 success(function (response) {
                     var dataemail = angular.fromJson(response);
-                    $log.info(dataemail);
                     $scope.emails = $scope.getEmailList(dataemail);
                     $scope.searchemail.working = false;
                 }

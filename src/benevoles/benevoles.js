@@ -33,7 +33,6 @@ angular.module('angular-login.benevoles', ['angular-login.grandfather'])
             $http(req).
                 success(function (response) {
                     var dataemail = angular.fromJson(response);
-                    $log.info(dataemail);
                     $scope.emails = $scope.getEmailList(dataemail);
                     $scope.searchemail.working = false;
                 }

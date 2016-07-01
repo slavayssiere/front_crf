@@ -16,13 +16,6 @@ angular.module('angular-login.recyclage', ['angular-login.grandfather'])
 })
 .controller('RecyclageController', function ($scope, loginService, $http, $log) {
     
-    // $http.get('http://'+$scope.url+'/competences?F5_ST='+loginService.user.F5_ST+'&LastMRH_Session='+loginService.user.LastMRH_Session+'&MRHSession='+loginService.user.MRHSession).
-    //         success(function(response){
-    //         $log.info('data', response);
-    //         $scope.listcompetences = angular.fromJson(response);
-    //         }
-    //     );
-  
     var hashComp = new Array();
     hashComp['166']="PSE1";
     hashComp['167']="PSE2";
@@ -42,8 +35,6 @@ angular.module('angular-login.recyclage', ['angular-login.grandfather'])
     
     $scope.search = function () {
         
-        $log.info('competence search',$scope.competence);
-        
         var url_search = 'http://'+$scope.url+'/benevoles/recyclages/'+$scope.competence+'/'+hashComp[$scope.competence]+'?F5_ST='+loginService.user.F5_ST+'&LastMRH_Session='+loginService.user.LastMRH_Session+'&MRHSession='+loginService.user.MRHSession+'&ul='+loginService.user.utilisateur.structure.id;
         $log.info('URI: ' + url_search);
         
@@ -51,7 +42,6 @@ angular.module('angular-login.recyclage', ['angular-login.grandfather'])
         
         $http.get(url_search+'&page=0').
             success(function(response){
-                $log.info('data', response);
                 $scope.data = angular.fromJson(response);
                 if($scope.data.pages > 1){
                     for (i = 1; i != $scope.data.pages; i++) { 
@@ -89,7 +79,6 @@ angular.module('angular-login.recyclage', ['angular-login.grandfather'])
         $http(req).
             success(function(response){
                 var dataemail = angular.fromJson(response);
-                $log.info(dataemail);
                 $scope.emails = $scope.getEmailList(dataemail); 
                 $scope.searchemail.working = false;
             }
@@ -117,8 +106,6 @@ angular.module('angular-login.recyclage', ['angular-login.grandfather'])
 
   $scope.search = function () {
     
-    $log.info('competence search',$scope.competence);
-    
     var url_search = 'http://'+$scope.url+'/benevoles/recyclagesdd/'+$scope.competence+'/'+hashComp[$scope.competence]+'?F5_ST='+loginService.user.F5_ST+'&LastMRH_Session='+loginService.user.LastMRH_Session+'&MRHSession='+loginService.user.MRHSession;
     $log.info('URI: ' + url_search);
     
@@ -126,7 +113,6 @@ angular.module('angular-login.recyclage', ['angular-login.grandfather'])
     
     $http.get(url_search+'&page=0').
         success(function(response){
-            $log.info('data', response);
             $scope.data = angular.fromJson(response);
             if($scope.data.pages > 1){
                 for (i = 1; i != $scope.data.pages; i++) { 
@@ -164,7 +150,6 @@ angular.module('angular-login.recyclage', ['angular-login.grandfather'])
         $http(req).
             success(function(response){
             var dataemail = angular.fromJson(response);
-            $log.info(dataemail);
             $scope.emails = $scope.getEmailList(dataemail); 
             $scope.searchemail.working = false;
             }

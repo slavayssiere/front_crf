@@ -14,7 +14,6 @@ angular.module('angular-login.stats', ['angular-login.grandfather'])
 
     $http.get(url_search).
         success(function(response){
-        $log.info('data', response);
         $scope.data = angular.fromJson(response);
         }
     );         
