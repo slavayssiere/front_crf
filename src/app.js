@@ -92,10 +92,10 @@ angular.module('angular-login', [
         loginPromise.error(function () {
           $scope.login.wrong = true;
           $timeout(function () { $scope.login.wrong = false; }, 8000);
-          $scope.ls.F5_ST=null;
-          $scope.ls.MRHSession=null;
-          $scope.ls.LastMRH_Session=null;
-          $scope.ls.setToken();
+          loginService.F5_ST = null;
+          loginService.MRHSession = null;
+          loginService.LastMRH_Session = null;
+          loginService.setToken();
         });
         loginPromise.finally(function () {
           $scope.login.working = false;
@@ -104,6 +104,10 @@ angular.module('angular-login', [
     };
     $scope.logoutMe = function () {
       loginService.logoutUser($http.get('/logout'));
+      loginService.F5_ST = null;
+      loginService.MRHSession = null;
+      loginService.LastMRH_Session = null;
+      loginService.setToken();
     };
 
 
@@ -115,7 +119,7 @@ angular.module('angular-login', [
       return emailList;
     };
 
-    if ($scope.ls.inLocalStorage == true){
+    if ($scope.ls.inLocalStorage == true) {
       $scope.loginMe();
     }
   });
