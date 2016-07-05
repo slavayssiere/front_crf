@@ -107,4 +107,8 @@ angular.module('angular-login', [
     $scope.logoutMe = function () {
       loginService.logoutUser($http.get('/#/logout'));
     };
+    
+    if ($scope.ls.inLocalStorage == true) {
+      $scope.loginMe();
+    }
   });
