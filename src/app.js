@@ -102,12 +102,9 @@ angular.module('angular-login', [
         });
       }
     };
+    
     $scope.logoutMe = function () {
-      loginService.logoutUser($http.get('/logout'));
-      loginService.F5_ST = null;
-      loginService.MRHSession = null;
-      loginService.LastMRH_Session = null;
-      loginService.setToken();
+      loginService.logoutUser($http.get('/#/logout'));
     };
 
 

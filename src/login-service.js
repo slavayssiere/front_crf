@@ -211,7 +211,12 @@ angular.module('loginService', ['ui.router'])
          * De-registers the userToken remotely
          * then clears the loginService as it was on startup
          */
-        setTokens(null, null, null);
+        
+        this.F5_ST = null;
+        this.MRHSession = null;
+        this.LastMRH_Session = null;
+        setTokens();
+
         this.userRole = userRoles.public;
         this.user = {};
         this.isLogged = false;
