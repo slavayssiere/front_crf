@@ -2,17 +2,8 @@
   <h3>Competences search</h3>
     <form name="searchRecyclageForm" role="competenceSearch" ng-submit="search()">
         <div class="form-group">
-            <!-- <input type="text" class="form-control" ng-model="competence" name="competence" placeholder="Competence"> -->
             <select name="competence" ng-model="competence">
-              <option value="166">PSE1</option>
-              <option value="167">PSE2</option>
-              <option value="116">CIP2</option>
-              <option value="47">OPR</option>
-              <option value="113">FIPS</option>
-              <option value="224">FIPSEN</option>
-              <option value="288">FPS</option>
-              <option value="286">FPSC</option>
-              <option value="284">PICF</option>
+              <option ng-repeat="(key, value) in list_comp" value="{{ key }}">{{ value }}</option>
             </select>
         </div>
         <button type="submit" class="btn btn-default" ng-disabled="search.working">
@@ -27,7 +18,7 @@
     </form>
     <h4 ng-if="emails">{{ emails }}</h4> 
     <h2 ng-if="data.list">A recycle cette annee</h2>
-    <table class="table table-bordered" ng-if="data.list">
+    <table class="table table-bordered table-striped" ng-if="data.list">
         <thead>
             <tr>            
                 <th>Nivol</th>

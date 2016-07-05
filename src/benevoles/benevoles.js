@@ -8,7 +8,7 @@ angular.module('angular-login.benevoles', ['angular-login.grandfather'])
                 accessLevel: accessLevels.public
             });
     })
-    .controller('BenevolesController', function ($scope, loginService, $http, $log) {
+    .controller('BenevolesController', function ($scope, loginService, $http, $log, datalib) {
 
         var url_search = 'http://' + $scope.url + '/benevoles?F5_ST=' + loginService.user.F5_ST + '&LastMRH_Session=' + loginService.user.LastMRH_Session + '&MRHSession=' + loginService.user.MRHSession + '&ul=' + loginService.user.utilisateur.structure.id;
         $log.info('URI: ' + url_search);
@@ -33,7 +33,7 @@ angular.module('angular-login.benevoles', ['angular-login.grandfather'])
             $http(req).
                 success(function (response) {
                     var dataemail = angular.fromJson(response);
-                    $scope.emails = $scope.getEmailList(dataemail);
+                    $scope.emails = datalib.getEmailList(dataemail);
                     $scope.searchemail.working = false;
                 }
                 );

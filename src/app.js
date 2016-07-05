@@ -13,6 +13,7 @@ angular.module('angular-login', [
   'angular-login.benevolesadmin',
   'angular-login.register',
   'angular-login.error',
+  'angular-services.competence',
   // components
   'ngAnimate'
 ])
@@ -106,17 +107,4 @@ angular.module('angular-login', [
     $scope.logoutMe = function () {
       loginService.logoutUser($http.get('/#/logout'));
     };
-
-
-    $scope.getEmailList = function (data) {
-      var emailList = "";
-      for (i = 0; i < data.list.length; i++) {
-        emailList += data.list[i].email + "; ";
-      }
-      return emailList;
-    };
-
-    if ($scope.ls.inLocalStorage == true) {
-      $scope.loginMe();
-    }
   });

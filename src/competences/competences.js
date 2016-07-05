@@ -8,7 +8,7 @@ angular.module('angular-login.competences', ['angular-login.grandfather'])
                 accessLevel: accessLevels.public
             });
     })
-    .controller('CompetencesController', function ($scope, loginService, $http, $log) {
+    .controller('CompetencesController', function ($scope, loginService, $http, $log, datalib) {
 
         $scope.search = function () {
 
@@ -113,7 +113,7 @@ angular.module('angular-login.competences', ['angular-login.grandfather'])
             $http(req).
                 success(function (response) {
                     var dataemail = angular.fromJson(response);
-                    $scope.emails = $scope.getEmailList(dataemail);
+                    $scope.emails = datalib.getEmailList(dataemail);
                     $scope.searchemail.working = false;
                 }
                 );
