@@ -21,8 +21,8 @@
                 <td>{{person.id}}</td>
                 <td>{{person.prenom}}</td>
                 <td>{{person.nom}}</td>
-                <td class="fa" ng-class="{person.allow_email ? 'fa-check' : 'fa-times'}">{{person.allow_email}}</td>
-                <td class="fa" ng-class="{person.allow_external ? 'fa-check' : 'fa-times'}">{{person.allow_external}}</td>
+                <td>{{person.allow_email}} <i class="fa" ng-class="{ 'fa-check': person.allow_email, 'fa-times': !person.allow_email }"></i></td>
+                <td>{{person.allow_external}} <i class="fa" ng-class="{ 'fa-check': person.allow_external, 'fa-times': !person.allow_external }"></i></td>
             </tr>
         </tbody>
     </table>
