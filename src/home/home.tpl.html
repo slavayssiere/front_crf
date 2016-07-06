@@ -2,20 +2,18 @@
   <div ng-hide="!ls.isLogged">
     <h2>Bonjour {{ ls.user.utilisateur.prenom }} {{ ls.user.utilisateur.nom }}</h2>
     <div>
-      <p>      
-        Nivol: {{ ls.user.utilisateur.id }} <br />
-        ul: {{ ls.user.structuresAdministrees[0].libelle }} <br />
-        Role: {{ ls.userRole.title }}
+      <p>
+        Nivol: {{ ls.user.utilisateur.id }} <br /> ul: {{ ls.user.structuresAdministrees[0].libelle }} <br /> Role: {{ ls.userRole.title
+        }}
       </p>
       <!--<h3>Nominations</h3>
         <ul ng-repeat="nomination in nominations" class="list-unstyled">
             <li>{{nomination.libelleLong}}</li>
         </ul>-->
     </div>
-    
-  <div ng-hide="ls.isLogged">
-    <h2>Please login with Pegass login / password</h2>
   </div>
+  
+    <div ng-hide="ls.isLogged">
+      <h2>Please login with Pegass login / password</h2>
+    </div>
 </div>
-
-

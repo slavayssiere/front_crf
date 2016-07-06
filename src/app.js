@@ -74,11 +74,11 @@ angular.module('angular-login', [
         loginService.loginUser(loginPromise);
         loginPromise.error(function () {
           $scope.login.wrong = true;
+          loginService.logoutUser($http.get('/#/logout'));
           $timeout(function () { $scope.login.wrong = false; }, 8000);
         });
         loginPromise.finally(function () {
           $scope.login.working = false;
-          $scope.ls.setToken();
         });
       }
       else {
@@ -93,10 +93,7 @@ angular.module('angular-login', [
         loginPromise.error(function () {
           $scope.login.wrong = true;
           $timeout(function () { $scope.login.wrong = false; }, 8000);
-          loginService.F5_ST = null;
-          loginService.MRHSession = null;
-          loginService.LastMRH_Session = null;
-          loginService.setToken();
+          loginService.logoutUser($http.get('/#/logout'));
         });
         loginPromise.finally(function () {
           $scope.login.working = false;

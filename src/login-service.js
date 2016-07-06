@@ -28,7 +28,9 @@ angular.module('loginService', ['ui.router'])
         localStorage.setItem('LastMRH_Session', wrappedService.LastMRH_Session);
         localStorage.setItem('MRHSession', wrappedService.MRHSession);
         wrappedService.inLocalStorage = true;
-      }      
+      }  
+      
+      return true;    
     };
     
     var getTokens = function () {
