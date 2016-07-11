@@ -24,7 +24,7 @@
                 <td ng-if="admin" ng-click="change(person, 'email')">                    
                     <i class="fa" ng-class="{ 'fa-check': person.allow_email, 'fa-times': !person.allow_email }" ng-style="person.allow_email ? {'color':'green'} : {'color':'red'}"></i>
                 </td>
-                <td ng-if="admin">
+                <td ng-if="admin" ng-click="change(person, 'external')">
                     <i class="fa" ng-class="{ 'fa-check': person.allow_external, 'fa-times': !person.allow_external }" ng-style="person.allow_email ? {'color':'green'} : {'color':'red'}"></i>
                 </td>
             </tr>
