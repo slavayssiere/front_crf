@@ -1,19 +1,21 @@
 <div class="jumbotron">
   <div ng-hide="!ls.isLogged">
     <h2>Bonjour {{ ls.user.utilisateur.prenom }} {{ ls.user.utilisateur.nom }}</h2>
-    <div>
-      <p>
-        Nivol: {{ ls.user.utilisateur.id }} <br /> ul: {{ ls.user.structuresAdministrees[0].libelle }} <br /> Role: {{ ls.userRole.title
-        }}
-      </p>
-      <!--<h3>Nominations</h3>
-        <ul ng-repeat="nomination in nominations" class="list-unstyled">
-            <li>{{nomination.libelleLong}}</li>
-        </ul>-->
-    </div>
+    <p>
+      Nivol: {{ ls.user.utilisateur.id }}
+   </p>
+   <p>
+      ul: {{ ls.user.structuresAdministrees[0].libelle }}
+   </p>
+   <p>
+      Role: {{ ls.userRole.title }}
+   </p>
+   <p>
+      Can admin: {{ ls.user.admin.peutAdministrer }}
+    </p>
   </div>
-  
-    <div ng-hide="ls.isLogged">
-      <h2>Please login with Pegass login / password</h2>
-    </div>
+
+  <div ng-hide="ls.isLogged">
+    <h2>Please login with Pegass login / password</h2>
+  </div>
 </div>

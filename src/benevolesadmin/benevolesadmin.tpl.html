@@ -1,19 +1,19 @@
 <div class="jumbotron">
     <h3>Liste des benevoles</h3>
-    <form name="searchEmailForm" role="searchEmail" ng-submit="searchemail()" ng-if="data.list">       
-        <button type="submit" class="btn btn-default"  ng-disabled="searchemail.working">
+    <form name="searchEmailForm" role="searchEmail" ng-submit="searchemail()" ng-if="data.list">
+        <button type="submit" class="btn btn-default" ng-disabled="searchemail.working">
             Get emails list 
         </button>
     </form>
-    <h4 ng-if="emails">{{ emails }}</h4> 
+    <h4 ng-if="emails">{{ emails }}</h4>
     <table class="table table-bordered table-striped" ng-if="data.list">
         <thead>
-            <tr>            
+            <tr>
                 <th>Nivol</th>
                 <th>Prenom</th>
                 <th>Nom</th>
-                <th>Emails</th>
-                <th>Exterieur</th>
+                <th ng-if="admin">Emails</th>
+                <th ng-if="admin">Exterieur</th>
             </tr>
         </thead>
         <tbody>
@@ -21,10 +21,14 @@
                 <td>{{person.id}}</td>
                 <td>{{person.prenom}}</td>
                 <td>{{person.nom}}</td>
-                <td>{{person.allow_email}} <i class="fa" ng-class="{ 'fa-check': person.allow_email, 'fa-times': !person.allow_email }"></i></td>
-                <td>{{person.allow_external}} <i class="fa" ng-class="{ 'fa-check': person.allow_external, 'fa-times': !person.allow_external }"></i></td>
+                <td ng-if="admin" ng-click="change(person, 'email')">                    
+                    <i class="fa" ng-class="{ 'fa-check': person.allow_email, 'fa-times': !person.allow_email }" ng-style="person.allow_email ? {'color':'green'} : {'color':'red'}"></i>
+                </td>
+                <td ng-if="admin">
+                    <i class="fa" ng-class="{ 'fa-check': person.allow_external, 'fa-times': !person.allow_external }" ng-style="person.allow_email ? {'color':'green'} : {'color':'red'}"></i>
+                </td>
             </tr>
         </tbody>
     </table>
- 
+
 </div>
