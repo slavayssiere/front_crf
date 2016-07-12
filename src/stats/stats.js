@@ -25,15 +25,19 @@ angular.module('angular-login.stats', ['angular-login.grandfather'])
     })
     .controller('StatsController', function ($scope, loginService, $http, $log, NgTableParams) {
         $scope.year = 2016;
+        $scope.wait = false;
         var self = this;
 
         $scope.getDonne = function () {
+            
+            $scope.wait = true;
             var url_search = 'http://' + $scope.url + '/stats/formations?year=' + $scope.year + '&F5_ST=' + loginService.user.F5_ST + '&LastMRH_Session=' + loginService.user.LastMRH_Session + '&MRHSession=' + loginService.user.MRHSession + '&ul=' + loginService.user.utilisateur.structure.id;
             $log.info('URI: ' + url_search);
 
             $http.get(url_search).
                 success(function (response) {
-                    $scope.donnee = angular.fromJson(response);                                      
+                    $scope.donnee = angular.fromJson(response);                     
+                    $scope.wait = false;                                     
                     self.tableformateurs = new NgTableParams(
                         {
                             sorting: { nombre: "desc" },
@@ -63,15 +67,18 @@ angular.module('angular-login.stats', ['angular-login.grandfather'])
     })
     .controller('StatsMaraudeController', function ($scope, loginService, $http, $log, NgTableParams) {
         $scope.year = 2016;
+        $scope.wait = false;
         var self = this;
 
         $scope.getDonne = function () {
+            $scope.wait = true;
             var url_search = 'http://' + $scope.url + '/stats/maraude?year=' + $scope.year + '&F5_ST=' + loginService.user.F5_ST + '&LastMRH_Session=' + loginService.user.LastMRH_Session + '&MRHSession=' + loginService.user.MRHSession + '&ul=' + loginService.user.utilisateur.structure.id;
             $log.info('URI: ' + url_search);
 
             $http.get(url_search).
                 success(function (response) {
-                    $scope.donnee = angular.fromJson(response);                    
+                    $scope.donnee = angular.fromJson(response); 
+                    $scope.wait = false;                   
                     self.tablechef = new NgTableParams(
                         {
                             sorting: { nombre: "desc" },
@@ -102,14 +109,17 @@ angular.module('angular-login.stats', ['angular-login.grandfather'])
     .controller('StatsFCController', function ($scope, loginService, $http, $log, NgTableParams) {
         $scope.year = 2016;
         var self = this;
+         $scope.wait = false;                   
           
         $scope.getDonne = function () {
+            $scope.wait = true;                   
             var url_search = 'http://' + $scope.url + '/stats/fc?year=' + $scope.year + '&F5_ST=' + loginService.user.F5_ST + '&LastMRH_Session=' + loginService.user.LastMRH_Session + '&MRHSession=' + loginService.user.MRHSession + '&ul=' + loginService.user.utilisateur.structure.id;
             $log.info('URI: ' + url_search);
 
             $http.get(url_search).
                 success(function (response) {
                     $scope.donnee = angular.fromJson(response);
+                    $scope.wait = false;                   
                     self.tableformateurs = new NgTableParams(
                         {
                             sorting: { nombre: "desc" },
