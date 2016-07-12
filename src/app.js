@@ -1,4 +1,4 @@
-angular.module('angular-login', [
+angular.module('angular-login', [  
   // login service
   'loginService',
   //'angular-login.mock',
@@ -15,7 +15,9 @@ angular.module('angular-login', [
   'angular-login.error',
   'angular-services.competence',
   // components
-  'ngAnimate'
+  'ngAnimate', 
+  'ngTouch',
+  'ui.bootstrap'
 ])
   .config(function ($urlRouterProvider, $httpProvider) {
     $urlRouterProvider.otherwise('/');
