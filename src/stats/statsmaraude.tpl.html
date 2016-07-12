@@ -3,74 +3,54 @@
     <p>
         <select 
             ng-model="year"
-            ng-change="getData()">
+            ng-change="getDonne()">
             <option value="2016" selected>2016</option>
             <option value="2015">2015</option>
         </select>
     </p>
     <p>
-        Nombre de maraudes complètes: {{ data.nb_maraude }}
+        Nombre de maraudes complètes: {{ donnee.nb_maraude }}
     </p>
     <h3>Liste des CEs</h3>
-    <table class="table table-bordered table-striped" ng-if="data">
-        <thead>
-            <tr>            
-                <th>Nivol</th>
-                <th>Prenom</th>
-                <th>Nom</th>
-                <th>Nombre de maraude</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="formateur in data.chef">
-                <td>{{formateur.id}}</td>
-                <td>{{formateur.prenom}}</td>
-                <td>{{formateur.nom}}</td>
-                <td>{{formateur.nombre}}</td>
-            </tr>
-        </tbody>
+    <table ng-table="statmrd.tablechef" class="table table-bordered table-striped">        
+        <tr ng-repeat="formateur in $data">
+            <td data-title="'Nivol'">{{formateur.id}}</td>
+            <td data-title="'Prenom'" sortable="'prenom'">{{formateur.prenom}}</td>
+            <td data-title="'Nom'" sortable="'nom'">{{formateur.nom}}</td>
+            <td data-title="'Nombre'" sortable="'nombre'">{{formateur.nombre}}</td>
+        </tr>
     </table>
     <h3>Liste des maraudeurs</h3>
-    <table class="table table-bordered table-striped" ng-if="data">
-        <thead>
-            <tr>            
-                <th>Nivol</th>
-                <th>Prenom</th>
-                <th>Nom</th>
-                <th>Nombre de maraude</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="formateur in data.maraudeur">
-                <td>{{formateur.id}}</td>
-                <td>{{formateur.prenom}}</td>
-                <td>{{formateur.nom}}</td>
-                <td>{{formateur.nombre}}</td>
-            </tr>
-        </tbody>
+    <table ng-table="statmrd.tablemaraudeur" class="table table-bordered table-striped">        
+        <tr ng-repeat="formateur in $data">
+            <td data-title="'Nivol'">{{formateur.id}}</td>
+            <td data-title="'Prenom'" sortable="'prenom'">{{formateur.prenom}}</td>
+            <td data-title="'Nom'" sortable="'nom'">{{formateur.nom}}</td>
+            <td data-title="'Nombre'" sortable="'nombre'">{{formateur.nombre}}</td>
+        </tr>
     </table>
     <h3>Sessions annulées</h3>
-    <table class="table table-bordered table-striped" ng-if="data">
+    <table class="table table-bordered table-striped" ng-if="donnee">
         <thead>
             <tr>            
                 <th>Date</th>
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="formateur in data.annulee">
+            <tr ng-repeat="formateur in donnee.annulee">
                 <td>{{formateur.date}}</td>
             </tr>
         </tbody>
     </table>
     <h3>Sessions incompletes</h3>
-    <table class="table table-bordered table-striped" ng-if="data">
+    <table class="table table-bordered table-striped" ng-if="donnee">
         <thead>
             <tr>            
                 <th>Date</th>
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="formateur in data.incomplete">
+            <tr ng-repeat="formateur in donnee.incomplete">
                 <td>{{formateur.date}}</td>
             </tr>
         </tbody>

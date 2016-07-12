@@ -3,47 +3,27 @@
     <p>
         <select 
             ng-model="year"
-            ng-change="getData()">
+            ng-change="getDonne()">
             <option value="2016" selected>2016</option>
             <option value="2015">2015</option>
         </select>
     </p>
     <h3>Liste des formateurs</h3>
-    <table class="table table-bordered table-striped" ng-if="data">
-        <thead>
-            <tr>            
-                <th>Nivol</th>
-                <th>Prenom</th>
-                <th>Nom</th>
-                <th>Nombre de formations</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="formateur in data.formateurs">
-                <td>{{formateur.id}}</td>
-                <td>{{formateur.prenom}}</td>
-                <td>{{formateur.nom}}</td>
-                <td>{{formateur.nombre}}</td>
-            </tr>
-        </tbody>
+    <table ng-table="statfcc.tableformateurs" class="table table-bordered table-striped">        
+        <tr ng-repeat="formateur in $data">
+            <td data-title="'Nivol'">{{formateur.id}}</td>
+            <td data-title="'Prenom'" sortable="'prenom'">{{formateur.prenom}}</td>
+            <td data-title="'Nom'" sortable="'nom'">{{formateur.nom}}</td>
+            <td data-title="'Nombre'" sortable="'nombre'">{{formateur.nombre}}</td>
+        </tr>
     </table>
     <h3>Liste des participants</h3>
-    <table class="table table-bordered table-striped" ng-if="data">
-        <thead>
-            <tr>            
-                <th>Nivol</th>
-                <th>Prenom</th>
-                <th>Nom</th>
-                <th>Nombre de formation</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="formateur in data.participants">
-                <td>{{formateur.id}}</td>
-                <td>{{formateur.prenom}}</td>
-                <td>{{formateur.nom}}</td>
-                <td>{{formateur.nombre}}</td>
-            </tr>
-        </tbody>
+    <table ng-table="statfcc.tableparticipants" class="table table-bordered table-striped">        
+        <tr ng-repeat="formateur in $data">
+            <td data-title="'Nivol'">{{formateur.id}}</td>
+            <td data-title="'Prenom'" sortable="'prenom'">{{formateur.prenom}}</td>
+            <td data-title="'Nom'" sortable="'nom'">{{formateur.nom}}</td>
+            <td data-title="'Nombre'" sortable="'nombre'">{{formateur.nombre}}</td>
+        </tr>
     </table>
 </div>

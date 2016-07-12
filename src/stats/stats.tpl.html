@@ -3,51 +3,31 @@
     <p>
         <select 
             ng-model="year"
-            ng-change="getData()">
+            ng-change="getDonne()">
             <option value="2016" selected>2016</option>
             <option value="2015">2015</option>
         </select>
     </p>
     <h3>Liste des formateurs</h3>
-    <table class="table table-bordered table-striped" ng-if="data">
-        <thead>
-            <tr>
-                <th>Nivol</th>
-                <th>Prenom</th>
-                <th>Nom</th>
-                <th>Nombre de PSC1</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="formateur in data.formateurs">
-                <td>{{formateur.id}}</td>
-                <td>{{formateur.prenom}}</td>
-                <td>{{formateur.nom}}</td>
-                <td>{{formateur.nombre}}</td>
-            </tr>
-        </tbody>
+    <table ng-table="statfmt.tableformateurs" class="table table-bordered table-striped">        
+        <tr ng-repeat="formateur in $data">
+            <td data-title="'Nivol'">{{formateur.id}}</td>
+            <td data-title="'Prenom'" sortable="'prenom'">{{formateur.prenom}}</td>
+            <td data-title="'Nom'" sortable="'nom'">{{formateur.nom}}</td>
+            <td data-title="'Nombre'" sortable="'nombre'">{{formateur.nombre}}</td>
+        </tr>
     </table>
     <h3>Liste des assistants</h3>
-    <table class="table table-bordered table-striped" ng-if="data">
-        <thead>
-            <tr>
-                <th>Nivol</th>
-                <th>Prenom</th>
-                <th>Nom</th>
-                <th>Nombre de PSC1</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="formateur in data.assistants">
-                <td>{{formateur.id}}</td>
-                <td>{{formateur.prenom}}</td>
-                <td>{{formateur.nom}}</td>
-                <td>{{formateur.nombre}}</td>
-            </tr>
-        </tbody>
+    <table ng-table="statfmt.tableassistants" class="table table-bordered table-striped">        
+        <tr ng-repeat="formateur in $data">
+            <td data-title="'Nivol'">{{formateur.id}}</td>
+            <td data-title="'Prenom'" sortable="'prenom'">{{formateur.prenom}}</td>
+            <td data-title="'Nom'" sortable="'nom'">{{formateur.nom}}</td>
+            <td data-title="'Nombre'" sortable="'nombre'">{{formateur.nombre}}</td>
+        </tr>
     </table>
     <h3>Session incomplete</h3>
-    <table class="table table-bordered table-striped" ng-if="data">
+    <table class="table table-bordered table-striped" ng-if="donnee">
         <thead>
             <tr>
                 <th>Date</th>
@@ -55,14 +35,14 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="formateur in data.session_incomplete">
+            <tr ng-repeat="formateur in donnee.session_incomplete">
                 <td>{{formateur.date}}</td>
                 <td>{{formateur.formateur}}</td>
             </tr>
         </tbody>
     </table>
     <h3>Session annulée</h3>
-    <table class="table table-bordered table-striped" ng-if="data">
+    <table class="table table-bordered table-striped" ng-if="donnee">
         <thead>
             <tr>
                 <th>Date</th>
@@ -70,7 +50,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="formateur in data.session_annulee">
+            <tr ng-repeat="formateur in donnee.session_annulee">
                 <td>{{formateur.date}}</td>
                 <td>{{formateur.formateur}}</td>
             </tr>

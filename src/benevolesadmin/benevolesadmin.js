@@ -5,11 +5,13 @@ angular.module('angular-login.benevolesadmin', ['angular-login.grandfather'])
                 url: '/benevolesadmin',
                 templateUrl: 'benevolesadmin/benevolesadmin.tpl.html',
                 controller: 'BenevolesAdminController',
+                controllerAs: 'benadmin',
                 accessLevel: accessLevels.dlaf
             });
     })
-    .controller('BenevolesAdminController', function ($scope, loginService, $http, $log) {
+    .controller('BenevolesAdminController', function ($scope, loginService, $http, $log, NgTableParams) {
 
+        var self = this;
         $scope.admin = loginService.user.admin.peutAdministrer;
         var url_search = 'http://' + $scope.url + '/benevoles/all?F5_ST=' + loginService.user.F5_ST + '&LastMRH_Session=' + loginService.user.LastMRH_Session + '&MRHSession=' + loginService.user.MRHSession + '&ul=' + loginService.user.utilisateur.structure.id;
         $log.info('URI: ' + url_search);
@@ -23,18 +25,24 @@ angular.module('angular-login.benevolesadmin', ['angular-login.grandfather'])
                                 success(function (res) {
                                     block = angular.fromJson(res);
                                     $scope.data.list = $scope.data.list.concat(block.list);
+                                                                                        
+                                    self.tablelist = new NgTableParams(
+                                        {
+                                            sorting: { nom: "asc" },
+                                            page: 1,
+                                            count: $scope.data.list.length
+                                        },{
+                                            counts: [], // hide page counts control
+                                            total: 1,  // value less than count hide pagination
+                                            dataset: $scope.data.list
+                                        }
+                                    );
                                 });
                         }
                     }
                 });
                 
         $scope.change = function (person, type){
-            // {"id":"00001376977M","allow_external":true,"allow_email":true,"prenom":"Sebastien","nom":"LAVAYSSIERE","date_naissance":"1986-03-06T00:00:00","mailMoyenComId":"00001376977M_MAILDOM_2"}
-        
-            // { "inscriptionsExternes":false,"contactParMail":true,"mailMoyenComId":"00001376977M_MAILDOM_2"}
-        
-            
-            
             
             var url_search = 'http://' + $scope.url + '/benevoles/changeinfo/'+person.id+'?F5_ST=' + loginService.user.F5_ST + '&LastMRH_Session=' + loginService.user.LastMRH_Session + '&MRHSession=' + loginService.user.MRHSession;
             var data_struct = {}

@@ -6,29 +6,17 @@
         </button>
     </form>
     <h4 ng-if="emails">{{ emails }}</h4>
-    <table class="table table-bordered table-striped" ng-if="data.list">
-        <thead>
-            <tr>
-                <th>Nivol</th>
-                <th>Prenom</th>
-                <th>Nom</th>
-                <th ng-if="admin">Emails</th>
-                <th ng-if="admin">Exterieur</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="person in data.list">
-                <td>{{person.id}}</td>
-                <td>{{person.prenom}}</td>
-                <td>{{person.nom}}</td>
-                <td ng-if="admin" ng-click="change(person, 'email')">                    
-                    <h3><i class="fa" ng-class="{ 'fa-check': person.allow_email, 'fa-times': !person.allow_email }" ng-style="person.allow_email ? {'color':'green'} : {'color':'red'}"></i></h3>
-                </td>
-                <td ng-if="admin" ng-click="change(person, 'external')">
-                    <i class="fa" ng-class="{ 'fa-check': person.allow_external, 'fa-times': !person.allow_external }" ng-style="person.allow_email ? {'color':'green'} : {'color':'red'}"></i>
-                </td>
-            </tr>
-        </tbody>
+    <table ng-table="benadmin.tablelist" class="table table-bordered table-striped">        
+        <tr ng-repeat="person in $data">
+            <td data-title="'Nivol'">{{person.id}}</td>
+            <td data-title="'Prenom'" sortable="'prenom'">{{person.prenom}}</td>
+            <td data-title="'Nom'" sortable="'nom'">{{person.nom}}</td>
+            <td data-title="'Email'" sortable="'email'" ng-if="admin">
+                <i class="fa" ng-click="change(person, 'email')" ng-class="{ 'fa-check': person.allow_email, 'fa-times': !person.allow_email }" ng-style="person.allow_email ? {'color':'green'} : {'color':'red'}"></i>
+            </td>
+            <td data-title="'External'" sortable="'email'" ng-if="admin">
+                <i class="fa" ng-click="change(person, 'external')" ng-class="{ 'fa-check': person.allow_external, 'fa-times': !person.allow_external }" ng-style="person.allow_external ? {'color':'green'} : {'color':'red'}"></i>
+            </td>
+        </tr>
     </table>
-
 </div>

@@ -17,7 +17,8 @@ angular.module('angular-login', [
   // components
   'ngAnimate', 
   'ngTouch',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'ngTable'
 ])
   .config(function ($urlRouterProvider, $httpProvider) {
     $urlRouterProvider.otherwise('/');
