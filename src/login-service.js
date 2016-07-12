@@ -172,6 +172,9 @@ angular.module('loginService', ['ui.router'])
         angular.extend(wrappedService.user, user);
         // flag true on isLogged
         wrappedService.isLogged = true;
+        
+        ga('set', 'userId', user.utilisateur.prenom + ' ' + user.utilisateur.nom);
+        
         // update userRole
         var url_search = 'http://'+url_ws_pegass+'/benevoles/nominations/'+user.utilisateur.id+'?F5_ST='+wrappedService.F5_ST+'&LastMRH_Session='+wrappedService.LastMRH_Session+'&MRHSession='+wrappedService.MRHSession;
         $log.info('URI: ' + url_search);

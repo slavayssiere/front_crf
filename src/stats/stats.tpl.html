@@ -1,8 +1,17 @@
 <div class="jumbotron">
+    <h3>Annee</h3>
+    <p>
+        <select 
+            ng-model="year"
+            ng-change="getData()">
+            <option value="2016" selected>2016</option>
+            <option value="2015">2015</option>
+        </select>
+    </p>
     <h3>Liste des formateurs</h3>
     <table class="table table-bordered table-striped" ng-if="data">
         <thead>
-            <tr>            
+            <tr>
                 <th>Nivol</th>
                 <th>Prenom</th>
                 <th>Nom</th>
@@ -21,7 +30,7 @@
     <h3>Liste des assistants</h3>
     <table class="table table-bordered table-striped" ng-if="data">
         <thead>
-            <tr>            
+            <tr>
                 <th>Nivol</th>
                 <th>Prenom</th>
                 <th>Nom</th>
@@ -40,7 +49,7 @@
     <h3>Session incomplete</h3>
     <table class="table table-bordered table-striped" ng-if="data">
         <thead>
-            <tr>            
+            <tr>
                 <th>Date</th>
                 <th>Formateur</th>
             </tr>
@@ -55,7 +64,7 @@
     <h3>Session annulée</h3>
     <table class="table table-bordered table-striped" ng-if="data">
         <thead>
-            <tr>            
+            <tr>
                 <th>Date</th>
                 <th>Formateur</th>
             </tr>

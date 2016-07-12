@@ -1,4 +1,13 @@
 <div class="jumbotron">
+    <h3>Annee</h3>
+    <p>
+        <select 
+            ng-model="year"
+            ng-change="getData()">
+            <option value="2016" selected>2016</option>
+            <option value="2015">2015</option>
+        </select>
+    </p>
     <h3>Liste des formateurs</h3>
     <table class="table table-bordered table-striped" ng-if="data">
         <thead>
