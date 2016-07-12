@@ -1,0 +1,40 @@
+<div class="jumbotron">
+    <h3>Liste des formateurs</h3>
+    <table class="table table-bordered table-striped" ng-if="data">
+        <thead>
+            <tr>            
+                <th>Nivol</th>
+                <th>Prenom</th>
+                <th>Nom</th>
+                <th>Nombre de formations</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="formateur in data.formateurs">
+                <td>{{formateur.id}}</td>
+                <td>{{formateur.prenom}}</td>
+                <td>{{formateur.nom}}</td>
+                <td>{{formateur.nombre}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <h3>Liste des participants</h3>
+    <table class="table table-bordered table-striped" ng-if="data">
+        <thead>
+            <tr>            
+                <th>Nivol</th>
+                <th>Prenom</th>
+                <th>Nom</th>
+                <th>Nombre de formation</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="formateur in data.assistants">
+                <td>{{formateur.id}}</td>
+                <td>{{formateur.prenom}}</td>
+                <td>{{formateur.nom}}</td>
+                <td>{{formateur.nombre}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
