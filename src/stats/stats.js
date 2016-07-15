@@ -22,6 +22,20 @@ angular.module('angular-login.stats', ['angular-login.grandfather'])
                 controllerAs: 'statfcc',
                 accessLevel: accessLevels.public
             })
+            .state('app.statsreseau', {
+                url: '/statsreseau',
+                templateUrl: 'stats/statsreseau.tpl.html',
+                controller: 'StatsReseauController',
+                controllerAs: 'statrc',
+                accessLevel: accessLevels.public
+            })
+            .state('app.statsml', {
+                url: '/statsml',
+                templateUrl: 'stats/statsreseau.tpl.html',
+                controller: 'StatsMLController',
+                controllerAs: 'statrc',
+                accessLevel: accessLevels.public
+            })
     })
     .controller('StatsController', function ($scope, loginService, $http, $log, NgTableParams) {
         $scope.year = 2016;
@@ -140,6 +154,132 @@ angular.module('angular-login.stats', ['angular-login.grandfather'])
                             counts: [], // hide page counts control
                             total: 1,  // value less than count hide pagination
                             dataset: $scope.donnee.participants
+                        }
+                    );     
+                });
+        };
+
+        $scope.getDonne();
+    })
+    .controller('StatsReseauController', function ($scope, loginService, $http, $log, NgTableParams) {
+        $scope.year = 2016;
+        var self = this;
+        $scope.wait = false;                   
+          
+        $scope.getDonne = function () {
+            $scope.wait = true;                   
+            var url_search = 'http://' + $scope.url + '/stats/reseau?year=' + $scope.year + '&F5_ST=' + loginService.user.F5_ST + '&LastMRH_Session=' + loginService.user.LastMRH_Session + '&MRHSession=' + loginService.user.MRHSession + '&ul=' + loginService.user.utilisateur.structure.id;
+            $log.info('URI: ' + url_search);
+
+            $http.get(url_search).
+                success(function (response) {
+                    $scope.donnee = angular.fromJson(response);
+                    $scope.wait = false;                   
+                    self.tableci = new NgTableParams(
+                        {
+                            sorting: { nombre: "desc" },
+                            page: 1,
+                            count: $scope.donnee.ci.length
+                        },{
+                            counts: [], // hide page counts control
+                            total: 1,  // value less than count hide pagination
+                            dataset: $scope.donnee.ci
+                        }
+                    );
+                    self.tablech = new NgTableParams(
+                        {
+                            sorting: { nombre: "desc" },
+                            page: 1,
+                            count: $scope.donnee.ch.length
+                        },{
+                            counts: [], // hide page counts control
+                            total: 1,  // value less than count hide pagination
+                            dataset: $scope.donnee.ch
+                        }
+                    );     
+                    self.tablepse2 = new NgTableParams(
+                        {
+                            sorting: { nombre: "desc" },
+                            page: 1,
+                            count: $scope.donnee.pse2.length
+                        },{
+                            counts: [], // hide page counts control
+                            total: 1,  // value less than count hide pagination
+                            dataset: $scope.donnee.pse2
+                        }
+                    );         
+                    self.tablepse1 = new NgTableParams(
+                        {
+                            sorting: { nombre: "desc" },
+                            page: 1,
+                            count: $scope.donnee.pse1.length
+                        },{
+                            counts: [], // hide page counts control
+                            total: 1,  // value less than count hide pagination
+                            dataset: $scope.donnee.pse1
+                        }
+                    );     
+                });
+        };
+
+        $scope.getDonne();
+    })
+    .controller('StatsMLController', function ($scope, loginService, $http, $log, NgTableParams) {
+        $scope.year = 2016;
+        var self = this;
+        $scope.wait = false;                   
+          
+        $scope.getDonne = function () {
+            $scope.wait = true;                   
+            var url_search = 'http://' + $scope.url + '/stats/ml?year=' + $scope.year + '&F5_ST=' + loginService.user.F5_ST + '&LastMRH_Session=' + loginService.user.LastMRH_Session + '&MRHSession=' + loginService.user.MRHSession + '&ul=' + loginService.user.utilisateur.structure.id;
+            $log.info('URI: ' + url_search);
+
+            $http.get(url_search).
+                success(function (response) {
+                    $scope.donnee = angular.fromJson(response);
+                    $scope.wait = false;                   
+                    self.tableci = new NgTableParams(
+                        {
+                            sorting: { nombre: "desc" },
+                            page: 1,
+                            count: $scope.donnee.ci.length
+                        },{
+                            counts: [], // hide page counts control
+                            total: 1,  // value less than count hide pagination
+                            dataset: $scope.donnee.ci
+                        }
+                    );
+                    self.tablech = new NgTableParams(
+                        {
+                            sorting: { nombre: "desc" },
+                            page: 1,
+                            count: $scope.donnee.ch.length
+                        },{
+                            counts: [], // hide page counts control
+                            total: 1,  // value less than count hide pagination
+                            dataset: $scope.donnee.ch
+                        }
+                    );     
+                    self.tablepse2 = new NgTableParams(
+                        {
+                            sorting: { nombre: "desc" },
+                            page: 1,
+                            count: $scope.donnee.pse2.length
+                        },{
+                            counts: [], // hide page counts control
+                            total: 1,  // value less than count hide pagination
+                            dataset: $scope.donnee.pse2
+                        }
+                    );         
+                    self.tablepse1 = new NgTableParams(
+                        {
+                            sorting: { nombre: "desc" },
+                            page: 1,
+                            count: $scope.donnee.pse1.length
+                        },{
+                            counts: [], // hide page counts control
+                            total: 1,  // value less than count hide pagination
+                            dataset: $scope.donnee.pse1
                         }
                     );     
                 });

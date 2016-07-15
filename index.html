@@ -36,7 +36,7 @@
       <div class="container-fluid">
         <!-- Navbar links -->
         <div class="navbar-header">
-          <a class="navbar-brand" href="https://pegass.croix-rouge.fr">Pegass</a>
+          <a class="navbar-brand" ui-sref="app.home">Home</a>
         </div>
         <ul class="nav navbar-nav">
           <li ng-class="{ 'active': $state.is('app.home') }">
@@ -63,6 +63,8 @@
               <li><a ui-sref="app.stats">Stats formation</a></li>
               <li><a ui-sref="app.statsmaraude">Stats maraude</a></li>
               <li><a ui-sref="app.statsfc">Stats FC PSE</a></li>
+              <li><a ui-sref="app.statsreseau">Stats Reseau</a></li>
+              <li><a ui-sref="app.statsml">Stats Mission Locale</a></li>
             </ul>
           </li>
         </ul>
