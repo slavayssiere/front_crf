@@ -12,7 +12,7 @@
         </select>
     </p>
     <p>
-        Nombre de reseaux: {{ donnee.nb_reseau }}
+        Nombre total: {{ donnee.nb_mission }}
     </p>
     <h3>Liste des CIs</h3>
     <table ng-table="statrc.tableci" class="table table-bordered table-striped">        
@@ -43,6 +43,15 @@
     </table>
     <h3>Liste des PSE1s</h3>
     <table ng-table="statrc.tablepse1" class="table table-bordered table-striped">        
+        <tr ng-repeat="formateur in $data">
+            <td data-title="'Nivol'">{{formateur.id}}</td>
+            <td data-title="'Prenom'" sortable="'prenom'">{{formateur.prenom}}</td>
+            <td data-title="'Nom'" sortable="'nom'">{{formateur.nom}}</td>
+            <td data-title="'Nombre'" sortable="'nombre'">{{formateur.nombre}}</td>
+        </tr>
+    </table>
+    <h3>Liste des PSC1s</h3>
+    <table ng-table="statrc.tablepsc" class="table table-bordered table-striped">        
         <tr ng-repeat="formateur in $data">
             <td data-title="'Nivol'">{{formateur.id}}</td>
             <td data-title="'Prenom'" sortable="'prenom'">{{formateur.prenom}}</td>

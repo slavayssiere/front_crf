@@ -218,6 +218,17 @@ angular.module('angular-login.stats', ['angular-login.grandfather'])
                             total: 1,  // value less than count hide pagination
                             dataset: $scope.donnee.pse1
                         }
+                    );              
+                    self.tablepsc = new NgTableParams(
+                        {
+                            sorting: { nombre: "desc" },
+                            page: 1,
+                            count: $scope.donnee.psc.length
+                        },{
+                            counts: [], // hide page counts control
+                            total: 1,  // value less than count hide pagination
+                            dataset: $scope.donnee.psc
+                        }
                     );     
                 });
         };
@@ -281,7 +292,18 @@ angular.module('angular-login.stats', ['angular-login.grandfather'])
                             total: 1,  // value less than count hide pagination
                             dataset: $scope.donnee.pse1
                         }
-                    );     
+                    );      
+                    self.tablepsc = new NgTableParams(
+                        {
+                            sorting: { nombre: "desc" },
+                            page: 1,
+                            count: $scope.donnee.psc.length
+                        },{
+                            counts: [], // hide page counts control
+                            total: 1,  // value less than count hide pagination
+                            dataset: $scope.donnee.psc
+                        }
+                    );                         
                 });
         };
 
