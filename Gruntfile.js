@@ -115,6 +115,10 @@ module.exports = function (grunt) {
       config: {
         src: 'config.js',
         dest: 'build/'
+      },
+      htaccess: {
+        src: '.htaccess',
+        dest: 'build/'
       }
     },
     clean: {
