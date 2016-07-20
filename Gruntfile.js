@@ -106,6 +106,14 @@ module.exports = function (grunt) {
             });
           }
         }
+      },
+      robots: {
+        src: 'robots.txt',
+        dest: 'build/'
+      },
+      config: {
+        src: 'config.js',
+        dest: 'build/'
       }
     },
     clean: {
@@ -145,6 +153,6 @@ module.exports = function (grunt) {
   // - concatenates all the libraries in build/libs.js
   // - copies index.html over build/
   grunt.registerTask('build', ['clean', 'html2js', 'less', 'concat_sourcemap:app', 'concat_sourcemap:libs', 'uglify:app', 'uglify:libs', 'copy']);
-  grunt.registerTask('default', ['clean', 'concat_sourcemap:libs', 'uglify:libs', 'connect', 'watch']);
+  grunt.registerTask('default', ['clean', 'concat_sourcemap:libs', 'uglify:libs', 'copy:config', 'connect', 'watch']);
   grunt.registerTask('test', ['karma']);
 };
