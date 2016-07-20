@@ -1,6 +1,6 @@
 <div class="jumbotron">
   <h3>Competences search</h3>
-    <form name="searchRecyclageForm" role="competenceSearch" ng-submit="search()">
+    <form name="searchRecyclageForm" role="form" ng-submit="search()">
         <div class="form-group">
             <select name="competence" ng-model="competence">
               <option ng-repeat="(key, value) in list_comp" value="{{ key }}">{{ value }}</option>
@@ -11,7 +11,7 @@
         </button>
     </form>
 
-    <form name="searchEmailForm" role="searchEmail" ng-submit="searchemail()" ng-if="!search.working && data.list">       
+    <form name="searchEmailForm" role="form" ng-submit="searchemail()" ng-if="!search.working && data.list">       
         <button type="submit" class="btn btn-default"  ng-disabled="searchemail.working">
             Get emails list
         </button>

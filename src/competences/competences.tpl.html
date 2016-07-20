@@ -1,6 +1,6 @@
 <div class="jumbotron">
     <h3>Chercher une competence</h3>
-    <form name="searchCompetenceForm" role="competenceSearch" ng-submit="search()">
+    <form name="searchCompetenceForm" role="form" ng-submit="search()">
         <div class="form-group">
             <input type="text" class="form-control" ng-model="competence" name="competence" placeholder="Competence">
         </div>
@@ -9,7 +9,7 @@
         </button>
     </form>
     <h3>Qui n'est pas... ?</h3>
-    <form name="searchWithoutCompetenceForm" role="withoutXompetenceSearch" ng-submit="searchWithout()">
+    <form name="searchWithoutCompetenceForm" role="form" ng-submit="searchWithout()">
         <div class="form-group">
             <input type="text" class="form-control" ng-model="competence" name="competence" placeholder="Competence">
         </div>
@@ -18,7 +18,7 @@
         </button>
     </form>
     <h3>Qui n'est pas... ? Mais possede la competence...</h3>
-    <form name="searchWithoutCompetenceForm" role="withoutXompetenceSearch" ng-submit="searchComplexe()">
+    <form name="searchWithoutCompetenceForm" role="form" ng-submit="searchComplexe()">
         <div class="form-group">
             <input type="text" class="form-control" ng-model="competence" name="competence" placeholder="Competence">
             <input type="text" class="form-control" ng-model="competence2" name="competence2" placeholder="Competence 2">
@@ -29,7 +29,7 @@
     </form>
 
 
-    <form name="searchEmailForm" role="searchEmail" ng-submit="searchemail()" ng-if="data.list">
+    <form name="searchEmailForm" role="form" ng-submit="searchemail()" ng-if="data.list">
         <button type="submit" class="btn btn-default" ng-disabled="searchemail.working">
             Get emails list 
         </button>
