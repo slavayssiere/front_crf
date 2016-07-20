@@ -8,6 +8,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-karma');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
 
 
   grunt.initConfig({
@@ -57,7 +58,7 @@ module.exports = function (grunt) {
       },
       sources: {
         files: ['src/**/*.js', 'src/*.js'],
-        tasks: ['concat_sourcemap:app']
+        tasks: ['concat_sourcemap:app', 'uglify:app']
       },
       index: {
         files: 'index.html',
@@ -109,7 +110,22 @@ module.exports = function (grunt) {
     },
     clean: {
       all: {
-        src: ['build/']
+        src: ['build/', '!build/config.js']
+      }
+    },
+    uglify: {
+      options: {
+        mangle: false
+      },
+      app: {
+        files: {
+          'build/app.min.js': ['build/app.js']
+        }
+      },
+      libs: {
+        files: {
+          'build/libs.min.js': ['build/libs.js']
+        }
       }
     },
     // Test settings
@@ -128,7 +144,7 @@ module.exports = function (grunt) {
   // - concatenates all the source files in build/app.js - banner with git revision
   // - concatenates all the libraries in build/libs.js
   // - copies index.html over build/
-  grunt.registerTask('build', ['clean', 'html2js', 'less', 'concat_sourcemap:app', 'concat_sourcemap:libs', 'copy']);
-  grunt.registerTask('default', ['clean', 'concat_sourcemap:libs', 'connect', 'watch']);
+  grunt.registerTask('build', ['clean', 'html2js', 'less', 'concat_sourcemap:app', 'concat_sourcemap:libs', 'uglify:app', 'uglify:libs', 'copy']);
+  grunt.registerTask('default', ['clean', 'concat_sourcemap:libs', 'uglify:libs', 'connect', 'watch']);
   grunt.registerTask('test', ['karma']);
 };
