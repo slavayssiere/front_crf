@@ -9,6 +9,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-minify-html');
 
 
   grunt.initConfig({
@@ -62,7 +63,7 @@ module.exports = function (grunt) {
       },
       index: {
         files: 'index.html',
-        tasks: ['copy:index']
+        tasks: ['copy:index', 'minifyHtml']
       }
       // Useful for watching / rerunning karma tests
       // jsTest: {
@@ -136,6 +137,16 @@ module.exports = function (grunt) {
         }
       }
     },
+    minifyHtml: {
+        options: {
+            cdata: true
+        },
+        dist: {
+            files: {
+                'build/index.html': 'build/index.html'
+            }
+        }
+    },
     // Test settings
     karma: {
       unit: {
@@ -152,7 +163,7 @@ module.exports = function (grunt) {
   // - concatenates all the source files in build/app.js - banner with git revision
   // - concatenates all the libraries in build/libs.js
   // - copies index.html over build/
-  grunt.registerTask('build', ['clean', 'html2js', 'less', 'concat_sourcemap:app', 'concat_sourcemap:libs', 'uglify:app', 'uglify:libs', 'copy']);
+  grunt.registerTask('build', ['clean', 'html2js', 'less', 'concat_sourcemap:app', 'concat_sourcemap:libs', 'uglify:app', 'uglify:libs', 'copy', 'minifyHtml']);
   grunt.registerTask('default', ['clean', 'concat_sourcemap:libs', 'uglify:libs', 'copy:config', 'connect', 'watch']);
   grunt.registerTask('test', ['karma']);
 };
