@@ -1,4 +1,4 @@
-angular.module('angular-login', [  
+angular.module('angular-login', [
   // login service
   'loginService',
   //'angular-login.mock',
@@ -15,7 +15,7 @@ angular.module('angular-login', [
   'angular-login.error',
   'angular-services.competence',
   // components
-  'ngAnimate', 
+  'ngAnimate',
   'ngTouch',
   'ui.bootstrap',
   'ngTable'
@@ -103,12 +103,18 @@ angular.module('angular-login', [
         });
       }
     };
-    
+
     $scope.logoutMe = function () {
       loginService.logoutUser($http.get('/#/logout'));
     };
-    
+
     if ($scope.ls.inLocalStorage == true) {
       $scope.loginMe();
     }
+
+    var url_version = 'http://' + $scope.url + '/version'
+    $http.get(url_version).
+      success(function (response) {
+        $scope.version = response.version;
+      });
   });
