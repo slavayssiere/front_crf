@@ -41,9 +41,9 @@
           <a class="navbar-brand" ui-sref="app.home">Home</a>
         </div>
         <ul class="nav navbar-nav">
-          <li ng-class="{ 'active': $state.is('app.home') }">
+          <!--<li ng-class="{ 'active': $state.is('app.home') }">
             <a ui-sref="app.home">Home</a>
-          </li>
+          </li>-->
           <li class="dropdown" uib-dropdown>
             <a class="dropdown-toggle" uib-dropdown-toggle>Benevoles<span class="caret"></span></a>
             <ul class="dropdown-menu">
@@ -106,8 +106,8 @@
     <!-- version footer -->
     <div class="panel panel-default">
       <div class="panel-body">
-        <span><a href="https://github.com/slavayssiere/front_crf/<%=version %>" target="_blank"><b>Front version:</b> <%=version %></a></span>
-        <span><a href="https://github.com/slavayssiere/ws_pegass/" target="_blank">Link to backend project</a></span>
+        <span class="col-md-12"><a href="https://github.com/slavayssiere/front_crf/<%=version %>" target="_blank"><b>Front version:</b> <%=version %></a></span>
+        <span class="col-md-12"><a href="https://github.com/slavayssiere/ws_pegass/" target="_blank"><b>API Pegass version:</b> {{ version }}</a></span>
       </div>
     </div>
   </div>
