@@ -14,6 +14,7 @@ angular.module('angular-login', [
   'angular-login.register',
   'angular-login.error',
   'angular-services.competence',
+  'angular-login.google',
   // components
   'ngAnimate',
   'ngTouch',
@@ -29,7 +30,7 @@ angular.module('angular-login', [
     $locationProvider.html5Mode(true);
     $authProvider.google({
       url: 'http://'+url_ws_google+'/auth/google',
-      scope: ['profile', 'email', 'https://www.googleapis.com/auth/spreadsheets.readonly'],
+      scope: ['profile', 'email', 'https://www.googleapis.com/auth/spreadsheets.readonly'], //https://www.googleapis.com/auth/userinfo.profile
       clientId: '1037173200559-u3fibeuoidab32gl829ur4eoe2h147pi.apps.googleusercontent.com'
     });
   })
@@ -63,6 +64,7 @@ angular.module('angular-login', [
     $scope.$state = $state;
     $scope.$stateParams = $stateParams;
     $scope.url = url_ws_pegass;
+    $scope.url_google = url_ws_google;
 
     // loginService exposed and a new Object containing login user/pwd
     $scope.ls = loginService;
@@ -116,6 +118,11 @@ angular.module('angular-login', [
       loginService.logoutUser($http.get('/#/logout'));
     };
 
+    // Controller
+    $scope.isAuthenticated = function() {
+      return $auth.isAuthenticated();
+    };
+    
     if ($scope.ls.inLocalStorage == true) {
       $scope.loginMe();
     }

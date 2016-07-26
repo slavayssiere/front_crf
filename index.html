@@ -71,6 +71,9 @@
               <li><a ui-sref="app.statsml">Stats Mission Locale</a></li>
             </ul>
           </li>
+          <li ng-class="{ 'active': $state.is('app.google') }" ng-if="isAuthenticated">
+            <a ui-sref="app.google">Google test</a>
+          </li>
         </ul>
         <!-- Right side of the navbar -->
         <!-- Login Form -->
