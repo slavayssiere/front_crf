@@ -1,0 +1,11 @@
+<div class="jumbotron">
+  <div ng-hide="!ls.isLogged">
+    <p ng-if="isAuthenticated">
+      <pre>
+        <code>
+{{ data | json }}
+        </code>
+      </pre>
+    </p>
+  </div>
+</div>

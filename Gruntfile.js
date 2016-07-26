@@ -87,7 +87,8 @@ module.exports = function (grunt) {
           'libs/angular-bootstrap/ui-bootstrap.js',
           'libs/angular-mocks/angular-mocks.js',
           'libs/angular-ui-router/release/angular-ui-router.js',
-          'libs/ng-table/dist/ng-table.js'
+          'libs/ng-table/dist/ng-table.js',
+          'libs/satellizer/dist/satellizer.js'
         ],
         dest: 'build/libs.js'
       }

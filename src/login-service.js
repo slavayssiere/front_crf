@@ -265,6 +265,9 @@ angular.module('loginService', ['ui.router'])
       inLocalStorage: null,
       pendingStateChange: null,
       doneLoading: null,
+      gw_token: null,
+      gw_refresh: null,
+      gw_expire: null,
           
       F5_ST: localStorage.getItem('F5_ST'),
       LastMRH_Session: localStorage.getItem('LastMRH_Session'),

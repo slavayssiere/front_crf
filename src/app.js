@@ -14,16 +14,30 @@ angular.module('angular-login', [
   'angular-login.register',
   'angular-login.error',
   'angular-services.competence',
+  'angular-login.google',
   // components
   'ngAnimate',
   'ngTouch',
   'ui.bootstrap',
-  'ngTable'
+  'ngTable',
+  'satellizer'
 ])
-  .config(function ($urlRouterProvider, $httpProvider) {
+  .config(function ($urlRouterProvider, $httpProvider, $locationProvider, $authProvider) {
     $urlRouterProvider.otherwise('/');
     $httpProvider.defaults.useXDomain = true;
-    delete $httpProvider.defaults.headers.common['X-Requested-With'];
+    //delete $httpProvider.defaults.headers.common['X-Requested-With'];
+    $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+    $locationProvider.html5Mode(true);
+    $authProvider.google({
+      url: 'http://'+url_ws_google+'/auth/google',
+      scope: [
+          'profile', 
+          'email', 
+          'https://www.googleapis.com/auth/spreadsheets.readonly', 
+          'https://www.googleapis.com/auth/drive.metadata.readonly'
+      ], //https://www.googleapis.com/auth/userinfo.profile
+      clientId: '1037173200559-u3fibeuoidab32gl829ur4eoe2h147pi.apps.googleusercontent.com'
+    });
   })
   .run(function ($rootScope, $window) {
     $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams) {
@@ -55,6 +69,7 @@ angular.module('angular-login', [
     $scope.$state = $state;
     $scope.$stateParams = $stateParams;
     $scope.url = url_ws_pegass;
+    $scope.url_google = url_ws_google;
 
     // loginService exposed and a new Object containing login user/pwd
     $scope.ls = loginService;
@@ -108,6 +123,11 @@ angular.module('angular-login', [
       loginService.logoutUser($http.get('/#/logout'));
     };
 
+    // Controller
+    $scope.isAuthenticated = function() {
+      return $auth.isAuthenticated();
+    };
+    
     if ($scope.ls.inLocalStorage == true) {
       $scope.loginMe();
     }

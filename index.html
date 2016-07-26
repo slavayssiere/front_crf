@@ -28,8 +28,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <meta charset="utf-8">
+  <base href="/">
 
 </head>
+
 
 <body ng-app="angular-login">
   <div ng-controller="BodyController" class="container">
@@ -68,6 +70,9 @@
               <li><a ui-sref="app.statsreseau">Stats Reseau</a></li>
               <li><a ui-sref="app.statsml">Stats Mission Locale</a></li>
             </ul>
+          </li>
+          <li ng-class="{ 'active': $state.is('app.google') }" ng-if="isAuthenticated">
+            <a ui-sref="app.google">Google test</a>
           </li>
         </ul>
         <!-- Right side of the navbar -->
