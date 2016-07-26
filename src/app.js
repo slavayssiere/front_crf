@@ -18,12 +18,20 @@ angular.module('angular-login', [
   'ngAnimate',
   'ngTouch',
   'ui.bootstrap',
-  'ngTable'
+  'ngTable',
+  'satellizer'
 ])
-  .config(function ($urlRouterProvider, $httpProvider) {
+  .config(function ($urlRouterProvider, $httpProvider, $locationProvider, $authProvider) {
     $urlRouterProvider.otherwise('/');
     $httpProvider.defaults.useXDomain = true;
-    delete $httpProvider.defaults.headers.common['X-Requested-With'];
+    //delete $httpProvider.defaults.headers.common['X-Requested-With'];
+    $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+    $locationProvider.html5Mode(true);
+    $authProvider.google({
+      url: 'http://'+url_ws_google+'/auth/google',
+      scope: ['profile', 'email', 'https://www.googleapis.com/auth/spreadsheets.readonly'],
+      clientId: '1037173200559-u3fibeuoidab32gl829ur4eoe2h147pi.apps.googleusercontent.com'
+    });
   })
   .run(function ($rootScope, $window) {
     $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams) {

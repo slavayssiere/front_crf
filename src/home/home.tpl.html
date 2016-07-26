@@ -13,6 +13,15 @@
    <p>
       Can admin: {{ ls.user.admin.peutAdministrer }}
     </p>
+    <p ng-if="ls.user.utilisateur.id=='00001376977M' && !isAuthenticated()">
+        <button ng-click="loginGoogle()">Connect with google</button>
+    </p>
+    <p ng-if="isAuthenticated()">
+        {{ ls.gwt | json }}
+    </p>
+    <p ng-if="isAuthenticated()">
+        <button ng-click="logoutGoogle()">Disconnect from google</button>
+    </p>
   </div>
 
   <div ng-hide="ls.isLogged">
