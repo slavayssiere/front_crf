@@ -30,7 +30,12 @@ angular.module('angular-login', [
     $locationProvider.html5Mode(true);
     $authProvider.google({
       url: 'http://'+url_ws_google+'/auth/google',
-      scope: ['profile', 'email', 'https://www.googleapis.com/auth/spreadsheets.readonly'], //https://www.googleapis.com/auth/userinfo.profile
+      scope: [
+          'profile', 
+          'email', 
+          'https://www.googleapis.com/auth/spreadsheets.readonly', 
+          'https://www.googleapis.com/auth/drive.metadata.readonly'
+      ], //https://www.googleapis.com/auth/userinfo.profile
       clientId: '1037173200559-u3fibeuoidab32gl829ur4eoe2h147pi.apps.googleusercontent.com'
     });
   })

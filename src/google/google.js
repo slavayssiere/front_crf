@@ -9,17 +9,11 @@ angular.module('angular-login.google', ['angular-login.grandfather'])
   })
   .controller('GoogleController', function ($scope, $log, $auth, $http) {
     
-    var url_search = 'http://' + $scope.url_google + '/sheet';
+    var url_search = 'http://' + $scope.url_google + '/files?token='+$auth.getToken();
     $log.info('URI: ' + url_search);
-    var req = {
-      method: 'GET',
-      url: url_search,
-      data: {
-        token: $auth.getToken()
-      }
-    }
+   
 
-    $http(req).
+    $http.get(url_search).
       success(function (response) {
         $scope.data = angular.fromJson(response);
       });
