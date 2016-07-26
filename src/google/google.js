@@ -9,7 +9,7 @@ angular.module('angular-login.google', ['angular-login.grandfather'])
   })
   .controller('GoogleController', function ($scope, $log, $auth, $http) {
     
-    var url_search = 'http://' + $scope.url_google + '/files?token='+$auth.getToken();
+    var url_search = 'http://' + $scope.url_google + '/sheets/state?token='+$auth.getToken();
     $log.info('URI: ' + url_search);
    
 
