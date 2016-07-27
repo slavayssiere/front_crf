@@ -26,15 +26,15 @@ angular.module('angular-login', [
     $urlRouterProvider.otherwise('/');
     $httpProvider.defaults.useXDomain = true;
     //delete $httpProvider.defaults.headers.common['X-Requested-With'];
-    $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-    $locationProvider.html5Mode(true);
+    //$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+    //$locationProvider.html5Mode(true);
     $authProvider.google({
-      url: 'http://'+url_ws_google+'/auth/google',
+      url: 'http://' + url_ws_google + '/auth/google',
       scope: [
-          'profile', 
-          'email', 
-          'https://www.googleapis.com/auth/spreadsheets.readonly', 
-          'https://www.googleapis.com/auth/drive.metadata.readonly'
+        'profile',
+        'email',
+        'https://www.googleapis.com/auth/spreadsheets',
+        'https://www.googleapis.com/auth/drive'
       ], //https://www.googleapis.com/auth/userinfo.profile
       clientId: '1037173200559-u3fibeuoidab32gl829ur4eoe2h147pi.apps.googleusercontent.com'
     });
@@ -64,7 +64,7 @@ angular.module('angular-login', [
     $rootScope.$on('$stateChangeError', resolveDone);
     $rootScope.$on('$statePermissionError', resolveDone);
   })
-  .controller('BodyController', function ($scope, $state, $stateParams, loginService, $http, $timeout, $log) {
+  .controller('BodyController', function ($scope, $state, $stateParams, loginService, $http, $timeout, $log, $auth) {
     // Expose $state and $stateParams to the <body> tag
     $scope.$state = $state;
     $scope.$stateParams = $stateParams;
@@ -124,10 +124,10 @@ angular.module('angular-login', [
     };
 
     // Controller
-    $scope.isAuthenticated = function() {
+    $scope.isAuthenticated = function () {
       return $auth.isAuthenticated();
     };
-    
+
     if ($scope.ls.inLocalStorage == true) {
       $scope.loginMe();
     }

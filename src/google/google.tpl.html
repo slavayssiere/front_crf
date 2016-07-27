@@ -1,11 +1,23 @@
 <div class="jumbotron">
-  <div ng-hide="!ls.isLogged">
-    <p ng-if="isAuthenticated">
+  <div ng-hide="!ls.isLogged" ng-if="isAuthenticated">
+    <div class="login-error" ng-class="{ 'active': wait }">
+      <div class="alert alert-danger"><b>Calcul en cours</b> Wait for Google...</div>
+    </div>
+    <table ng-table="googlesessions.tablesessions" class="table table-bordered table-striped">        
+        <tr ng-repeat="session in $data">
+            <td data-title="'Formateur'" sortable="'formateur'">{{session.formateur}}</td>
+            <td data-title="'Date'" sortable="'date'">{{session.date | date :'dd-MM-yyyy'}}</td>
+            <td data-title="'Type'" sortable="'type'">{{session.type}}</td>
+            <td data-title="'Places/15'"" sortable="'nb_empty'">{{session.nb_empty}}</td>
+            <td data-title="'Google Link'"><a href='https://docs.google.com/spreadsheets/d/{{session.google_id}}/edit#gid=0'>{{session.google_name}}</a></td>
+        </tr>
+    </table>
+    <!--<p>
       <pre>
         <code>
 {{ data | json }}
         </code>
       </pre>
-    </p>
+    </p>-->
   </div>
 </div>

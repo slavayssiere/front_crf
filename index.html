@@ -28,7 +28,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <meta charset="utf-8">
-  <base href="/">
+  <!--<base href="/">-->
 
 </head>
 
@@ -71,8 +71,11 @@
               <li><a ui-sref="app.statsml">Stats Mission Locale</a></li>
             </ul>
           </li>
-          <li ng-class="{ 'active': $state.is('app.google') }" ng-if="isAuthenticated">
-            <a ui-sref="app.google">Google test</a>
+          <li class="dropdown" uib-dropdown ng-if="isAuthenticated()">
+            <a class="dropdown-toggle" uib-dropdown-toggle>Inscription 7511<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a ui-sref="app.google">Etats</a></li>
+            </ul>
           </li>
         </ul>
         <!-- Right side of the navbar -->

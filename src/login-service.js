@@ -4,7 +4,7 @@ angular.module('loginService', ['ui.router'])
       errorState = 'app.error',
       logoutState = 'app.logout';
   
-  this.$get = function ($rootScope, $http, $q, $state, $log) {
+  this.$get = function ($rootScope, $http, $q, $state, $log, $auth) {
 
     /**
      * Low-level, private functions.
@@ -225,6 +225,8 @@ angular.module('loginService', ['ui.router'])
         this.userRole = userRoles.public;
         this.user = {};
         this.isLogged = false;
+
+        $auth.logout();
         $state.go(logoutState);
       },
       resolvePendingState: function (httpPromise) {
