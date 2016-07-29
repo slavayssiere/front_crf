@@ -2,17 +2,38 @@ angular.module('angular-login.google', ['angular-login.grandfather'])
   .config(function ($stateProvider) {
     $stateProvider
       .state('app.sessions', {
-        url: '/',
+        url: '/sessions',
         templateUrl: 'google/google.tpl.html',
         controller: 'GoogleController',
         controllerAs: 'googlesessions'
       })
       .state('app.sessioncreate', {
-        url: '/',
+        url: '/sessioncreate',
         templateUrl: 'google/create.tpl.html',
         controller: 'GCreateController',
         controllerAs: 'gcc'
+      })
+      .state('app.sessionscript', {
+        url: '/sessionscript',
+        templateUrl: 'google/scripts.tpl.html',
+        controller: 'GScriptController',
+        controllerAs: 'gss'
       });
+  })
+  .controller('GScriptController', function ($scope, $log, $auth, $http) {
+
+    var url_search = 'http://' + $scope.url_google + '/sheets/launchscript?token=' + $auth.getToken();
+    $log.info('URI: ' + url_search);
+    var self = this;
+
+    $scope.wait = true;
+
+    $http.get(url_search).
+      success(function (response) {
+        $scope.data = response;
+        $scope.wait = false;
+      });
+
   })
   .controller('GoogleController', function ($scope, $log, $auth, $http, NgTableParams) {
 
@@ -36,7 +57,11 @@ angular.module('angular-login.google', ['angular-login.grandfather'])
             dataset: $scope.data
           }
         );
+      })
+      .error(function (response){
         $scope.wait = false;
+        $log.info(response);
+        $scope.data = response;
       });
 
   })
