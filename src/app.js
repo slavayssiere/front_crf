@@ -34,9 +34,14 @@ angular.module('angular-login', [
         'profile',
         'email',
         'https://www.googleapis.com/auth/spreadsheets',
-        'https://www.googleapis.com/auth/drive'
+        'https://www.googleapis.com/auth/drive',
+        'https://www.googleapis.com/auth/documents',
+        'https://www.googleapis.com/auth/drive.scripts',
+        'https://www.googleapis.com/auth/userinfo.email',
+        'https://www.googleapis.com/auth/calendar'
       ], //https://www.googleapis.com/auth/userinfo.profile
-      clientId: '1037173200559-u3fibeuoidab32gl829ur4eoe2h147pi.apps.googleusercontent.com'
+      //clientId: '1037173200559-u3fibeuoidab32gl829ur4eoe2h147pi.apps.googleusercontent.com'
+      clientId: '794502709562-bgo3mjvn9jhpifvd0no50vebts8j9050.apps.googleusercontent.com'
     });
   })
   .run(function ($rootScope, $window) {

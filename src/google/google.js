@@ -1,11 +1,17 @@
 angular.module('angular-login.google', ['angular-login.grandfather'])
   .config(function ($stateProvider) {
     $stateProvider
-      .state('app.google', {
+      .state('app.sessions', {
         url: '/',
         templateUrl: 'google/google.tpl.html',
         controller: 'GoogleController',
         controllerAs: 'googlesessions'
+      })
+      .state('app.sessioncreate', {
+        url: '/',
+        templateUrl: 'google/create.tpl.html',
+        controller: 'GCreateController',
+        controllerAs: 'gcc'
       });
   })
   .controller('GoogleController', function ($scope, $log, $auth, $http, NgTableParams) {
@@ -32,5 +38,45 @@ angular.module('angular-login.google', ['angular-login.grandfather'])
         );
         $scope.wait = false;
       });
+
+  })
+  .controller('GCreateController', function ($scope, $log, $auth, $http) {
+
+    var self = this;
+    $scope.session = {
+      working: false,
+      wrong: false
+    };
+
+    $scope.wait = true;
+    //{"formateur":"Maureen Mahe","address":null,"date":1469138400000,"id":0,"type":"PSC1","google_id":"1W2a8PELm7wNsNLZpjRNn57UkMPgmj0jhXxD83rcLcBY","google_name":"ANNULEE - 2016 - 07 - 22 PSC1 Maureen","inscriptions":[],"emptyRows":[5,6,7,8,9,10,11,12,13,14,15,16,17,18,19],"nb_empty":15}
+
+    // Controller
+    $scope.isAuthenticated = function () {
+      return $auth.isAuthenticated();
+    };
+
+    $scope.create = function () {
+      $scope.data = "Waiting...";
+      var url_search = 'http://' + $scope.url_google + '/sheets/create?token=' + $auth.getToken();
+      $log.info('URI: ' + url_search);
+
+      var req = {
+        method: 'POST',
+        url: url_search,
+        data: {
+          formateur: $scope.session.formateur,
+          address: "12 rue Auguste Laurent 75011 Paris",
+          date: $scope.session.date,
+          type: $scope.session.type,
+          heure: $scope.session.heure
+        }
+      }
+
+      $http(req).
+        success(function (response) {
+          $scope.data = response;
+        });
+    }
 
   });

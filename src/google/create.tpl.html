@@ -1,0 +1,49 @@
+<div class="jumbotron">
+    <div ng-hide="!ls.isLogged" ng-if="isAuthenticated()">
+        <form name="createForm" role="form" ng-submit="create()">
+            <div>
+                <label for="input-date">Date formation</label>
+                <input id="input-date" type="date" value="2014-10-31" ng-model="session.date">
+                <span class="result"></span>
+            </div>
+            <div>
+                <label for="input-type">Type formation</label>
+                <select id="input-type" ng-model="session.type">
+                    <option value="PSC1">PSC1</option>
+                    <option value="IPSEN">IPSEN</option>
+                </select>
+            </div>
+            <div>
+                <label for="input-heure">Heure formation(mettre 9 pour '9h00')</label>
+                <input id="input-heure" type="text" ng-model="session.heure">
+                <span class="result"></span>
+            </div>
+            <div>
+                <label for="input-formateur">Nom formateur</label>
+                <select id="input-formateur" ng-model="session.formateur">
+                    <option value="Farah Animan">Farah</option>
+                    <option value="Charle-Alain Debove">Charlie</option>
+                    <option value="Flavie Pouillot">Flavie</option>
+                    <option value="Thomas Chamas">Thomas C</option>
+                    <option value="Sébastien Lavayssière">Seb</option>
+                    <option value="Camille Cecchi">Camille C</option>
+                    <option value="Camille Puybaret">Camille P</option>
+                    <option value="David Ganche">David</option>
+                    <option value="Mathilde Padilla">Mathilde</option>
+                    <option value="Raphaele Absire">Raph</option>
+                    <option value="Samia Tazi">Samia</option>
+                    <option value="Maureen Mahe">Maureen</option>
+                </select>
+            </div>
+            <div>
+                <button type="submit" class="col-md-12">Create in google</button>
+            </div>
+        </form>
+        <p ng-if="data.google_id">
+            Please go to: <a href="https://docs.google.com/spreadsheets/d/{{data.google_id}}/edit#gid=0">the Google SpreadSheet</a> and click on menu "emails" and "add trigger".
+        </p>
+        <p ng-if="data">
+            <pre><code>{{ data | json }}</code></pre>
+        </p>
+    </div>
+</div>
