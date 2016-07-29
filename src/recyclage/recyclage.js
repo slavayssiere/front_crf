@@ -66,8 +66,7 @@ angular.module('angular-login.recyclage', ['angular-login.grandfather'])
                     var dataemail = angular.fromJson(response);
                     $scope.emails = datalib.getEmailList(dataemail);
                     $scope.searchemail.working = false;
-                }
-                );
+                });
         };
 
     })

@@ -14,6 +14,9 @@
   <!-- compiled css -->
   <link href="style.css" rel="stylesheet">
 
+  <link rel="icon" type="image/png" href="/path/favicon.png" />
+<!--[if IE]><link rel="shortcut icon" type="image/x-icon" href="/path/favicon.ico" /><![endif]-->
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <!-- configuration -->
   <script type="text/javascript" src="config.js"></script>
@@ -28,7 +31,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <meta charset="utf-8">
-  <base href="/">
+  <!--<base href="/">-->
+
+  <meta name="description" content="ul-management for CRf">
 
 </head>
 
@@ -71,18 +76,23 @@
               <li><a ui-sref="app.statsml">Stats Mission Locale</a></li>
             </ul>
           </li>
-          <li ng-class="{ 'active': $state.is('app.google') }" ng-if="isAuthenticated">
-            <a ui-sref="app.google">Google test</a>
+          <li class="dropdown" uib-dropdown ng-if="isAuthenticated()">
+            <a class="dropdown-toggle" uib-dropdown-toggle>Inscription 7511<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a ui-sref="app.sessions">Etats</a></li>
+              <li><a ui-sref="app.sessioncreate">Create new session</a></li>
+              <li><a ui-sref="app.sessionscript">Launch a script</a></li>
+            </ul>
           </li>
         </ul>
         <!-- Right side of the navbar -->
         <!-- Login Form -->
         <form class="nav navbar-nav navbar-right" name="loginForm" role="form" ng-submit="loginMe()" ng-hide="ls.isLogged || !ls.doneLoading">
-          <div class="form-group">
-            <input type="text" class="form-control" ng-model="login.username" name="username" placeholder="Username">
+          <div class="form-group">            
+            <input type="text" class="form-control" ng-model="login.username" name="username" id="username" placeholder="Username" title="Pegass username">
           </div>
           <div class="form-group">
-            <input type="password" class="form-control" ng-model="login.password" name="password" placeholder="Password">
+            <input type="password" class="form-control" ng-model="login.password" name="password" placeholder="Password"  title="Pegass password">
           </div>
           <button type="submit" class="btn btn-default" ng-disabled="login.working">Login <i class="fa" ng-class="login.working ? 'fa-cog fa-spin' : 'fa-sign-in'"></i></button>
         </form>
@@ -93,10 +103,8 @@
         <!-- Logout Form -->
         <form class="nav navbar-nav navbar-right" role="form" ng-submit="logoutMe()" ng-show="ls.isLogged">
           <div class="form-group">
-            <label>Hello {{ ls.user.utilisateur.prenom }} {{ ls.user.utilisateur.nom }}</label>
-          </div>
-          <div class="form-group">
-            <button type="submit" class="btn btn-default">Logout <i class="fa fa-signout"></i></button>
+            <label for="logout-btn">Hello {{ ls.user.utilisateur.prenom }} {{ ls.user.utilisateur.nom }}</label>
+            <button type="submit" class="btn btn-default" id="logout-btn">Logout <i class="fa fa-signout"></i></button>
           </div>
         </form>
       </div>
