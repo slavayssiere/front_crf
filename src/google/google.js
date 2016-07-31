@@ -43,7 +43,13 @@ angular.module('angular-login.google', ['angular-login.grandfather'])
 
     $scope.wait = true;
 
-    $http.get(url_search).
+    var req = {
+        method: 'GET',
+        url: url_search,
+        timeout: 90000
+      }
+      
+    $http(req).
       success(function (response) {
         $scope.data = response;
         self.tablesessions = new NgTableParams(
@@ -57,6 +63,8 @@ angular.module('angular-login.google', ['angular-login.grandfather'])
             dataset: $scope.data
           }
         );
+        
+        $scope.wait = true;
       })
       .error(function (response){
         $scope.wait = false;
