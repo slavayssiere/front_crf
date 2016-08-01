@@ -22,7 +22,7 @@ angular.module('angular-login.google', ['angular-login.grandfather'])
   })
   .controller('GScriptController', function ($scope, $log, $auth, $http) {
 
-    var url_search = 'http://' + $scope.url_google + '/sheets/launchscript?token=' + $auth.getToken();
+    var url_search = 'http://' + $scope.url_google + '/api/sheets/launchscript?token=' + $auth.getToken();
     $log.info('URI: ' + url_search);
     var self = this;
 
@@ -37,7 +37,7 @@ angular.module('angular-login.google', ['angular-login.grandfather'])
   })
   .controller('GoogleController', function ($scope, $log, $auth, $http, NgTableParams) {
 
-    var url_search = 'http://' + $scope.url_google + '/sheets/state?token=' + $auth.getToken();
+    var url_search = 'http://' + $scope.url_google + '/api/sheets/state?token=' + $auth.getToken();
     $log.info('URI: ' + url_search);
     var self = this;
 
@@ -91,7 +91,7 @@ angular.module('angular-login.google', ['angular-login.grandfather'])
 
     $scope.create = function () {
       $scope.data = "Waiting...";
-      var url_search = 'http://' + $scope.url_google + '/sheets/create?token=' + $auth.getToken();
+      var url_search = 'http://' + $scope.url_google + '/api/sheets/create?token=' + $auth.getToken();
       $log.info('URI: ' + url_search);
 
       var req = {

@@ -29,7 +29,7 @@ angular.module('angular-login', [
     //$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
     //$locationProvider.html5Mode(true);
     $authProvider.google({
-      url: 'http://' + url_ws_google + '/auth/google',
+      url: 'http://' + url_ws_google + '/api/auth/google',
       scope: [
         'profile',
         'email',
@@ -138,9 +138,16 @@ angular.module('angular-login', [
       $scope.loginMe();
     }
 
-    var url_version = 'http://' + $scope.url + '/version'
-    $http.get(url_version).
+    var url_version_pegass = 'http://' + $scope.url + '/version'
+    $http.get(url_version_pegass).
       success(function (response) {
-        $scope.version = response.version;
+        $scope.version_pegass = response.version;
       });
+    
+    var url_version_google = 'http://' + $scope.url_google + '/info'
+    $http.get(url_version_google).
+      success(function (response) {
+        $scope.version_google = response.app.version;
+      });  
+    
   });
