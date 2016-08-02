@@ -46,7 +46,7 @@ angular.module('angular-login.home', ['angular-login.grandfather'])
     }
 
     var displayData = function () {
-      var url_search = 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=' + loginService.gw_token;
+      var url_search = 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=' + $auth.getToken();
       $log.info('URI: ' + url_search);
       var req = {
         method: 'GET',
@@ -57,6 +57,10 @@ angular.module('angular-login.home', ['angular-login.grandfather'])
         success(function (response) {
           $log.info(response);
           $scope.data = angular.fromJson(response);
+        })
+        .error(function (res){
+          $auth.logout();
+          $auth.removeToken();
         });
     }
 
