@@ -20,9 +20,9 @@ angular.module('angular-login.google', ['angular-login.grandfather'])
         controllerAs: 'gss'
       });
   })
-  .controller('GScriptController', function ($scope, $log, $auth, $http) {
+  .controller('GScriptController', function ($scope, $log, $auth, $http, NgTableParams) {
 
-    var url_search = 'http://' + $scope.url_google + '/api/sheets/launchscript?token=' + $auth.getToken();
+    var url_search = 'http://' + $scope.url_google + '/api/sheets/getemails?token=' + $auth.getToken();
     $log.info('URI: ' + url_search);
     var self = this;
 
@@ -31,6 +31,17 @@ angular.module('angular-login.google', ['angular-login.grandfather'])
     $http.get(url_search).
       success(function (response) {
         $scope.data = response;
+        self.tableinscrits = new NgTableParams(
+          {
+            sorting: { dateFormation: "desc" },
+            page: 1,
+            count: $scope.data.length
+          }, {
+            counts: [], // hide page counts control
+            total: 1,  // value less than count hide pagination
+            dataset: $scope.data
+          }
+        );
         $scope.wait = false;
       });
 
@@ -64,7 +75,7 @@ angular.module('angular-login.google', ['angular-login.grandfather'])
           }
         );
         
-        $scope.wait = true;
+        $scope.wait = false;
       })
       .error(function (response){
         $scope.wait = false;
