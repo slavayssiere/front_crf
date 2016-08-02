@@ -183,7 +183,6 @@ angular.module('loginService', ['ui.router'])
             success(function(response){
               nominations = angular.fromJson(response);
               for (i = 0; i < nominations.length; i++) {
-                $log.info(nominations[i].libelleCourt);
                 if(nominations[i].libelleCourt == "DLUS.A.FOR"){
                   wrappedService.userRole=userRoles.dlaf;
                 }

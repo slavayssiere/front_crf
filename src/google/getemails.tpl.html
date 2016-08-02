@@ -1,0 +1,73 @@
+<div class="jumbotron">
+  <div ng-hide="!ls.isLogged" ng-if="isAuthenticated">
+    <div class="login-error" ng-class="{ 'active': wait }">
+      <div class="alert alert-danger"><b>Calcul en cours</b> Wait for Google...</div>
+    </div>
+    <div ng-if="sessioncomplete">
+      <div>
+        <p><b>La session est complete</b></p>
+        <p ng-click="anotherDate()">Proposer une autre date... (via mails automatiques)</p>
+      </div>
+    </div>
+    <div ng-if="disponible">
+      <p>
+        Feuille google: <a href="https://docs.google.com/spreadsheets/d/{{google_id}}/edit#gid=0">Google SpreadSheet</a>
+      </p>
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Ligne</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="row in disponible" ng-click="inscription(row)">
+            <td>{{row - 4}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div ng-if="selected">
+      <p>
+        <pre>
+          <code>{{ selected }}</code>
+        </pre>
+      </p>
+    </div>
+    <table class="table table-bordered table-striped" ng-if="table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Type Formation</th>
+          <th>Civilite</th>
+          <th>Prenom</th>
+          <th>Nom</th>
+          <th>DateNaissance</th>
+          <th>LieuNaissance</th>
+          <th>Adresse</th>
+          <th>CodePostal</th>
+          <th>Ville</th>
+          <th>Telephone</th>
+          <th>Email</th>
+          <th>Message</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="inscrit in table" ng-click="getDataSession(inscrit)">
+          <td>{{inscrit.dateFormation | date :'dd-MM-yyyy'}}</td>
+          <td>{{inscrit.typeFormation}}</td>
+          <td>{{inscrit.civilite}}</td>
+          <td>{{inscrit.prenom}}</td>
+          <td>{{inscrit.nom}}</td>
+          <td>{{inscrit.datenaissance}}</td>
+          <td>{{inscrit.lieunaissance}}</td>
+          <td>{{inscrit.adresse}}</td>
+          <td>{{inscrit.codepostal}}</td>
+          <td>{{inscrit.ville}}</td>
+          <td>{{inscrit.phone}}</td>
+          <td>{{inscrit.email}}</td>
+          <td>{{inscrit.message}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
