@@ -35,6 +35,11 @@ angular.module('angular-login.home', ['angular-login.grandfather'])
       return $auth.isAuthenticated();
     };
 
+    $scope.isTeamFormat = function () {
+      var members = ['00001376977M', '00001669247X', '00001727030F', '00001701729E', '00001641554W', '00000599352T'] //me: '00001376977M'
+      return (members.indexOf(loginService.user.utilisateur.id) > -1)
+    }
+
     var displayData = function () {
       var url_search = 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=' + loginService.gw_token;
       $log.info('URI: ' + url_search);

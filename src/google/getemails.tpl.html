@@ -4,9 +4,9 @@
       <div class="alert alert-danger"><b>Calcul en cours</b> Wait for Google...</div>
     </div>
     <div ng-if="sessioncomplete">
-      <div>
+      <div ng-click="anotherDate()">
         <p><b>La session est complete</b></p>
-        <p ng-click="anotherDate()">Proposer une autre date... (via mails automatiques)</p>
+        <p>Proposer une autre date... (via mails automatiques) en cliquant ici</p>
       </div>
     </div>
     <div ng-if="disponible">

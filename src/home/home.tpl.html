@@ -13,7 +13,7 @@
    <p>
       Can admin: {{ ls.user.admin.peutAdministrer }}
     </p>
-    <p ng-if="ls.user.utilisateur.id=='00001376977M' && !isAuthenticated()">
+    <p ng-if="isTeamFormat() && !isAuthenticated()">
         <button ng-click="loginGoogle()">Connect with google</button>
     </p>
     <div ng-if="isAuthenticated()">
