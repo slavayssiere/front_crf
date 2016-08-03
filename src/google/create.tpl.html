@@ -3,7 +3,7 @@
         <form name="createForm" role="form" ng-submit="create()">
             <div>
                 <label for="input-date">Date formation</label>
-                <input id="input-date" type="date" value="2014-10-31" ng-model="session.date">
+                <input id="input-date" type="date" value="2014-10-31" ng-model="session.date" ng-model-options="{ timezone: 'UTC' }">
                 <span class="result"></span>
             </div>
             <div>
