@@ -59,6 +59,7 @@ angular.module('angular-login.google', ['angular-login.grandfather'])
     };
 
     $scope.inscription = function (row) {
+      $scope.wait = true;
       $log.info("inscription de", $scope.selected, "on row ", row);
       var url_inscription = 'http://' + $scope.url_google + '/api/sheets/inscription/'+$scope.google_id+'/'+row+'?token=' + $auth.getToken();
       var req = {
@@ -74,11 +75,13 @@ angular.module('angular-login.google', ['angular-login.grandfather'])
           $scope.selected = null;
           $scope.google_id = null;
           $scope.disponible = null; 
-          $scope.sessioncomplete=null;      
+          $scope.sessioncomplete=null;  
+          $scope.wait = false;    
         });
     };
 
     $scope.anotherDate = function (row) {
+      $scope.wait = true;
       var url_search = 'http://' + $scope.url_google + '/api/sheets/complete?token=' + $auth.getToken();
       var req = {
         method: 'POST',
@@ -93,7 +96,8 @@ angular.module('angular-login.google', ['angular-login.grandfather'])
           $scope.selected = null;
           $scope.google_id = null;
           $scope.disponible = null; 
-          $scope.sessioncomplete=null;       
+          $scope.sessioncomplete=null;     
+          $scope.wait = false;  
         });
     };
 
