@@ -6,35 +6,35 @@ angular.module('angular-login.stats', ['angular-login.grandfather'])
                 templateUrl: 'stats/stats.tpl.html',
                 controller: 'StatsController',
                 controllerAs: 'statfmt',
-                accessLevel: accessLevels.public
+                accessLevel: accessLevels.user
             })
             .state('app.statsmaraude', {
                 url: '/statsmaraude',
                 templateUrl: 'stats/statsmaraude.tpl.html',
                 controller: 'StatsMaraudeController',
                 controllerAs: 'statmrd',
-                accessLevel: accessLevels.public
+                accessLevel: accessLevels.user
             })
             .state('app.statsfc', {
                 url: '/statsfc',
                 templateUrl: 'stats/statsfc.tpl.html',
                 controller: 'StatsFCController',
                 controllerAs: 'statfcc',
-                accessLevel: accessLevels.public
+                accessLevel: accessLevels.user
             })
             .state('app.statsreseau', {
                 url: '/statsreseau',
                 templateUrl: 'stats/statsreseau.tpl.html',
                 controller: 'StatsReseauController',
                 controllerAs: 'statrc',
-                accessLevel: accessLevels.public
+                accessLevel: accessLevels.user
             })
             .state('app.statsml', {
                 url: '/statsml',
                 templateUrl: 'stats/statsreseau.tpl.html',
                 controller: 'StatsMLController',
                 controllerAs: 'statrc',
-                accessLevel: accessLevels.public
+                accessLevel: accessLevels.user
             })
     })
     .controller('StatsController', function ($scope, loginService, $http, $log, NgTableParams) {

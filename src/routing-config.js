@@ -23,11 +23,13 @@
     /*
     Build out all the access levels you want referencing the roles listed above
     You can use the "*" symbol to represent access to all roles
+    'truc': le role peut etre pris par les utilisteurs de la liste
      */
     accessLevels: {
       'public' : '*',
       'anon': ['public'],
-      'dlaf' : ['admin', 'ddaf', 'dlaf', 'dlus'],
+      'user': ['admin', 'ddaf', 'dlaf', 'dlus'],
+      'dlaf' : ['admin', 'ddaf', 'dlus'],
       'dlus': ['admin','dlus', 'dlaf'],
       'ddaf': ['admin','ddaf',],
       'admin': ['admin']

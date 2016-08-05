@@ -5,7 +5,7 @@ angular.module('angular-login.competences', ['angular-login.grandfather'])
                 url: '/competences',
                 templateUrl: 'competences/competences.tpl.html',
                 controller: 'CompetencesController',
-                accessLevel: accessLevels.public
+                accessLevel: accessLevels.user
             });
     })
     .controller('CompetencesController', function ($scope, loginService, $http, $log, datalib) {

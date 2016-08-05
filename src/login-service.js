@@ -178,6 +178,7 @@ angular.module('loginService', ['ui.router'])
         // update userRole
         var url_search = 'http://'+url_ws_pegass+'/benevoles/nominations/'+user.utilisateur.id+'?F5_ST='+wrappedService.F5_ST+'&LastMRH_Session='+wrappedService.LastMRH_Session+'&MRHSession='+wrappedService.MRHSession;
         $log.info('URI: ' + url_search);
+        wrappedService.userRole=userRoles.user;
         
         $http.get(url_search).
             success(function(response){
