@@ -135,6 +135,36 @@ angular.module('angular-login', [
       return $auth.isAuthenticated();
     };
 
+    $scope.googleMe = function () {
+     	$auth.authenticate('google')
+        .then(function (response) {
+          $log.info("logged", $auth.isAuthenticated());
+          $auth.setToken(response.data.token);
+          loginService.gw_token = response.data.token;
+          loginService.gw_refresh = response.data.refreshToken;
+          loginService.gw_expire = response.data.expiresInSeconds;
+        })
+        .catch(function (response) {
+          $log.info("error in login");
+          $log.info(response);
+        });
+    };
+
+    $scope.googleOutMe = function () {
+     	$auth.logout();
+    };
+
+    $scope.isTeamFormat = function () {
+      var members = ['00001376977M', '00001669247X', '00001727030F', '00001701729E', '00001641554W', '00000599352T'] //me: '00001376977M'
+      if(loginService.user.utilisateur){
+        return (members.indexOf(loginService.user.utilisateur.id) > -1)
+      }
+      else {
+        return false;
+      } 
+    }
+
+
     if ($scope.ls.inLocalStorage == true) {
       $scope.loginMe();
     }

@@ -5,7 +5,7 @@ angular.module('angular-login.register', ['angular-login.grandfather'])
       url: '/register',
       templateUrl: 'register/register.tpl.html',
       controller: 'RegisterController',
-      accessLevel: accessLevels.anon
+      accessLevel: accessLevels.user
     });
 })
 .controller('RegisterController', function ($scope, $http, $timeout, $state) {

@@ -13,15 +13,9 @@
    <p>
       Can admin: {{ ls.user.admin.peutAdministrer }}
     </p>
-    <p ng-if="isTeamFormat() && !isAuthenticated()">
-        <button ng-click="loginGoogle()">Connect with google</button>
-    </p>
     <div ng-if="isAuthenticated()">
         <p>{{ data.name }}</p>
         <p>{{ data.email }}</p>
-    </div>
-    <div ng-if="isAuthenticated()">
-        <button ng-click="logoutGoogle()">Disconnect from google</button>
     </div>
   </div>
 

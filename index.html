@@ -15,7 +15,7 @@
   <link href="style.css" rel="stylesheet">
 
   <link rel="icon" type="image/png" href="/path/favicon.png" />
-<!--[if IE]><link rel="shortcut icon" type="image/x-icon" href="/path/favicon.ico" /><![endif]-->
+  <!--[if IE]><link rel="shortcut icon" type="image/x-icon" href="/path/favicon.ico" /><![endif]-->
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <!-- configuration -->
@@ -86,27 +86,51 @@
           </li>
         </ul>
         <!-- Right side of the navbar -->
-        <!-- Login Form -->
-        <form class="nav navbar-nav navbar-right" name="loginForm" role="form" ng-submit="loginMe()" ng-hide="ls.isLogged || !ls.doneLoading">
-          <div class="form-group">            
-            <input type="text" class="form-control" ng-model="login.username" name="username" id="username" placeholder="Username" title="Pegass username">
-          </div>
-          <div class="form-group">
-            <input type="password" class="form-control" ng-model="login.password" name="password" placeholder="Password"  title="Pegass password">
-          </div>
-          <button type="submit" class="btn btn-default" ng-disabled="login.working">Login <i class="fa" ng-class="login.working ? 'fa-cog fa-spin' : 'fa-sign-in'"></i></button>
-        </form>
-        <!-- Spinner -->
-        <button class="btn btn-default nav navbar-btn navbar-right" ng-hide="ls.doneLoading">
-            <i class="fa fa-spinner fa-spin"></i>
-          </button>
-        <!-- Logout Form -->
-        <form class="nav navbar-nav navbar-right" role="form" ng-submit="logoutMe()" ng-show="ls.isLogged">
-          <div class="form-group">
-            <label for="logout-btn">Hello {{ ls.user.utilisateur.prenom }} {{ ls.user.utilisateur.nom }}</label>
-            <button type="submit" class="btn btn-default" id="logout-btn">Logout <i class="fa fa-signout"></i></button>
-          </div>
-        </form>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <!-- Login Form -->
+            <form name="loginForm" role="form" ng-submit="loginMe()" ng-hide="ls.isLogged || !ls.doneLoading">
+              <div class="form-group">
+                <input type="text" class="form-control" ng-model="login.username" name="username" id="username" placeholder="Username" title="Pegass username">
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control" ng-model="login.password" name="password" placeholder="Password" title="Pegass password">
+              </div>
+              <button type="submit" class="btn btn-default" ng-disabled="login.working">Login <i class="fa" ng-class="login.working ? 'fa-cog fa-spin' : 'fa-sign-in'"></i></button>
+            </form>
+            <!-- Spinner -->
+            <button class="btn btn-default nav navbar-btn navbar-right" ng-hide="ls.doneLoading">
+              <i class="fa fa-spinner fa-spin"></i>
+            </button>
+          </li>
+          <li>
+            <!-- Logout Form -->
+            <form role="form" ng-submit="logoutMe()" ng-show="ls.isLogged">
+              <div class="form-group">
+                <label for="logout-btn">Hello {{ ls.user.utilisateur.prenom }} {{ ls.user.utilisateur.nom }}</label>
+                <button type="submit" class="btn btn-default" id="logout-btn">Logout <i class="fa fa-signout"></i></button>
+              </div>
+            </form>
+          </li>
+          <li>
+            <!-- Google Login -->
+            <form role="form" ng-submit="googleMe()" ng-show="isTeamFormat() && !isAuthenticated()">
+              <div class="form-group">
+                <label for="googleme-btn">Login</label>
+                <button type="submit" class="btn btn-default" id="googleme">to inscription.crf7511 <i class="fa fa-signout"></i></button>
+              </div>
+            </form>
+          </li>
+          <li>
+            <!-- Google Logout -->
+            <form role="form" ng-submit="googleOutMe()" ng-show="isTeamFormat() && isAuthenticated()">
+              <div class="form-group">
+                <label for="googleoutme-btn">Hello {{ ls.googleuser.name }}</label>
+                <button type="submit" class="btn btn-default" id="googleoutme">Logout from Google<i class="fa fa-signout"></i></button>
+              </div>
+            </form>
+          </li>
+        </ul>
       </div>
     </nav>
     <div class="login-error" ng-class="{ 'active': login.wrong }">
