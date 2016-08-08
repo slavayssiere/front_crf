@@ -33,9 +33,10 @@
         </pre>
       </p>
     </div>
-    <table class="table table-bordered table-striped" ng-if="table">
+    <table class="table table-bordered table-hover table-condensed" ng-if="table">
       <thead>
         <tr>
+          <th>Row in Gsheet</th>
           <th>Date</th>
           <th>Type Formation</th>
           <th>Civilite</th>
@@ -53,6 +54,7 @@
       </thead>
       <tbody>
         <tr ng-repeat="inscrit in table" ng-click="getDataSession(inscrit)">
+          <td>{{inscrit.row}}</td>
           <td>{{inscrit.dateFormation | date :'dd-MM-yyyy'}}</td>
           <td>{{inscrit.typeFormation}}</td>
           <td>{{inscrit.civilite}}</td>

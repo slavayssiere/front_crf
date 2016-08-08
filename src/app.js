@@ -85,6 +85,10 @@ angular.module('angular-login', [
       wrong: false
     };
 
+    $scope.logingoogle = {
+      working: false
+    }
+
     $scope.loginMe = function () {
 
       if ($scope.ls.inLocalStorage == false) {
@@ -136,6 +140,7 @@ angular.module('angular-login', [
     };
 
     $scope.googleMe = function () {
+      $scope.logingoogle.working = true;
      	$auth.authenticate('google')
         .then(function (response) {
           $log.info("logged", $auth.isAuthenticated());
@@ -147,6 +152,9 @@ angular.module('angular-login', [
         .catch(function (response) {
           $log.info("error in login");
           $log.info(response);
+        })
+        .finally(function (response){
+          $scope.logingoogle.working = false;
         });
     };
 

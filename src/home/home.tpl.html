@@ -3,26 +3,38 @@
     <h2>Bonjour {{ ls.user.utilisateur.prenom }} {{ ls.user.utilisateur.nom }}</h2>
     <p>
       Nivol: {{ ls.user.utilisateur.id }}
-   </p>
-   <p>
-      ul: {{ ls.user.structuresAdministrees[0].libelle }}
-   </p>
-   <p>
-      Role: {{ ls.userRole.title }}
-   </p>
-   <p>
-      Can admin: {{ ls.user.admin.peutAdministrer }}
+    </p>
+    <div>
+      <p>
+        Structure(s) administrable(s) par l'utilisateur
+      </p>
+      <ul ng-repeat="struct in ls.user.structuresAdministrees">
+        <li>{{ struct.libelle }}</li>
+      </ul>
+    </div>
+    <p>
+      Role dans cette application: {{ ls.userRole.title }}
+    </p>
+    <p>
+      Admin sur Pegass: {{ ls.user.admin.peutAdministrer }}
     </p>
     <div ng-if="isAuthenticated()">
-        <p>{{ data.name }}</p>
-        <p>{{ data.email }}</p>
+      <p>Nom dans Google: {{ data.name }}</p>
+      <p>Email associé: {{ data.email }}</p>
     </div>
   </div>
 
   <div ng-hide="ls.isLogged">
-    <h2>Please login with Pegass login / password</h2>
+    <h2>Se connecter avec son login / password Pegass</h2>
     <p>
-      Ce site dépend de Pegass et donc des données qui ont été remplies. (en particulier pour les stats)
+      Ce site dépend de <abbr title="Cf pegass.croix-rouge.fr" class="initialism">Pegass</abbr> et donc des données qui ont été remplies. (en particulier pour les stats)
+    </p>
+    <blockquote>
+      <p>Seuls ceux qui sont assez fous pour penser qu’ils peuvent changer le monde y parviennent.</p>
+      <footer>Henri Dunant<cite title="Memoire de Solferino">Memoire de Solferino</cite></footer>
+    </blockquote>   
+    <p>
+      Pour obtenir la derniere version de l'interface, rafraichir avec <kbd><kbd>shift</kbd> + <kbd>F5</kbd></kbd>
     </p>
   </div>
 </div>
