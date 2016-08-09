@@ -36,7 +36,7 @@ angular.module('angular-login.google', ['angular-login.grandfather'])
 
     $scope.getDataSession = function (inscrit) {
       $scope.wait = true;
-      $scope.sessioncomplete=false;
+      $scope.sessioncomplete = false;
       $scope.data = null;
       $scope.selected = inscrit;
       var req = {
@@ -49,22 +49,22 @@ angular.module('angular-login.google', ['angular-login.grandfather'])
       }
       $http(req).
         success(function (response) {
-          if(response.nb_empty>0){
+          if (response.nb_empty > 0) {
             $scope.disponible = response.emptyRows;
             $scope.google_id = response.google_id;
             $scope.data = response;
           }
           else {
-            $scope.sessioncomplete=response;
+            $scope.sessioncomplete = response;
           }
-          $scope.wait = false;    
+          $scope.wait = false;
         });
     };
 
     $scope.inscription = function (row) {
       $scope.wait = true;
       $log.info("inscription de", $scope.selected, "on row ", row);
-      var url_inscription = 'http://' + $scope.url_google + '/api/sheets/inscription/'+$scope.google_id+'/'+row+'?token=' + $auth.getToken();
+      var url_inscription = 'http://' + $scope.url_google + '/api/sheets/inscription/' + $scope.google_id + '/' + row + '?token=' + $auth.getToken();
       var req = {
         method: 'POST',
         data: $scope.selected,
@@ -75,16 +75,25 @@ angular.module('angular-login.google', ['angular-login.grandfather'])
           var indexremove = $scope.table.indexOf($scope.selected);
           $log.info("remove ", indexremove);
           $scope.table.splice(indexremove, 1);
-          var url_delete = 'http://' + $scope.url_google + '/api/sheets/getemails/'+$scope.selected.row+'?token=' + $auth.getToken();
+          var url_delete = 'http://' + $scope.url_google + '/api/sheets/getemails/' + $scope.selected.row + '?token=' + $auth.getToken();
           $http.delete(url_delete)
-            .success(function (response){
+            .success(function (response) {
               $log.info(response);
-            }); 
+            });
+
+          var req = {
+            method: 'PUT',
+            url: 'http://' + $scope.url_google + '/api/sheets/'+$scope.google_id+'/sendinscrits?token=' + $auth.getToken()
+          }
+          $http(req).
+            success(function (response) { 
+              $log.info(response);
+            });
           $scope.selected = null;
           $scope.google_id = null;
-          $scope.disponible = null; 
-          $scope.sessioncomplete=null;  
-          $scope.wait = false;    
+          $scope.disponible = null;
+          $scope.sessioncomplete = null;
+          $scope.wait = false;
         });
     };
 
@@ -100,17 +109,17 @@ angular.module('angular-login.google', ['angular-login.grandfather'])
         success(function (response) {
           var indexremove = $scope.table.indexOf($scope.selected);
           $log.info("remove ", indexremove);
-          var url_delete = 'http://' + $scope.url_google + '/api/sheets/getemails/'+$scope.selected.row+'?token=' + $auth.getToken();
+          var url_delete = 'http://' + $scope.url_google + '/api/sheets/getemails/' + $scope.selected.row + '?token=' + $auth.getToken();
           $http.delete(url_delete)
-            .success(function (response){
+            .success(function (response) {
               $log.info(response);
-            }); 
-          $scope.table.splice(indexremove, 1); 
+            });
+          $scope.table.splice(indexremove, 1);
           $scope.selected = null;
           $scope.google_id = null;
-          $scope.disponible = null; 
-          $scope.sessioncomplete=null;     
-          $scope.wait = false;  
+          $scope.disponible = null;
+          $scope.sessioncomplete = null;
+          $scope.wait = false;
         });
     };
 
