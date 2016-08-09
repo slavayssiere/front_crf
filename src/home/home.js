@@ -20,7 +20,6 @@ angular.module('angular-login.home', ['angular-login.grandfather'])
 
       $http(req).
         success(function (response) {
-          $log.info(response);
           $scope.data = angular.fromJson(response);
         })
         .error(function (res){

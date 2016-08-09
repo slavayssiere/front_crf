@@ -54,11 +54,9 @@ angular.module('loginService', ['ui.router'])
       wrappedService.doneLoading = true;
         
       if (!getTokens()) {
-        $log.info('we have not localstorage data');
         wrappedService.inLocalStorage = false;
       }
       else {
-        $log.info('we have localstorage data');
         wrappedService.inLocalStorage = true;        
       }
     };
@@ -160,8 +158,6 @@ angular.module('loginService', ['ui.router'])
          *   $state.go('app.nagscreen');
          * }
          */
-        $log.info('user', user);
-        
         
         // setup token
         wrappedService.F5_ST=user.F5_ST;
@@ -173,7 +169,8 @@ angular.module('loginService', ['ui.router'])
         // flag true on isLogged
         wrappedService.isLogged = true;
         
-        ga('set', 'userId', user.utilisateur.prenom + ' ' + user.utilisateur.nom);
+        $log.info("set nivol as google id", user.utilisateur.id);
+        ga('set', 'userId', user.utilisateur.id); 
         
         // update userRole
         var url_search = 'http://'+url_ws_pegass+'/benevoles/nominations/'+user.utilisateur.id+'?F5_ST='+wrappedService.F5_ST+'&LastMRH_Session='+wrappedService.LastMRH_Session+'&MRHSession='+wrappedService.MRHSession;

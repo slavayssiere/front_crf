@@ -10,11 +10,11 @@ angular.module('angular-login', [
   'angular-login.competences',
   'angular-login.pages',
   'angular-login.benevoles',
-  'angular-login.benevolesadmin',
   'angular-login.register',
   'angular-login.error',
   'angular-services.competence',
   'angular-login.google',
+  'angular-services.emails',
   // components
   'ngAnimate',
   'ngTouch',
@@ -143,7 +143,6 @@ angular.module('angular-login', [
       $scope.logingoogle.working = true;
      	$auth.authenticate('google')
         .then(function (response) {
-          $log.info("logged", $auth.isAuthenticated());
           $auth.setToken(response.data.token);
           loginService.gw_token = response.data.token;
           loginService.gw_refresh = response.data.refreshToken;

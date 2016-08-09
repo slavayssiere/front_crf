@@ -1,11 +1,11 @@
 <div class="jumbotron">
     <h2>Liste des benevoles</h2>
-    <form name="searchEmailForm" role="searchEmail" ng-submit="searchemail()" ng-if="data.list">       
-        <button type="submit" class="btn btn-default"  ng-disabled="searchemail.working">
-            Obtenir les emails 
+    <form name="searchEmailForm" role="searchEmail" ng-submit="getEmails()" ng-if="data.list">       
+        <button type="submit" class="btn btn-default"  ng-disabled="searching">
+            <i class="fa fa-envelope" aria-hidden="true"></i> Obtenir les emails <i class="fa" ng-class="searching ? 'fa-cog fa-spin' : 'fa-search '"></i>
         </button>
     </form>
-    <h4 ng-if="emails">{{ emails }}</h4> 
+    <p ng-if="emails">{{ emails }}</p> 
     <table class="table table-bordered table-striped" ng-if="data.list">
         <thead>
             <tr>            

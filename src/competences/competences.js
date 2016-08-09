@@ -8,7 +8,7 @@ angular.module('angular-login.competences', ['angular-login.grandfather'])
                 accessLevel: accessLevels.user
             });
     })
-    .controller('CompetencesController', function ($scope, loginService, $http, $log, datalib) {
+    .controller('CompetencesController', function ($scope, loginService, $http, $log, BenevolesDataFactory) {
 
         $scope.search = function () {
 
@@ -98,25 +98,15 @@ angular.module('angular-login.competences', ['angular-login.grandfather'])
                 );
         };
 
-
-        $scope.searchemail = function () {
-
-            $scope.searchemail.working = true;
-            var url_search = 'http://' + $scope.url + '/benevoles/emails?F5_ST=' + loginService.user.F5_ST + '&LastMRH_Session=' + loginService.user.LastMRH_Session + '&MRHSession=' + loginService.user.MRHSession;
-            $log.info('URI: ' + url_search);
-            var req = {
-                method: 'POST',
-                url: url_search,
-                data: angular.toJson($scope.data)
-            }
-
-            $http(req).
-                success(function (response) {
-                    var dataemail = angular.fromJson(response);
-                    $scope.emails = datalib.getEmailList(dataemail);
-                    $scope.searchemail.working = false;
-                }
-                );
+        $scope.getEmails = function(){
+            $scope.searching = true;
+            BenevolesDataFactory.searchemail($scope.data).then(function(emailslist){
+                $scope.searching = false;
+                $scope.emails = emailslist;
+            }, function(msg){
+                $log.info(msg);
+                $scope.searching = false;
+            });
         };
 
     });
