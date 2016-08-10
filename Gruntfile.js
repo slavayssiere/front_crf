@@ -58,7 +58,7 @@ module.exports = function (grunt) {
         tasks: ['less']
       },
       sources: {
-        files: ['src/**/*.js', 'src/*.js'],
+        files: ['src/**/*.js', 'src/*.js', '!src/config.js'],
         tasks: ['concat_sourcemap:app', 'uglify:app']
       },
       index: {
@@ -76,7 +76,7 @@ module.exports = function (grunt) {
         sourcesContent: true
       },
       app: {
-        src: ['src/**/*.js', 'src/*.js'],
+        src: ['src/**/*.js', 'src/*.js', '!src/config.js'],
         dest: 'build/app.js'
       },
       libs: {
