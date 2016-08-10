@@ -110,16 +110,16 @@ module.exports = function (grunt) {
         }
       },
       robots: {
-        src: 'robots.txt',
-        dest: 'build/'
+        src: 'src/robots.txt',
+        dest: 'build/robots.txt'
       },
       config: {
-        src: 'config.js',
-        dest: 'build/'
+        src: 'src/config.js',
+        dest: 'build/config.js'
       },
       htaccess: {
-        src: '.htaccess',
-        dest: 'build/'
+        src: 'src/.htaccess',
+        dest: 'build/.htaccess'
       }
     },
     clean: {
