@@ -23,7 +23,8 @@
     /*
     Build out all the access levels you want referencing the roles listed above
     You can use the "*" symbol to represent access to all roles
-    'truc': le role peut etre pris par les utilisteurs de la liste
+
+    'trucRole': le trucRole peut etre pris par les utilisteurs de la liste
      */
     accessLevels: {
       'public' : '*',

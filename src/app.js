@@ -13,38 +13,21 @@ angular.module('angular-login', [
   'angular-login.register',
   'angular-login.error',
   'angular-services.competence',
+  'angular-services.googleconnect',
   'angular-login.google',
   'angular-services.emails',
   // components
   'ngAnimate',
   'ngTouch',
   'ui.bootstrap',
-  'ngTable',
-  'satellizer'
+  'ngTable'
 ])
-  .config(function ($urlRouterProvider, $httpProvider, $locationProvider, $authProvider) {
+  .config(function ($urlRouterProvider, $httpProvider) {
     $urlRouterProvider.otherwise('/');
     $httpProvider.defaults.useXDomain = true;
     //delete $httpProvider.defaults.headers.common['X-Requested-With'];
     //$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
     //$locationProvider.html5Mode(true);
-    $authProvider.google({
-      url: 'http://' + url_ws_google + '/api/auth/google',
-      scope: [
-        'profile',
-        'email',
-        'https://mail.google.com/',
-        'https://www.googleapis.com/auth/spreadsheets',
-        'https://www.googleapis.com/auth/drive',
-        'https://www.googleapis.com/auth/documents',
-        'https://www.googleapis.com/auth/drive.scripts',
-        'https://www.googleapis.com/auth/userinfo.email',
-        'https://www.googleapis.com/auth/calendar',
-        'https://www.googleapis.com/auth/script.external_request'
-      ], //https://www.googleapis.com/auth/userinfo.profile
-      //clientId: '1037173200559-u3fibeuoidab32gl829ur4eoe2h147pi.apps.googleusercontent.com'
-      clientId: '794502709562-bgo3mjvn9jhpifvd0no50vebts8j9050.apps.googleusercontent.com'
-    });
   })
   .run(function ($rootScope, $window) {
     $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams) {
@@ -71,7 +54,7 @@ angular.module('angular-login', [
     $rootScope.$on('$stateChangeError', resolveDone);
     $rootScope.$on('$statePermissionError', resolveDone);
   })
-  .controller('BodyController', function ($scope, $state, $stateParams, loginService, $http, $timeout, $log, $auth) {
+  .controller('BodyController', function ($scope, $state, $stateParams, loginService, $http, $timeout, $log, GoogleConnectFactory) {
     // Expose $state and $stateParams to the <body> tag
     $scope.$state = $state;
     $scope.$stateParams = $stateParams;
@@ -136,41 +119,30 @@ angular.module('angular-login', [
 
     // Controller
     $scope.isAuthenticated = function () {
-      return $auth.isAuthenticated();
+      return GoogleConnectFactory.isAuthenticated();
     };
 
-    $scope.googleMe = function () {
+    $scope.googleMe = function () {      
       $scope.logingoogle.working = true;
-     	$auth.authenticate('google')
-        .then(function (response) {
-          $auth.setToken(response.data.token);
-          loginService.gw_token = response.data.token;
-          loginService.gw_refresh = response.data.refreshToken;
-          loginService.gw_expire = response.data.expiresInSeconds;
-        })
-        .catch(function (response) {
-          $log.info("error in login");
-          $log.info(response);
-        })
-        .finally(function (response){
+      GoogleConnectFactory.login().then(function (){
+          $scope.logingoogle.working = false;
+        },function (){
           $scope.logingoogle.working = false;
         });
     };
 
     $scope.googleOutMe = function () {
-     	$auth.logout();
+     	GoogleConnectFactory.logout();
     };
 
     $scope.isTeamFormat = function () {
-      var members = ['00001376977M', '00001669247X', '00001727030F', '00001701729E', '00001641554W', '00000599352T'] //me: '00001376977M'
-      if(loginService.user.utilisateur){
-        return (members.indexOf(loginService.user.utilisateur.id) > -1)
+      if(loginService.user.utilisateur && loginService.user.utilisateur.id){
+        return GoogleConnectFactory.allowInGoogle(loginService.user.utilisateur.id);
       }
-      else {
+      else{
         return false;
-      } 
+      }
     }
-
 
     if ($scope.ls.inLocalStorage == true) {
       $scope.loginMe();

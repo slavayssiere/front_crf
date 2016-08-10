@@ -5,19 +5,22 @@ angular.module('angular-login.google', ['angular-login.grandfather'])
         url: '/sessions',
         templateUrl: 'google/google.tpl.html',
         controller: 'GoogleController',
-        controllerAs: 'googlesessions'
+        controllerAs: 'googlesessions',
+        accessLevel: accessLevels.admin
       })
       .state('app.sessioncreate', {
         url: '/sessioncreate',
         templateUrl: 'google/create.tpl.html',
         controller: 'GCreateController',
-        controllerAs: 'gcc'
+        controllerAs: 'gcc',
+        accessLevel: accessLevels.admin
       })
       .state('app.getemails', {
         url: '/getemails',
         templateUrl: 'google/getemails.tpl.html',
         controller: 'GGetEmailController',
-        controllerAs: 'gss'
+        controllerAs: 'gss',
+        accessLevel: accessLevels.user
       });
   })
   .controller('GGetEmailController', function ($scope, $log, $auth, $http, NgTableParams) {
