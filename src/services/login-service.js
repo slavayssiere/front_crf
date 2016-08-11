@@ -2,7 +2,8 @@ angular.module('loginService', ['ui.router'])
 .provider('loginService', function () {
   var userToken = localStorage.getItem('userToken'),
       errorState = 'app.error',
-      logoutState = 'app.logout';
+      logoutState = 'app.logout',
+      loginState = 'app.home';
   
   this.$get = function ($rootScope, $http, $q, $state, $log, $auth) {
 
@@ -203,6 +204,10 @@ angular.module('loginService', ['ui.router'])
               }
             }
         );
+
+
+        $state.go(loginState);
+
         return user;
       },
       loginUser: function (httpPromise) {
