@@ -83,13 +83,9 @@ angular.module('angular-login.google', ['angular-login.grandfather'])
           var url_delete = 'http://' + $scope.url_google + '/api/sheets/getemails/' + $scope.selected.row + '?token=' + $auth.getToken();
           $http.delete(url_delete)
             .success(function (response) {
-              for(var tableIndex = 0; tableIndex != $scope.table.length; tableIndex++)
-              {
-                $log.info("row: ", $scope.table[tableIndex]);
-                if($scope.table[tableIndex].row > rowDelete){
-                  $log.info("change row for: ", $scope.table[tableIndex]);
+              for (var tableIndex = 0; tableIndex != $scope.table.length; tableIndex++) {
+                if ($scope.table[tableIndex].row > rowDelete) {
                   $scope.table[tableIndex].row--;
-                  $log.info("new row : ", $scope.table[tableIndex].row);
                 }
               }
               $log.info(response);
@@ -97,10 +93,10 @@ angular.module('angular-login.google', ['angular-login.grandfather'])
 
           var req = {
             method: 'PUT',
-            url: 'http://' + $scope.url_google + '/api/sheets/'+$scope.google_id+'/sendinscrits?token=' + $auth.getToken()
+            url: 'http://' + $scope.url_google + '/api/sheets/' + $scope.google_id + '/sendinscrits?token=' + $auth.getToken()
           }
           $http(req).
-            success(function (response) { 
+            success(function (response) {
               $log.info(response);
             });
           $scope.selected = null;
