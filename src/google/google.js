@@ -50,6 +50,7 @@ angular.module('angular-login.google', ['angular-login.grandfather'])
         },
         url: 'http://' + $scope.url_google + '/api/sheets/state?token=' + $auth.getToken()
       }
+
       $http(req).
         success(function (response) {
           if (response.nb_empty > 0) {
@@ -76,11 +77,21 @@ angular.module('angular-login.google', ['angular-login.grandfather'])
       $http(req).
         success(function (response) {
           var indexremove = $scope.table.indexOf($scope.selected);
+          var rowDelete = $scope.selected.row;
           $log.info("remove ", indexremove);
           $scope.table.splice(indexremove, 1);
           var url_delete = 'http://' + $scope.url_google + '/api/sheets/getemails/' + $scope.selected.row + '?token=' + $auth.getToken();
           $http.delete(url_delete)
             .success(function (response) {
+              for(var tableIndex = 0; tableIndex != $scope.table.length; tableIndex++)
+              {
+                $log.info("row: ", $scope.table[tableIndex]);
+                if($scope.table[tableIndex].row > rowDelete){
+                  $log.info("change row for: ", $scope.table[tableIndex]);
+                  $scope.table[tableIndex].row--;
+                  $log.info("new row : ", $scope.table[tableIndex].row);
+                }
+              }
               $log.info(response);
             });
 
