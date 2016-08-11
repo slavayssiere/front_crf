@@ -136,12 +136,7 @@ angular.module('angular-login', [
     };
 
     $scope.isTeamFormat = function () {
-      if(loginService.user.utilisateur && loginService.user.utilisateur.id){
-        return GoogleConnectFactory.allowInGoogle(loginService.user.utilisateur.id);
-      }
-      else{
-        return false;
-      }
+      return loginService.isInTeamFormat;
     }
 
     if ($scope.ls.inLocalStorage == true) {

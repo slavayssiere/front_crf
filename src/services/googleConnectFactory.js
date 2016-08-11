@@ -45,16 +45,7 @@ angular.module('angular-services.googleconnect', ['satellizer'])
             },
             logout: function(){
                 $auth.logout();
-            },
-            allowInGoogle: function (nivol) { //loginService.user.utilisateur
-                var members = ['00001376977M', '00001669247X', '00001727030F', '00001701729E', '00001641554W', '00000599352T'] //me: '00001376977M'
-                if(nivol){
-                    return (members.indexOf(nivol) > -1)
-                }
-                else {
-                    return false;
-                }
-            } 
+            }
         }
 
         return google;

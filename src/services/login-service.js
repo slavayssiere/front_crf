@@ -174,37 +174,24 @@ angular.module('loginService', ['ui.router'])
         ga('set', 'userId', user.utilisateur.id); 
         
         // update userRole
-        var url_search = 'http://'+url_ws_pegass+'/benevoles/nominations/'+user.utilisateur.id+'?F5_ST='+wrappedService.F5_ST+'&LastMRH_Session='+wrappedService.LastMRH_Session+'&MRHSession='+wrappedService.MRHSession;
-        $log.info('URI: ' + url_search);
-        wrappedService.userRole=userRoles.user;
-        
-        $http.get(url_search).
-            success(function(response){
-              nominations = angular.fromJson(response);
-              for (i = 0; i < nominations.length; i++) {
-                if(nominations[i].libelleCourt == "DLUS.A.FOR"){
-                  wrappedService.userRole=userRoles.dlaf;
-                }
-                
-                if(nominations[i].libelleCourt == "CS FORM"){
-                  wrappedService.userRole=userRoles.ddaf;
-                }
-                
-                if(nominations[i].libelleCourt == "DLUS"){
-                  wrappedService.userRole=userRoles.dlus;
-                }
-                
-                if(user.utilisateur.id == "00001376977M") {
-                  wrappedService.userRole=userRoles.admin;
-                }
-                
-                if(user.utilisateur.id == "00000040109X") {
-                  wrappedService.userRole=userRoles.ddaf;
-                }
-              }
-            }
-        );
+        switch (user.role)
+        {
+          case "admin": 
+            wrappedService.userRole=userRoles.admin;
+            break;
 
+          case "dlus": 
+            wrappedService.userRole=userRoles.dlus;
+            break;
+
+          case "dlaf": 
+            wrappedService.userRole=userRoles.dlaf;
+            break;
+
+          default:
+            wrappedService.userRole=userRoles.user;
+        }
+        wrappedService.isInTeamFormat=user.isInTeamFormat;
 
         $state.go(loginState);
 
@@ -225,6 +212,7 @@ angular.module('loginService', ['ui.router'])
         setTokens();
 
         this.userRole = userRoles.public;
+        this.isInTeamFormat = false;
         this.user = {};
         this.isLogged = false;
 
@@ -272,6 +260,7 @@ angular.module('loginService', ['ui.router'])
       gw_token: null,
       gw_refresh: null,
       gw_expire: null,
+      isInTeamFormat: false,
           
       F5_ST: localStorage.getItem('F5_ST'),
       LastMRH_Session: localStorage.getItem('LastMRH_Session'),
