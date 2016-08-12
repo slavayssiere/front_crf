@@ -25,6 +25,7 @@ angular.module('angular-login', [
   .config(function ($urlRouterProvider, $httpProvider) {
     $urlRouterProvider.otherwise('/');
     $httpProvider.defaults.useXDomain = true;
+    //X-Requested-With delete automatically insert with angularJS 1.3
     //delete $httpProvider.defaults.headers.common['X-Requested-With'];
     //$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
     //$locationProvider.html5Mode(true);

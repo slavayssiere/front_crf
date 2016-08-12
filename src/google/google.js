@@ -208,6 +208,7 @@ angular.module('angular-login.google', ['angular-login.grandfather'])
       $http(req).
         success(function (response) {
           $scope.data = response;
+          $scope.wait = false;
         });
     }
 
