@@ -1,5 +1,5 @@
 angular.module('angular-services.competence', [])
-    .service('datalib', function () {
+    .service('datalib', function ($http, $log, loginService) {
 
         var hashComp = {};
         hashComp['166'] = "PSE1";
@@ -20,12 +20,32 @@ angular.module('angular-services.competence', [])
 
         var hashRole = {};
         hashRole['9'] = "Conducteur VL";
+        hashRole['10'] = "Conducteur VPSP";
+        hashRole['11'] = "Evaluateur Chauffeur";
+        hashRole['34'] = "Elu local";
+        hashRole['35'] = "Elu departemental";
+        hashRole['15'] = "Maraudeur";
+        hashRole['18'] = "Régulateur";
+        hashRole['44'] = "Régulateur terrain";
+        hashRole['32'] = "TSA";
+        hashRole['75'] = "CI";
+        hashRole['254'] = "CIR";
+        hashRole['255'] = "CI BSPP";
 
         this.getHashComp = function () {
             return hashComp;
         }
 
         this.getHashRole = function () {
+            // var url_search = 'http://' + url_ws_pegass + '/benevoles/roles?F5_ST=' + loginService.user.F5_ST + '&LastMRH_Session=' + loginService.user.LastMRH_Session + '&MRHSession=' + loginService.user.MRHSession;
+            // $log.info('URI: ' + url_search);
+            
+            // $http.get(url_search).
+            //     success(function (response) {
+            //         $log.info(response);
+            //     });
+
+
             return hashRole;
         }
     });
