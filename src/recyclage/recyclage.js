@@ -16,7 +16,7 @@ angular.module('angular-login.recyclage', ['angular-login.grandfather'])
     })
     .controller('RecyclageController', function ($scope, loginService, $http, $log, datalib) {
 
-        $scope.list_comp = datalib.getHash();
+        $scope.list_comp = datalib.getHashComp();
 
         $scope.search = function () {
 
@@ -72,7 +72,7 @@ angular.module('angular-login.recyclage', ['angular-login.grandfather'])
     })
     .controller('RecyclageDDController', function ($scope, loginService, $http, $log, datalib) {
 
-        $scope.list_comp = datalib.getHash();
+        $scope.list_comp = datalib.getHashComp();
 
         $scope.search = function () {
 

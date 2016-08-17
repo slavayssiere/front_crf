@@ -17,18 +17,15 @@ angular.module('angular-services.competence', [])
         hashComp['43'] = "MORAD";
         hashComp['143'] = "FIAPS";
 
-        this.getHash = function () {
+
+        var hashRole = {};
+        hashRole['9'] = "Conducteur VL";
+
+        this.getHashComp = function () {
             return hashComp;
         }
 
-        function parseemails(data) {
-            var emailList = "";
-            for (i = 0; i < data.list.length; i++) {
-                emailList += data.list[i].email + "; ";
-            }
-            return emailList;
+        this.getHashRole = function () {
+            return hashRole;
         }
-        
-        this.getEmailList = parseemails;
-        
     });
