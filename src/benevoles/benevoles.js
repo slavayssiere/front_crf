@@ -17,6 +17,8 @@ angular.module('angular-login.benevoles', ['angular-login.grandfather'])
     })
     .controller('BenevolesController', function ($scope, loginService, $http, $log, BenevolesDataFactory) {
 
+        $scope.displayEmails=false;
+
         var url_search = 'http://' + $scope.url + '/benevoles?F5_ST=' + loginService.user.F5_ST + '&LastMRH_Session=' + loginService.user.LastMRH_Session + '&MRHSession=' + loginService.user.MRHSession + '&ul=' + loginService.user.utilisateur.structure.id;
         $log.info('URI: ' + url_search);
 
@@ -27,10 +29,15 @@ angular.module('angular-login.benevoles', ['angular-login.grandfather'])
 
         $scope.getEmails = function(){
             $scope.searching = true;
-            BenevolesDataFactory.searchemail($scope.data).then(function(emailslist){
+            BenevolesDataFactory.searchemail($scope.data).then(function(coordonees){
+                for (i = 0; i < coordonees.list.length; i++) {
+                    $scope.data.list[i]['coordonees']=coordonees.list[i];
+                }
+                $scope.displayEmails=true;
                 $scope.searching = false;
-                $scope.emails = emailslist;
+                $scope.emails = BenevolesDataFactory.parseemails();
             }, function(msg){
+                $log.info(msg);
                 $scope.searching = false;
             });
         };
@@ -69,7 +76,7 @@ angular.module('angular-login.benevoles', ['angular-login.grandfather'])
                     }
                 });
                 
-        $scope.change = function (person, type){
+            $scope.change = function (person, type){
             
             var url_search = 'http://' + $scope.url + '/benevoles/changeinfo/'+person.id+'?F5_ST=' + loginService.user.F5_ST + '&LastMRH_Session=' + loginService.user.LastMRH_Session + '&MRHSession=' + loginService.user.MRHSession;
             var data_struct = {}

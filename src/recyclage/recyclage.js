@@ -14,9 +14,10 @@ angular.module('angular-login.recyclage', ['angular-login.grandfather'])
                 accessLevel: accessLevels.ddaf
             });
     })
-    .controller('RecyclageController', function ($scope, loginService, $http, $log, datalib) {
+    .controller('RecyclageController', function ($scope, loginService, $http, $log, datalib, BenevolesDataFactory) {
 
         $scope.list_comp = datalib.getHashComp();
+        $scope.displayEmails=false;
 
         $scope.search = function () {
 
@@ -50,29 +51,26 @@ angular.module('angular-login.recyclage', ['angular-login.grandfather'])
         };
 
 
-        $scope.searchemail = function () {
-
-            $scope.searchemail.working = true;
-            var url_search = 'http://' + $scope.url + '/benevoles/emails?F5_ST=' + loginService.user.F5_ST + '&LastMRH_Session=' + loginService.user.LastMRH_Session + '&MRHSession=' + loginService.user.MRHSession;
-            $log.info('URI: ' + url_search);
-            var req = {
-                method: 'POST',
-                url: url_search,
-                data: angular.toJson($scope.data)
-            }
-
-            $http(req).
-                success(function (response) {
-                    var dataemail = angular.fromJson(response);
-                    $scope.emails = datalib.getEmailList(dataemail);
-                    $scope.searchemail.working = false;
-                });
+         $scope.getEmails = function(){
+            $scope.searching = true;
+            BenevolesDataFactory.searchemail($scope.data).then(function(coordonees){
+                for (i = 0; i < coordonees.list.length; i++) {
+                    $scope.data.list[i]['coordonees']=coordonees.list[i];
+                }
+                $scope.displayEmails=true;
+                $scope.searching = false;
+                $scope.emails = BenevolesDataFactory.parseemails();
+            }, function(msg){
+                $log.info(msg);
+                $scope.searching = false;
+            });
         };
 
     })
-    .controller('RecyclageDDController', function ($scope, loginService, $http, $log, datalib) {
+    .controller('RecyclageDDController', function ($scope, loginService, $http, $log, datalib, BenevolesDataFactory) {
 
         $scope.list_comp = datalib.getHashComp();
+        $scope.displayEmails=false;
 
         $scope.search = function () {
 
@@ -106,24 +104,19 @@ angular.module('angular-login.recyclage', ['angular-login.grandfather'])
         };
 
 
-        $scope.searchemail = function () {
-
-            $scope.searchemail.working = true;
-            var url_search = 'http://' + $scope.url + '/benevoles/emails?F5_ST=' + loginService.user.F5_ST + '&LastMRH_Session=' + loginService.user.LastMRH_Session + '&MRHSession=' + loginService.user.MRHSession;
-            $log.info('URI: ' + url_search);
-            var req = {
-                method: 'POST',
-                url: url_search,
-                data: angular.toJson($scope.data)
-            }
-
-            $http(req).
-                success(function (response) {
-                    var dataemail = angular.fromJson(response);
-                    $scope.emails = datalib.getEmailList(dataemail);
-                    $scope.searchemail.working = false;
+         $scope.getEmails = function(){
+            $scope.searching = true;
+            BenevolesDataFactory.searchemail($scope.data).then(function(coordonees){
+                for (i = 0; i < coordonees.list.length; i++) {
+                    $scope.data.list[i]['coordonees']=coordonees.list[i];
                 }
-                );
+                $scope.displayEmails=true;
+                $scope.searching = false;
+                $scope.emails = BenevolesDataFactory.parseemails();
+            }, function(msg){
+                $log.info(msg);
+                $scope.searching = false;
+            });
         };
 
     });

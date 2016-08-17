@@ -16,6 +16,8 @@ angular.module('angular-login.competences', ['angular-login.grandfather'])
     })
     .controller('CompetencesController', function ($scope, loginService, $http, $log, BenevolesDataFactory) {
 
+        $scope.displayEmails=false;
+        
         $scope.search = function () {
 
             var url_search = 'http://' + $scope.url + '/benevoles/competences/' + $scope.competence + '/yes?F5_ST=' + loginService.user.F5_ST + '&LastMRH_Session=' + loginService.user.LastMRH_Session + '&MRHSession=' + loginService.user.MRHSession + '&ul=' + loginService.user.utilisateur.structure.id;
@@ -104,11 +106,16 @@ angular.module('angular-login.competences', ['angular-login.grandfather'])
                 );
         };
 
+       
         $scope.getEmails = function(){
             $scope.searching = true;
-            BenevolesDataFactory.searchemail($scope.data).then(function(emailslist){
+            BenevolesDataFactory.searchemail($scope.data).then(function(coordonees){
+                for (i = 0; i < coordonees.list.length; i++) {
+                    $scope.data.list[i]['coordonees']=coordonees.list[i];
+                }
+                $scope.displayEmails=true;
                 $scope.searching = false;
-                $scope.emails = emailslist;
+                $scope.emails = BenevolesDataFactory.parseemails();
             }, function(msg){
                 $log.info(msg);
                 $scope.searching = false;
@@ -119,6 +126,7 @@ angular.module('angular-login.competences', ['angular-login.grandfather'])
     .controller('RolesController', function ($scope, loginService, $http, $log, BenevolesDataFactory, datalib) {
 
         $scope.list_role = datalib.getHashRole();
+        $scope.displayEmails=false;
 
         $scope.search = function () {
 
@@ -151,9 +159,13 @@ angular.module('angular-login.competences', ['angular-login.grandfather'])
 
         $scope.getEmails = function(){
             $scope.searching = true;
-            BenevolesDataFactory.searchemail($scope.data).then(function(emailslist){
+            BenevolesDataFactory.searchemail($scope.data).then(function(coordonees){
+                for (i = 0; i < coordonees.list.length; i++) {
+                    $scope.data.list[i]['coordonees']=coordonees.list[i];
+                }
+                $scope.displayEmails=true;
                 $scope.searching = false;
-                $scope.emails = emailslist;
+                $scope.emails = BenevolesDataFactory.parseemails();
             }, function(msg){
                 $log.info(msg);
                 $scope.searching = false;

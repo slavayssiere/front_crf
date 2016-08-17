@@ -11,9 +11,9 @@
         </button>
     </form>
 
-    <form name="searchEmailForm" role="form" ng-submit="searchemail()" ng-if="!search.working && data.list">       
+    <form name="searchEmailForm" role="form" ng-submit="getEmails()" ng-if="!search.working && data.list">       
         <button type="submit" class="btn btn-default"  ng-disabled="searchemail.working">
-            Get emails list
+            <i class="fa fa-envelope" aria-hidden="true"></i> Obtenir les emails <i class="fa" ng-class="searching ? 'fa-cog fa-spin' : 'fa-search '"></i>
         </button>
     </form>
     <h4 ng-if="emails">{{ emails }}</h4> 
@@ -25,6 +25,8 @@
                 <th>Prenom</th>
                 <th>Nom</th>
                 <th>Date</th>
+                <th ng-show="displayEmails">Emails</th>
+                <th ng-show="displayEmails">Portable</th>
             </tr>
         </thead>
         <tbody>
@@ -33,6 +35,8 @@
                 <td>{{person.prenom}}</td>
                 <td>{{person.nom}}</td>
                 <td>{{person.date}}</td>
+                <td ng-show="displayEmails">{{person.coordonees.email}}</td>
+                <td ng-show="displayEmails">{{person.coordonees.portable}}</td>
             </tr>
         </tbody>
     </table>

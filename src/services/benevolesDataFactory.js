@@ -16,13 +16,13 @@ angular.module('angular-services.emails', [])
                 $http(req).
                     success(function (response) {
                         benevoleData.list = angular.fromJson(response);
-                        deferred.resolve(benevoleData.parseemails());
+                        deferred.resolve(benevoleData.list);
                     })
                     .error(function (res){
                         deferred.reject('No email return');
                     });
 
-                return deferred.promise;                
+                return deferred.promise;
             },
             parseemails: function () {
                 var emailList = "";

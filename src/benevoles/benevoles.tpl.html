@@ -5,14 +5,15 @@
             <i class="fa fa-envelope" aria-hidden="true"></i> Obtenir les emails <i class="fa" ng-class="searching ? 'fa-cog fa-spin' : 'fa-search '"></i>
         </button>
     </form>
-    <p ng-if="emails">{{ emails }}</p> 
+    <h4 ng-if="emails">{{ emails }}</h4> 
     <table class="table table-bordered table-striped" ng-if="data.list">
         <thead>
             <tr>            
                 <th>Nivol</th>
                 <th>Prenom</th>
                 <th>Nom</th>
-                <th>Actif</th>
+                <th ng-show="displayEmails">Emails</th>
+                <th ng-show="displayEmails">Portable</th>
             </tr>
         </thead>
         <tbody>
@@ -20,7 +21,8 @@
                 <td>{{person.id}}</td>
                 <td>{{person.prenom}}</td>
                 <td>{{person.nom}}</td>
-                <td>{{person.actif}}</td>
+                <td ng-show="displayEmails">{{person.coordonees.email}}</td>
+                <td ng-show="displayEmails">{{person.coordonees.portable}}</td>
             </tr>
         </tbody>
     </table>
