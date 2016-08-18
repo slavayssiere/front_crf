@@ -162,6 +162,23 @@ angular.module('angular-login.google', ['angular-login.grandfather'])
       $scope.wait = false;
     };
 
+    $scope.createDraft = function (inscrit) {
+      $scope.wait = true;
+      var url_search = 'http://' + $scope.url_google + '/api/sheets/draft?token=' + $auth.getToken();
+      var req = {
+        method: 'POST',
+        data: inscrit,
+        url: url_search
+      }
+      $http(req).
+        success(function (response) {
+          $scope.wait = false;
+        })
+        .error(function (message) {
+          $window.alert("error in create draft");
+        });
+    };
+
   })
   .controller('GoogleController', function ($scope, $log, $auth, $http, NgTableParams) {
 

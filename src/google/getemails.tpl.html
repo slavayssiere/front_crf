@@ -37,7 +37,8 @@
     <table class="table table-bordered table-hover table-condensed" ng-if="table">
       <thead>
         <tr>
-          <th>Delete in google</th>
+          <th>Supprimer la ligne</th>
+          <th>Préparer un email</th>
           <th>Row in Gsheet</th>
           <th>Date</th>
           <th>Type Formation</th>
@@ -57,6 +58,7 @@
       <tbody>
         <tr ng-repeat="inscrit in table" ng-click="getDataSession(inscrit)" style="cursor:pointer">
           <td><i class="fa fa-times" ng-click="deleteRow(inscrit)"></i></td>
+          <td><i class="fa fa-envelope" ng-click="createDraft(inscrit)"></i></td>
           <td>{{inscrit.row}}</td>
           <td>{{inscrit.dateFormation | date :'dd-MM-yyyy'}}</td>
           <td>{{inscrit.typeFormation}}</td>
