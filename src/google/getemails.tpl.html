@@ -4,7 +4,7 @@
       <div class="alert alert-danger"><b>Calcul en cours</b> Wait for Google...</div>
     </div>
     <div ng-if="sessioncomplete">
-      <div ng-click="anotherDate()">
+      <div ng-click="anotherDate()" style="cursor:pointer">
         <p><b>La session est complete</b></p>
         <p>Proposer une autre date... (via mails automatiques) en cliquant ici</p>
       </div>
@@ -28,6 +28,7 @@
     </div>
     <div ng-if="selected">
       <p>
+        <h4>Email selectionne:</h4>
         <pre>
           <code>{{ selected }}</code>
         </pre>
@@ -36,6 +37,7 @@
     <table class="table table-bordered table-hover table-condensed" ng-if="table">
       <thead>
         <tr>
+          <th>Delete in google</th>
           <th>Row in Gsheet</th>
           <th>Date</th>
           <th>Type Formation</th>
@@ -53,7 +55,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="inscrit in table" ng-click="getDataSession(inscrit)">
+        <tr ng-repeat="inscrit in table" ng-click="getDataSession(inscrit)" style="cursor:pointer">
+          <td><i class="fa fa-times" ng-click="deleteRow(inscrit)"></i></td>
           <td>{{inscrit.row}}</td>
           <td>{{inscrit.dateFormation | date :'dd-MM-yyyy'}}</td>
           <td>{{inscrit.typeFormation}}</td>

@@ -23,7 +23,7 @@ angular.module('angular-login.google', ['angular-login.grandfather'])
         accessLevel: accessLevels.user
       });
   })
-  .controller('GGetEmailController', function ($scope, $log, $auth, $http, NgTableParams) {
+  .controller('GGetEmailController', function ($scope, $log, $auth, $http, NgTableParams, $window) {
 
     var url_search = 'http://' + $scope.url_google + '/api/sheets/getemails?token=' + $auth.getToken();
     $log.info('URI: ' + url_search);
@@ -34,6 +34,10 @@ angular.module('angular-login.google', ['angular-login.grandfather'])
     $http.get(url_search).
       success(function (response) {
         $scope.table = response;
+        $scope.wait = false;
+      })
+      .error(function (response) { 
+        $window.alert("error connection");       
         $scope.wait = false;
       });
 
@@ -118,10 +122,16 @@ angular.module('angular-login.google', ['angular-login.grandfather'])
       $http(req).
         success(function (response) {
           var indexremove = $scope.table.indexOf($scope.selected);
+          var rowDelete = $scope.selected.row;
           $log.info("remove ", indexremove);
           var url_delete = 'http://' + $scope.url_google + '/api/sheets/getemails/' + $scope.selected.row + '?token=' + $auth.getToken();
           $http.delete(url_delete)
             .success(function (response) {
+              for (var tableIndex = 0; tableIndex != $scope.table.length; tableIndex++) {
+                if ($scope.table[tableIndex].row > rowDelete) {
+                  $scope.table[tableIndex].row--;
+                }
+              }
               $log.info(response);
             });
           $scope.table.splice(indexremove, 1);
@@ -131,6 +141,25 @@ angular.module('angular-login.google', ['angular-login.grandfather'])
           $scope.sessioncomplete = null;
           $scope.wait = false;
         });
+    };
+
+    $scope.deleteRow = function (selectedRow) {
+      $scope.wait = true;
+      var indexremove = $scope.table.indexOf(selectedRow);
+      var rowDelete = selectedRow.row;
+      var url_delete = 'http://' + $scope.url_google + '/api/sheets/getemails/' + selectedRow.row + '?token=' + $auth.getToken();
+      $http.delete(url_delete)
+        .success(function (response) {
+          for (var tableIndex = 0; tableIndex != $scope.table.length; tableIndex++) {
+            if ($scope.table[tableIndex].row > rowDelete) {
+              $scope.table[tableIndex].row--;
+            }
+          }
+          $log.info(response);
+        });
+      $scope.table.splice(indexremove, 1);
+      $scope.selected = null;
+      $scope.wait = false;
     };
 
   })
