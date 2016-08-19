@@ -38,9 +38,8 @@ angular.module('angular-services.googleconnect', ['satellizer'])
                         deferred.resolve();
                     })
                     .catch(function (response) {
-                        $log.info("error in login");
                         $log.info(response);
-                        deferred.reject('error');
+                        deferred.reject(response);
                     })                
                 return deferred.promise; 
             },

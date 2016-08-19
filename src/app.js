@@ -55,7 +55,7 @@ angular.module('angular-login', [
     $rootScope.$on('$stateChangeError', resolveDone);
     $rootScope.$on('$statePermissionError', resolveDone);
   })
-  .controller('BodyController', function ($scope, $state, $stateParams, loginService, $http, $timeout, $log, GoogleConnectFactory) {
+  .controller('BodyController', function ($scope, $state, $stateParams, loginService, $http, $timeout, $log, GoogleConnectFactory, $window) {
     // Expose $state and $stateParams to the <body> tag
     $scope.$state = $state;
     $scope.$stateParams = $stateParams;
@@ -106,7 +106,7 @@ angular.module('angular-login', [
         loginPromise.error(function () {
           $scope.login.wrong = true;
           $timeout(function () { $scope.login.wrong = false; }, 8000);
-          loginService.logoutUser($http.get('/#/logout'));
+          loginService.logoutUser($http.get('/'));
         });
         loginPromise.finally(function () {
           $scope.login.working = false;
@@ -125,9 +125,11 @@ angular.module('angular-login', [
 
     $scope.googleMe = function () {      
       $scope.logingoogle.working = true;
-      GoogleConnectFactory.login().then(function (){
+      GoogleConnectFactory.login().then(function (response){
+          $log.info(response);
           $scope.logingoogle.working = false;
-        },function (){
+        },function (response){
+          $window.alert(response.data.message);
           $scope.logingoogle.working = false;
         });
     };
