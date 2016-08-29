@@ -29,8 +29,8 @@
     accessLevels: {
       'public' : '*',
       'anon': ['public'],
-      'user': ['admin', 'ddaf', 'dlaf', 'dlus'],
-      'dlaf' : ['admin', 'ddaf', 'dlus'],
+      'user': ['user', 'admin', 'ddaf', 'dlaf', 'dlus'],
+      'dlaf' : ['dlaf','admin', 'ddaf', 'dlus'],
       'dlus': ['admin','dlus', 'dlaf'],
       'ddaf': ['admin','ddaf',],
       'admin': ['admin']
