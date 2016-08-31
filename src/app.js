@@ -95,7 +95,7 @@ angular.module('angular-login', [
         });
       }
       else {
-        var url_connect = 'http://' + $scope.url + '/connecttest?F5_ST=' + $scope.ls.F5_ST + '&LastMRH_Session=' + $scope.ls.LastMRH_Session + '&MRHSession=' + $scope.ls.MRHSession;
+        var url_connect = 'http://' + $scope.url + '/connecttest?F5_ST=' + $scope.ls.F5_ST + '&LastMRH_Session=' + $scope.ls.LastMRH_Session + '&MRHSession=' + $scope.ls.MRHSession + '&SAML=' + $scope.ls.SAML + '&JSESSIONID=' + $scope.ls.JSESSIONID;
         $log.info(url_connect);
         var loginPromise = $http.get(url_connect, $scope.login);
 
@@ -156,6 +156,6 @@ angular.module('angular-login', [
     $http.get(url_version_google).
       success(function (response) {
         $scope.version_google = response.app.version;
-      });  
+      });    
     
   });

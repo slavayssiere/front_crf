@@ -19,15 +19,19 @@ angular.module('loginService', ['ui.router'])
     };
 
     var setTokens = function () {
-      if (!wrappedService.F5_ST && !wrappedService.LastMRH_Session && !wrappedService.MRHSession) {
+      if (!wrappedService.F5_ST && !wrappedService.LastMRH_Session && !wrappedService.MRHSession && !wrappedService.SAML && !wrappedService.JSESSIONID) {
         localStorage.removeItem('F5_ST');
         localStorage.removeItem('LastMRH_Session');
         localStorage.removeItem('MRHSession');
+        localStorage.removeItem('SAML');
+        localStorage.removeItem('JSESSIONID');
         wrappedService.inLocalStorage = false;
       } else {
         localStorage.setItem('F5_ST', wrappedService.F5_ST);
         localStorage.setItem('LastMRH_Session', wrappedService.LastMRH_Session);
         localStorage.setItem('MRHSession', wrappedService.MRHSession);
+        localStorage.setItem('SAML', wrappedService.SAML);
+        localStorage.setItem('JSESSIONID', wrappedService.JSESSIONID);
         wrappedService.inLocalStorage = true;
       }  
       
@@ -39,8 +43,10 @@ angular.module('loginService', ['ui.router'])
         wrappedService.F5_ST = localStorage.getItem('F5_ST');
         wrappedService.LastMRH_Session = localStorage.getItem('LastMRH_Session');
         wrappedService.MRHSession = localStorage.getItem('MRHSession');
+        wrappedService.SAML = localStorage.getItem('SAML');
+        wrappedService.JSESSIONID = localStorage.getItem('JSESSIONID');
         
-        if(!wrappedService.F5_ST && !wrappedService.LastMRH_Session && !wrappedService.MRHSession){
+        if(!wrappedService.F5_ST && !wrappedService.LastMRH_Session && !wrappedService.MRHSession && !wrappedService.SAML && !wrappedService.JSESSIONID){
           return false;
         }
         else{
@@ -164,6 +170,8 @@ angular.module('loginService', ['ui.router'])
         wrappedService.F5_ST=user.F5_ST;
         wrappedService.MRHSession=user.MRHSession;
         wrappedService.LastMRH_Session=user.LastMRH_Session;
+        wrappedService.SAML=user.SAML;
+        wrappedService.JSESSIONID=user.JSESSIONID;
         setTokens();
         // update user
         angular.extend(wrappedService.user, user);
@@ -209,6 +217,8 @@ angular.module('loginService', ['ui.router'])
         this.F5_ST = null;
         this.MRHSession = null;
         this.LastMRH_Session = null;
+        this.JSESSIONID=null;
+        this.SAML=null;
         setTokens();
 
         this.userRole = userRoles.public;
@@ -264,7 +274,9 @@ angular.module('loginService', ['ui.router'])
           
       F5_ST: localStorage.getItem('F5_ST'),
       LastMRH_Session: localStorage.getItem('LastMRH_Session'),
-      MRHSession: localStorage.getItem('MRHSession')
+      MRHSession: localStorage.getItem('MRHSession'),
+      JSESSIONID: localStorage.getItem('JSESSIONID'),
+      SAML: localStorage.getItem('SAML')
     };
 
     getLoginData();

@@ -32,4 +32,10 @@ angular.module('angular-login.home', ['angular-login.grandfather'])
       displayData();
     }
 
+    var url_version_pegass = 'http://' + $scope.url + '/benevoles/address/'+$scope.ls.user.utilisateur.gaia_id+'?SAML='+$scope.ls.user.SAML+'&JSESSIONID='+$scope.ls.user.JSESSIONID;
+    $http.get(url_version_pegass).
+      success(function (response) {
+        $scope.gaia_data=response;
+      });
+
   });
