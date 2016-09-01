@@ -1,11 +1,11 @@
 angular.module('angular-services.emails', [])
-    .factory('BenevolesDataFactory', function (loginService, $log, $http, $q) {
+    .factory('BenevolesDataFactory', function ($log, $http, $q) {
         var benevoleData = {
             list: false,
             searchemail: function (listBenevoles) {
                 var deferred = $q.defer();
 
-                var url_search = 'http://' + url_ws_pegass + '/benevoles/emails?F5_ST=' + loginService.user.F5_ST + '&LastMRH_Session=' + loginService.user.LastMRH_Session + '&MRHSession=' + loginService.user.MRHSession;
+                var url_search = 'http://' + url_ws_pegass + '/benevoles/emails';
                 $log.info('URI: ' + url_search);
                 var req = {
                     method: 'POST',

@@ -28,6 +28,7 @@ angular.module('angular-login', [
     //X-Requested-With delete automatically insert with angularJS 1.3
     //delete $httpProvider.defaults.headers.common['X-Requested-With'];
     //$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
     //$locationProvider.html5Mode(true);
   })
   .run(function ($rootScope, $window) {
@@ -77,9 +78,18 @@ angular.module('angular-login', [
 
       if ($scope.ls.inLocalStorage == false) {
         // setup promise, and 'working' flag
-        var url_connect = 'http://' + $scope.url + '/connect?username=' + $scope.login.username + '&password=' + $scope.login.password;
-        $log.info(url_connect);
-        var loginPromise = $http.get(url_connect, $scope.login);
+        var url_connect = 'http://' + $scope.url + '/connect';
+        var testHeaders = {
+          method: 'GET',
+          url: url_connect,
+          headers: {
+            'username': $scope.login.username,
+            'password': $scope.login.password
+          }
+        };
+        $log.info(testHeaders);
+        
+        var loginPromise = $http(testHeaders, $scope.login);
 
         $scope.login.working = true;
         $scope.login.wrong = false;
@@ -95,9 +105,21 @@ angular.module('angular-login', [
         });
       }
       else {
-        var url_connect = 'http://' + $scope.url + '/connecttest?F5_ST=' + $scope.ls.F5_ST + '&LastMRH_Session=' + $scope.ls.LastMRH_Session + '&MRHSession=' + $scope.ls.MRHSession + '&SAML=' + $scope.ls.SAML + '&JSESSIONID=' + $scope.ls.JSESSIONID;
+        var url_connect = 'http://' + $scope.url + '/connecttest';
         $log.info(url_connect);
-        var loginPromise = $http.get(url_connect, $scope.login);
+        var req = {
+          method: 'GET',
+          url: url_connect,
+          headers: {
+            'F5_ST': $scope.ls.F5_ST,
+            'LastMRH_Session': $scope.ls.LastMRH_Session,
+            'MRHSession': $scope.ls.MRHSession,
+            'SAML': $scope.ls.SAML,
+            'JSESSIONID': $scope.ls.JSESSIONID
+          }
+        };
+
+        var loginPromise = $http(req, $scope.login);
 
         $scope.login.working = true;
         $scope.login.wrong = false;

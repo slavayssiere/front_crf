@@ -31,4 +31,13 @@ angular.module('angular-login.home', ['angular-login.grandfather'])
     if($auth.getToken()){
       displayData();
     }
+
+    if(loginService.isLogged){
+      var url_version_pegass = 'http://' + $scope.url + '/benevoles/address/'+$scope.ls.user.utilisateur.gaia_id;
+      $http.get(url_version_pegass).
+        success(function (response) {
+          $scope.gaia_data=response;
+        });
+    }
+
   });

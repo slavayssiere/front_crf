@@ -45,7 +45,7 @@ angular.module('angular-login.stats', ['angular-login.grandfather'])
         $scope.getDonne = function () {
             
             $scope.wait = true;
-            var url_search = 'http://' + $scope.url + '/stats/formations?year=' + $scope.year + '&F5_ST=' + loginService.user.F5_ST + '&LastMRH_Session=' + loginService.user.LastMRH_Session + '&MRHSession=' + loginService.user.MRHSession + '&ul=' + loginService.user.utilisateur.structure.id;
+            var url_search = 'http://' + $scope.url + '/stats/formations?year=' + $scope.year + '&ul=' + loginService.user.utilisateur.structure.id;
             $log.info('URI: ' + url_search);
 
             $http.get(url_search).
@@ -86,7 +86,7 @@ angular.module('angular-login.stats', ['angular-login.grandfather'])
 
         $scope.getDonne = function () {
             $scope.wait = true;
-            var url_search = 'http://' + $scope.url + '/stats/maraude?year=' + $scope.year + '&F5_ST=' + loginService.user.F5_ST + '&LastMRH_Session=' + loginService.user.LastMRH_Session + '&MRHSession=' + loginService.user.MRHSession + '&ul=' + loginService.user.utilisateur.structure.id;
+            var url_search = 'http://' + $scope.url + '/stats/maraude?year=' + $scope.year + '&ul=' + loginService.user.utilisateur.structure.id;
             $log.info('URI: ' + url_search);
 
             $http.get(url_search).
@@ -127,7 +127,7 @@ angular.module('angular-login.stats', ['angular-login.grandfather'])
           
         $scope.getDonne = function () {
             $scope.wait = true;                   
-            var url_search = 'http://' + $scope.url + '/stats/fc?year=' + $scope.year + '&F5_ST=' + loginService.user.F5_ST + '&LastMRH_Session=' + loginService.user.LastMRH_Session + '&MRHSession=' + loginService.user.MRHSession + '&ul=' + loginService.user.utilisateur.structure.id;
+            var url_search = 'http://' + $scope.url + '/stats/fc?year=' + $scope.year + '&ul=' + loginService.user.utilisateur.structure.id;
             $log.info('URI: ' + url_search);
 
             $http.get(url_search).
@@ -168,7 +168,7 @@ angular.module('angular-login.stats', ['angular-login.grandfather'])
           
         $scope.getDonne = function () {
             $scope.wait = true;                   
-            var url_search = 'http://' + $scope.url + '/stats/reseau?year=' + $scope.year + '&F5_ST=' + loginService.user.F5_ST + '&LastMRH_Session=' + loginService.user.LastMRH_Session + '&MRHSession=' + loginService.user.MRHSession + '&ul=' + loginService.user.utilisateur.structure.id;
+            var url_search = 'http://' + $scope.url + '/stats/reseau?year=' + $scope.year + '&ul=' + loginService.user.utilisateur.structure.id;
             $log.info('URI: ' + url_search);
 
             $http.get(url_search).
@@ -242,7 +242,7 @@ angular.module('angular-login.stats', ['angular-login.grandfather'])
           
         $scope.getDonne = function () {
             $scope.wait = true;                   
-            var url_search = 'http://' + $scope.url + '/stats/ml?year=' + $scope.year + '&F5_ST=' + loginService.user.F5_ST + '&LastMRH_Session=' + loginService.user.LastMRH_Session + '&MRHSession=' + loginService.user.MRHSession + '&ul=' + loginService.user.utilisateur.structure.id;
+            var url_search = 'http://' + $scope.url + '/stats/ml?year=' + $scope.year + '&ul=' + loginService.user.utilisateur.structure.id;
             $log.info('URI: ' + url_search);
 
             $http.get(url_search).

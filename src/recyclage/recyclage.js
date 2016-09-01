@@ -21,7 +21,7 @@ angular.module('angular-login.recyclage', ['angular-login.grandfather'])
 
         $scope.search = function () {
 
-            var url_search = 'http://' + $scope.url + '/benevoles/recyclages/' + $scope.competence + '/' + $scope.list_comp[$scope.competence] + '?F5_ST=' + loginService.user.F5_ST + '&LastMRH_Session=' + loginService.user.LastMRH_Session + '&MRHSession=' + loginService.user.MRHSession + '&ul=' + loginService.user.utilisateur.structure.id;
+            var url_search = 'http://' + $scope.url + '/benevoles/recyclages/' + $scope.competence + '/' + $scope.list_comp[$scope.competence] + '?ul=' + loginService.user.utilisateur.structure.id;
             $log.info('URI: ' + url_search);
 
             $scope.search.working = true;
@@ -74,7 +74,7 @@ angular.module('angular-login.recyclage', ['angular-login.grandfather'])
 
         $scope.search = function () {
 
-            var url_search = 'http://' + $scope.url + '/benevoles/recyclagesdd/' + $scope.competence + '/' + $scope.list_comp[$scope.competence] + '?F5_ST=' + loginService.user.F5_ST + '&LastMRH_Session=' + loginService.user.LastMRH_Session + '&MRHSession=' + loginService.user.MRHSession;
+            var url_search = 'http://' + $scope.url + '/benevoles/recyclagesdd/' + $scope.competence + '/' + $scope.list_comp[$scope.competence] + '?dd=75';
             $log.info('URI: ' + url_search);
 
             $scope.search.working = true;

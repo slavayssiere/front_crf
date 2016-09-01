@@ -1,5 +1,5 @@
 angular.module('angular-services.competence', [])
-    .service('datalib', function ($http, $log, loginService) {
+    .service('datalib', function ($http, $log) {
 
         var hashComp = {};
         hashComp['166'] = "PSE1";
@@ -37,7 +37,7 @@ angular.module('angular-services.competence', [])
         }
 
         this.getHashRole = function () {
-            // var url_search = 'http://' + url_ws_pegass + '/benevoles/roles?F5_ST=' + loginService.user.F5_ST + '&LastMRH_Session=' + loginService.user.LastMRH_Session + '&MRHSession=' + loginService.user.MRHSession;
+            // var url_search = 'http://' + url_ws_pegass + '/benevoles/roles';
             // $log.info('URI: ' + url_search);
             
             // $http.get(url_search).

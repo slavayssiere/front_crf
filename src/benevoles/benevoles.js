@@ -13,13 +13,13 @@ angular.module('angular-login.benevoles', ['angular-login.grandfather'])
                 controller: 'BenevolesAdminController',
                 controllerAs: 'benadmin',
                 accessLevel: accessLevels.user
-            });;
+            });
     })
     .controller('BenevolesController', function ($scope, loginService, $http, $log, BenevolesDataFactory) {
 
         $scope.displayEmails = false;
 
-        var url_search = 'http://' + $scope.url + '/benevoles?F5_ST=' + loginService.user.F5_ST + '&LastMRH_Session=' + loginService.user.LastMRH_Session + '&MRHSession=' + loginService.user.MRHSession + '&ul=' + loginService.user.utilisateur.structure.id;
+        var url_search = 'http://' + $scope.url + '/benevoles?ul=' + loginService.user.utilisateur.structure.id;
         $log.info('URI: ' + url_search);
 
         $http.get(url_search).
@@ -46,7 +46,7 @@ angular.module('angular-login.benevoles', ['angular-login.grandfather'])
 
         var self = this;
         $scope.admin = loginService.user.admin.peutAdministrer;
-        var url_search = 'http://' + $scope.url + '/benevoles/all?F5_ST=' + loginService.user.F5_ST + '&LastMRH_Session=' + loginService.user.LastMRH_Session + '&MRHSession=' + loginService.user.MRHSession + '&ul=' + loginService.user.utilisateur.structure.id;
+        var url_search = 'http://' + $scope.url + '/benevoles/all?ul=' + loginService.user.utilisateur.structure.id;
         $log.info('URI: ' + url_search);
 
         $http.get(url_search + '&page=0').
@@ -78,7 +78,7 @@ angular.module('angular-login.benevoles', ['angular-login.grandfather'])
 
         $scope.change = function (person, type) {
 
-            var url_search = 'http://' + $scope.url + '/benevoles/changeinfo/' + person.id + '?F5_ST=' + loginService.user.F5_ST + '&LastMRH_Session=' + loginService.user.LastMRH_Session + '&MRHSession=' + loginService.user.MRHSession;
+            var url_search = 'http://' + $scope.url + '/benevoles/changeinfo/' + person.id;
             var data_struct = {}
 
             if (type == "email") {

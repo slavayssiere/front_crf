@@ -28,16 +28,21 @@ angular.module('angular-login.google', ['angular-login.grandfather'])
     var url_search = 'http://' + $scope.url_google + '/api/sheets/getemails?token=' + $auth.getToken();
     $log.info('URI: ' + url_search);
     var self = this;
-
+    var req = {
+      method: 'GET',
+      url: url_search,
+      headers: {
+      }
+    };
     $scope.wait = true;
 
-    $http.get(url_search).
+    $http(req).
       success(function (response) {
         $scope.table = response;
         $scope.wait = false;
       })
-      .error(function (response) { 
-        $window.alert("error connection");       
+      .error(function (response) {
+        $window.alert("error connection");
         $scope.wait = false;
       });
 
@@ -52,6 +57,7 @@ angular.module('angular-login.google', ['angular-login.grandfather'])
           date: inscrit.dateFormation,
           type: inscrit.typeFormation
         },
+        headers: {},
         url: 'http://' + $scope.url_google + '/api/sheets/state?token=' + $auth.getToken()
       }
 
@@ -76,7 +82,8 @@ angular.module('angular-login.google', ['angular-login.grandfather'])
       var req = {
         method: 'POST',
         data: $scope.selected,
-        url: url_inscription
+        url: url_inscription,
+        headers: {}
       }
       $http(req).
         success(function (response) {
@@ -85,7 +92,14 @@ angular.module('angular-login.google', ['angular-login.grandfather'])
           $log.info("remove ", indexremove);
           $scope.table.splice(indexremove, 1);
           var url_delete = 'http://' + $scope.url_google + '/api/sheets/getemails/' + $scope.selected.row + '?token=' + $auth.getToken();
-          $http.delete(url_delete)
+
+          var req = {
+            method: 'DELETE',
+            url: url_delete,
+            headers: {}
+          }
+
+          $http(req)
             .success(function (response) {
               for (var tableIndex = 0; tableIndex != $scope.table.length; tableIndex++) {
                 if ($scope.table[tableIndex].row > rowDelete) {
@@ -97,7 +111,8 @@ angular.module('angular-login.google', ['angular-login.grandfather'])
 
           var req = {
             method: 'PUT',
-            url: 'http://' + $scope.url_google + '/api/sheets/' + $scope.google_id + '/sendinscrits?token=' + $auth.getToken()
+            url: 'http://' + $scope.url_google + '/api/sheets/' + $scope.google_id + '/sendinscrits?token=' + $auth.getToken(),
+            headers: {}
           }
           $http(req).
             success(function (response) {
@@ -117,7 +132,8 @@ angular.module('angular-login.google', ['angular-login.grandfather'])
       var req = {
         method: 'POST',
         data: $scope.selected,
-        url: url_search
+        url: url_search,
+        headers: {}
       }
       $http(req).
         success(function (response) {
@@ -125,7 +141,14 @@ angular.module('angular-login.google', ['angular-login.grandfather'])
           var rowDelete = $scope.selected.row;
           $log.info("remove ", indexremove);
           var url_delete = 'http://' + $scope.url_google + '/api/sheets/getemails/' + $scope.selected.row + '?token=' + $auth.getToken();
-          $http.delete(url_delete)
+
+          var req = {
+            method: 'DELETE',
+            url: url_delete,
+            headers: {}
+          }
+
+          $http(req)
             .success(function (response) {
               for (var tableIndex = 0; tableIndex != $scope.table.length; tableIndex++) {
                 if ($scope.table[tableIndex].row > rowDelete) {
@@ -148,7 +171,12 @@ angular.module('angular-login.google', ['angular-login.grandfather'])
       var indexremove = $scope.table.indexOf(selectedRow);
       var rowDelete = selectedRow.row;
       var url_delete = 'http://' + $scope.url_google + '/api/sheets/getemails/' + selectedRow.row + '?token=' + $auth.getToken();
-      $http.delete(url_delete)
+      var req = {
+        method: 'DELETE',
+        url: url_delete,
+        headers: {}
+      }
+      $http(req)
         .success(function (response) {
           for (var tableIndex = 0; tableIndex != $scope.table.length; tableIndex++) {
             if ($scope.table[tableIndex].row > rowDelete) {
@@ -168,7 +196,8 @@ angular.module('angular-login.google', ['angular-login.grandfather'])
       var req = {
         method: 'POST',
         data: inscrit,
-        url: url_search
+        url: url_search,
+        headers: {}
       }
       $http(req).
         success(function (response) {
@@ -191,7 +220,8 @@ angular.module('angular-login.google', ['angular-login.grandfather'])
     var req = {
       method: 'GET',
       url: url_search,
-      timeout: 90000
+      timeout: 90000,
+      headers: {}
     }
 
     $http(req).
@@ -248,7 +278,8 @@ angular.module('angular-login.google', ['angular-login.grandfather'])
           date: $scope.session.date,
           type: $scope.session.type,
           heure: $scope.session.heure
-        }
+        },
+        headers: {}
       }
 
       $http(req).
