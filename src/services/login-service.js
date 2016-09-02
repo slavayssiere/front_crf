@@ -18,7 +18,7 @@ angular.module('loginService', ['ui.router'])
           localStorage.removeItem('SAML');
           localStorage.removeItem('JSESSIONID');
 
-          delete $http.defaults.headers.common['F5_ST'];
+          delete $http.defaults.headers.common['F5-ST'];
           delete $http.defaults.headers.common['LastMRH_Session'];
           delete $http.defaults.headers.common['MRHSession'];
           delete $http.defaults.headers.common['SAML'];
@@ -32,8 +32,8 @@ angular.module('loginService', ['ui.router'])
           localStorage.setItem('SAML', wrappedService.SAML);
           localStorage.setItem('JSESSIONID', wrappedService.JSESSIONID);
 
-          $http.defaults.headers.common['F5_ST'] = wrappedService.F5_ST;
-          $http.defaults.headers.common['LastMRH_Session'] = wrappedService.LastMRH_Session;
+          $http.defaults.headers.common['F5-ST'] = wrappedService.F5_ST;
+          $http.defaults.headers.common['LastMRH-Session'] = wrappedService.LastMRH_Session;
           $http.defaults.headers.common['MRHSession'] = wrappedService.MRHSession;
           $http.defaults.headers.common['SAML'] = wrappedService.SAML;
           $http.defaults.headers.common['JSESSIONID'] = wrappedService.JSESSIONID;
@@ -52,8 +52,8 @@ angular.module('loginService', ['ui.router'])
         wrappedService.SAML = localStorage.getItem('SAML');
         wrappedService.JSESSIONID = localStorage.getItem('JSESSIONID');
 
-        $http.defaults.headers.common['F5_ST'] = wrappedService.F5_ST;
-        $http.defaults.headers.common['LastMRH_Session'] = wrappedService.LastMRH_Session;
+        $http.defaults.headers.common['F5-ST'] = wrappedService.F5_ST;
+        $http.defaults.headers.common['LastMRH-Session'] = wrappedService.LastMRH_Session;
         $http.defaults.headers.common['MRHSession'] = wrappedService.MRHSession;
         $http.defaults.headers.common['SAML'] = wrappedService.SAML;
         $http.defaults.headers.common['JSESSIONID'] = wrappedService.JSESSIONID;
