@@ -19,7 +19,7 @@ angular.module('loginService', ['ui.router'])
           localStorage.removeItem('JSESSIONID');
 
           delete $http.defaults.headers.common['F5-ST'];
-          delete $http.defaults.headers.common['LastMRH_Session'];
+          delete $http.defaults.headers.common['LastMRH-Session'];
           delete $http.defaults.headers.common['MRHSession'];
           delete $http.defaults.headers.common['SAML'];
           delete $http.defaults.headers.common['JSESSIONID'];

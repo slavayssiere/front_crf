@@ -111,8 +111,8 @@ angular.module('angular-login', [
           method: 'GET',
           url: url_connect,
           headers: {
-            'F5_ST': $scope.ls.F5_ST,
-            'LastMRH_Session': $scope.ls.LastMRH_Session,
+            'F5-ST': $scope.ls.F5_ST,
+            'LastMRH-Session': $scope.ls.LastMRH_Session,
             'MRHSession': $scope.ls.MRHSession,
             'SAML': $scope.ls.SAML,
             'JSESSIONID': $scope.ls.JSESSIONID
