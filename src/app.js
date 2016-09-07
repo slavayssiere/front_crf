@@ -87,7 +87,7 @@ angular.module('angular-login', [
             'password': $scope.login.password
           }
         };
-        $log.info(testHeaders);
+        //$log.info(testHeaders);
         
         var loginPromise = $http(testHeaders, $scope.login);
 
@@ -106,7 +106,7 @@ angular.module('angular-login', [
       }
       else {
         var url_connect = 'http://' + $scope.url + '/connecttest';
-        $log.info(url_connect);
+        //$log.info(url_connect);
         var req = {
           method: 'GET',
           url: url_connect,

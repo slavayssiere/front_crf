@@ -190,7 +190,7 @@ angular.module('loginService', ['ui.router'])
           // flag true on isLogged
           wrappedService.isLogged = true;
 
-          $log.info("set nivol as google id", user.utilisateur.id);
+          //$log.info("set nivol as google id", user.utilisateur.id);
           ga('set', 'userId', user.utilisateur.id);
 
           // update userRole
